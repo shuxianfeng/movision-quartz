@@ -8,7 +8,7 @@
           class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="triggers">
             <list>
-                <!--<ref bean="orderJobTrigger"/>-->
+                <ref bean="orderJobTrigger"/>
                 <!--<ref bean="courseJobTrigger"/>-->
                 <!--<ref bean="statJobTrigger"/>-->
                 <!--<ref bean="vipExpiredJobTrigger"/>-->
@@ -25,7 +25,7 @@
         </property>
         <property name="jobDetails">
             <list>
-                <!--<ref bean="orderJobDetail"/>-->
+                <ref bean="orderJobDetail"/>
                 <!--<ref bean="courseJobDetail"/>-->
                 <!--<ref bean="statJobDetail"/>-->
                 <!--<ref bean="vipExpiredJobDetail"/>-->
@@ -43,11 +43,11 @@
     </bean>
 
     <!--调度触发器-->
-    <!--<bean id="orderJobTrigger"-->
-          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
-        <!--<property name="jobDetail" ref="orderJobDetail"/>-->
-        <!--<property name="cronExpression" value="${order_cronExpression}"/>-->
-    <!--</bean>-->
+    <bean id="orderJobTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="orderJobDetail"/>
+        <property name="cronExpression" value="${order_cronExpression}"/>
+    </bean>
     <!--<bean id="vipExpiredJobTrigger"-->
           <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
         <!--<property name="jobDetail" ref="vipExpiredJobDetail"/>-->
@@ -118,12 +118,13 @@
         <!--<property name="jobDetail" ref="brandAnalysisRecordBatchAddDetail"/>-->
         <!--<property name="cronExpression" value="${brandAnalysisRecordBatchAdd_cronExpression}"/>-->
     <!--</bean>-->
+
     <!-- job的配置 -->
-    <!--<bean id="orderJobDetail"-->
-          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
-        <!--<property name="targetObject" ref="orderJob"/>-->
-        <!--<property name="targetMethod" value="execute"/>-->
-    <!--</bean>-->
+    <bean id="orderJobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="orderJob"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
     <!--<bean id="vipExpiredJobDetail"-->
           <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
         <!--<property name="targetObject" ref="vipExpiredJob"/>-->
@@ -194,7 +195,7 @@
     <!--</bean>-->
 
     <!-- 工作的bean -->
-    <!--<bean id="orderJob" class="com.movision.job.OrderQuartzJob"/>-->
+    <bean id="orderJob" class="com.movision.job.CancelOrdersJob"/>
     <!--<bean id="vipExpiredJob" class="com.movision.job.VipExpiredJob"/>-->
     <!--<bean id="courseJob" class="com.movision.job.CourseJob"/>-->
     <!--<bean id="statJob" class="com.movision.job.StatQuartzJob"/>-->
