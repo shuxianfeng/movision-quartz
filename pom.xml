@@ -311,7 +311,7 @@
         <repository>
             <id>releases</id>
             <name>releases</name>
-            <url>http://120.77.214.187:8200/nexus/content/repositories/releases</url>
+            <url>http://120.77.214.187:8081/nexus/content/repositories/releases</url>
         </repository>
     </repositories>
 
