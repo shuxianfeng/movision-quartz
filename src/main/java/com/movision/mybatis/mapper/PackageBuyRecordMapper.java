@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 套餐购买记录业务相关数据层
  *
- * @author liyang
+ * @author zhuangyuhao
  * @date 2016年12月15日
  */
 

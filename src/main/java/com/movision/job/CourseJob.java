@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- * @author jianglz
+ * @author zhuangyuhao
  * @since 16/6/6.
  */
 public class CourseJob {

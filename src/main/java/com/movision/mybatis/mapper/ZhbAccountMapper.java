@@ -5,7 +5,7 @@ import com.movision.mybatis.entity.ZhbAccount;
 import java.util.List;
 
 /**
- * @author tongxinglong
+ * @author zhuangyuhao
  * @date 2017/1/11 0011.
  */
 public interface ZhbAccountMapper {

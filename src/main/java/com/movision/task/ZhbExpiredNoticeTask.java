@@ -17,7 +17,7 @@ import com.movision.utils.DateUtil;
 import com.movision.utils.EmailUtil;
 
 /**
- * @author tongxinglong
+ * @author zhuangyuhao
  * @date 2017/1/11 0011.
  */
 @Service

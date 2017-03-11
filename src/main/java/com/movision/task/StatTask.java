@@ -11,7 +11,7 @@ import com.movision.mybatis.dao.StatDao;
 
 /**
  * 定时统计平台业务数据
- * @author gmli
+ * @author zhuangyuhao
  *
  */
 @Service

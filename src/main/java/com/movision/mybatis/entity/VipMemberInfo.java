@@ -5,8 +5,8 @@ import java.util.Date;
 
 /**
  * VIP信息
- * 
- * @author tongxinglong
+ *
+ * @author zhuangyuhao
  *
  */
 public class VipMemberInfo implements Serializable {

@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 
 /**
  * 采用MD5加密解密
- * @author jianglz
+ * @author zhuangyuhao
  * @since 15/7/17.
  */
 public class MD5Util {

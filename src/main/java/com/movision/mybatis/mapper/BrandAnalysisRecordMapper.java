@@ -6,7 +6,7 @@ import java.util.Map;
 import com.movision.mybatis.entity.BrandAnalysisRecord;
 
 /**
- * @author tongxinglong
+ * @author zhuangyuhao
  * @date 2017/2/20 0020.
  */
 public interface BrandAnalysisRecordMapper {

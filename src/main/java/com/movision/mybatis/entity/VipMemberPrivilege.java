@@ -4,8 +4,8 @@ import java.util.Date;
 
 /**
  * 会员自定义特权信息
- * 
- * @author liyang
+ *
+ * @author zhuangyuhao
  *
  */
 public class VipMemberPrivilege {

@@ -15,7 +15,7 @@ import com.movision.mybatis.entity.Order;
 import com.movision.mybatis.mapper.OrderMapper;
 
 /**
- * @author jianglz
+ * @author zhuangyuhao
  * @since 16/6/1.
  */
 @Repository

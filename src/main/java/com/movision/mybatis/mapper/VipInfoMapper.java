@@ -5,8 +5,8 @@ import java.util.List;
 import com.movision.mybatis.entity.VipMemberInfo;
 
 /**
- * 
- * @author tongxinglong
+ *
+ * @author zhuangyuhao
  *
  */
 public interface VipInfoMapper {

@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  * 发送短信接口
- * @author jianglz
+ * @author zhuangyuhao
  * @since 16/6/6.
  */
 public class SDKSendSms {

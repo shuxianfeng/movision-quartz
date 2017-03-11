@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * @author jianglz
+ * @author zhuangyuhao
  * @since 15/7/13.
  */
 public class OrderQuartzJob {

@@ -9,7 +9,7 @@ import com.movision.mybatis.entity.OrderGoods;
 import com.movision.mybatis.mapper.OrderGoodsMapper;
 
 /**
- * @author jianglz
+ * @author zhuangyuhao
  * @since 16/6/1.
  */
 @Repository

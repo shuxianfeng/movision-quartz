@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * 套餐购买生效和失效处理
  *
- * @author liyang
+ * @author zhuangyuhao
  * @date 2016年12月21日
  */
 @Service

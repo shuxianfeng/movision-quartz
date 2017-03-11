@@ -22,7 +22,7 @@ import com.movision.utils.FileUtils;
 /**
  * 阿里云OSS
  *
- * @author jianglz
+ * @author zhuangyuhao
  * @since 16/6/21.
  */
 @Service
@@ -158,7 +158,7 @@ public class AliOSSClient {
     // test
     public static void main(String[] args) {
         AliOSSClient client = new AliOSSClient();
-        String fileName = "/Users/jianglz/Downloads/1111.jpg";
+        String fileName = "/Users/zhuangyuhao/Downloads/1111.jpg";
         File file = new File(fileName);
         // Map<String, String> result = client.uploadLocalFile(file, "doc",
         // null);

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
  * 套餐相关接口实现类
  *
- * @author liyang
+ * @author zhuangyuhao
  * @date 2016年12月15日
  */
 @Repository

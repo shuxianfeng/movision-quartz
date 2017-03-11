@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.movision.task.VipExpiredTask;
 
 /**
- * 
- * @author tongxinglong
+ *
+ * @author zhuangyuhao
  *
  */
 public class VipExpiredJob {

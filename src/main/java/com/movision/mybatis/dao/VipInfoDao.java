@@ -9,8 +9,8 @@ import com.movision.mybatis.entity.VipMemberInfo;
 import com.movision.mybatis.mapper.VipInfoMapper;
 
 /**
- * 
- * @author tongxinglong
+ *
+ * @author zhuangyuhao
  *
  */
 @Repository

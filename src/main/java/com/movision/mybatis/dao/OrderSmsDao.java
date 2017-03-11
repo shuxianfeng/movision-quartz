@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * @author jianglz
+ * @author zhuangyuhao
  * @since 16/7/14.
  */
 @Repository

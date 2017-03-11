@@ -18,8 +18,8 @@ import com.movision.utils.EmailUtil;
 
 /**
  * VIP服务过期处理
- * 
- * @author tongxinglong
+ *
+ * @author zhuangyuhao
  *
  */
 @Service

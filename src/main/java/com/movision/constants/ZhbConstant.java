@@ -1,14 +1,14 @@
 package com.movision.constants;
 
 /**
- * @author tongxinglong
+ * @author zhuangyuhao
  * @date 2017/1/11 0011.
  */
 public class ZhbConstant {
     /**
      * 筑慧币流水记录的类型
      *
-     * @author tongxinglong
+     * @author zhuangyuhao
      *
      */
     public enum ZhbRecordType {

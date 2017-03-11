@@ -17,8 +17,8 @@ import org.springframework.stereotype.Service;
 
 /**
  * 筑慧币到期处理
- * 
- * @author tongxinglong
+ *
+ * @author zhuangyuhao
  * @date 2017/1/11 0011.
  */
 @Service

@@ -7,7 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * 本地调试启动
- * @author jianglz
+ * @author zhuangyuhao
  * @since 15/7/13.
  */
 public class QuartzApp {

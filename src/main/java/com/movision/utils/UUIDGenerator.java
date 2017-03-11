@@ -3,7 +3,7 @@ package com.movision.utils;
 import java.util.UUID;
 
 /**
- * @author jianglz
+ * @author zhuangyuhao
  * @since 16/6/23.
  */
 public class UUIDGenerator {

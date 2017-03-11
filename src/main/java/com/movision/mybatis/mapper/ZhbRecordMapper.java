@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author tongxinglong
+ * @author zhuangyuhao
  * @date 2017/1/11 0011.
  */
 public interface ZhbRecordMapper {

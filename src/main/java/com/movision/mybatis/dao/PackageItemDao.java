@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 套餐条目相关接口实现类
  *
- * @author liyang
+ * @author zhuangyuhao
  * @date 2016年12月15日
  */
 @Service

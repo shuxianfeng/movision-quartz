@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.movision.task.StatTask;
 /**
  * 定时统计平台业务数据
- * @author gmli
+ * @author zhuangyuhao
  *
  */
 public class StatQuartzJob {

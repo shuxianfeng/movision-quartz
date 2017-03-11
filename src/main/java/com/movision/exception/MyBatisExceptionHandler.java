@@ -10,7 +10,7 @@ import org.springframework.core.NestedIOException;
 /**
  * 捕获mapper.xml异常
  *
- * @author liyang
+ * @author zhuangyuhao
  * @date 2017年2月9日
  */
 public class MyBatisExceptionHandler extends SqlSessionFactoryBean {

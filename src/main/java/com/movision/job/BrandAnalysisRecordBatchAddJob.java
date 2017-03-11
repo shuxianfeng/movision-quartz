@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.movision.task.BrandAnalysisRecordBatchAddTask;
 
 /**
- * @author tongxinglong
+ * @author zhuangyuhao
  * @date 2017/2/21 0021.
  */
 public class BrandAnalysisRecordBatchAddJob {

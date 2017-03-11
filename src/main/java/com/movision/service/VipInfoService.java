@@ -11,8 +11,8 @@ import com.movision.mybatis.entity.VipMemberInfo;
 
 /**
  * VIP服务
- * 
- * @author tongxinglong
+ *
+ * @author zhuangyuhao
  *
  */
 @Transactional

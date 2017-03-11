@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * 会员特权业务相关数据层
  *
- * @author liyang
+ * @author zhuangyuhao
  * @date 2016年12月21日
  */
 

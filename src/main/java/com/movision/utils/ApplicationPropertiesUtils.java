@@ -6,8 +6,8 @@ import java.util.Properties;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 /**
- * 
- * @author tongxinglong
+ *
+ * @author zhuangyuhao
  *
  */
 public class ApplicationPropertiesUtils {

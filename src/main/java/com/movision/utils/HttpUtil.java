@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * @author jianglz
+ * @author zhuangyuhao
  * @since 15/7/13.
  */
 public class HttpUtil {

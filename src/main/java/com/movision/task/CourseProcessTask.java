@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  * 系统自动终止课程
- * @author jianglz
+ * @author zhuangyuhao
  * @since 16/6/6.
  */
 @Service

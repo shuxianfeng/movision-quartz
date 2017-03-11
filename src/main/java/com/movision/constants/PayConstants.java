@@ -3,7 +3,7 @@ package com.movision.constants;
 /**
  * 常量类
  *
- * @author wangxiang2
+ * @author zhuangyuhao
  */
 public class PayConstants {
 

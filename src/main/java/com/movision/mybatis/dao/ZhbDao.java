@@ -15,8 +15,8 @@ import java.util.Map;
 
 /**
  * 筑慧币持久层
- * 
- * @author tongxinglong
+ *
+ * @author zhuangyuhao
  * @date 2017/1/11 0011.
  */
 @Repository

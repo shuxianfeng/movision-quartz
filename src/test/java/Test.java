@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @author jianglz
+ * @author zhuangyuhao
  * @since 16/6/1.
  */
 public class Test {

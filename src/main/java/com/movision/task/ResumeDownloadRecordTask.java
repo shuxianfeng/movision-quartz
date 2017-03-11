@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * 下载简历90天以后回收处理
  *
- * @author liyang
+ * @author zhuangyuhao
  * @date 2017年1月16日
  */
 @Service

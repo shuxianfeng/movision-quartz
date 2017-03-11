@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.movision.task.ZhbExpiredTask;
 
 /**
- * @author tongxinglong
+ * @author zhuangyuhao
  * @date 2017/1/13 0013.
  */
 public class ZhbExpiredJob {
