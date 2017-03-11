@@ -14,6 +14,7 @@ public class QuartzApp {
     private static final Logger logger = LoggerFactory.getLogger(QuartzApp.class);
 
     public static void main(String[] args) throws Exception {
+
         logger.info("quartz app start...");
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring.xml");
 
