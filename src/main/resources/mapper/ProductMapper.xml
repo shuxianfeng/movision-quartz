@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movision.mybatis.mapper.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.movision.mybatis.entity.Product" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="createid" property="createid" jdbcType="BIGINT" />
+    <result column="fcateid" property="fcateid" jdbcType="INTEGER" />
+    <result column="scateid" property="scateid" jdbcType="INTEGER" />
+    <result column="brandid" property="brandid" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
+    <result column="lastmodified" property="lastmodified" jdbcType="TIMESTAMP" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="repository" property="repository" jdbcType="DOUBLE" />
+    <result column="number" property="number" jdbcType="DOUBLE" />
+    <result column="hit" property="hit" jdbcType="BIGINT" />
+    <result column="imgUrl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="paramIDs" property="paramids" jdbcType="VARCHAR" />
+    <result column="paramValues" property="paramvalues" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.movision.mybatis.entity.ProductWithBLOBs" extends="BaseResultMap" >
+    <result column="detailDesc" property="detaildesc" jdbcType="LONGVARCHAR" />
+    <result column="paras" property="paras" jdbcType="LONGVARCHAR" />
+    <result column="service" property="service" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, createid, fcateid, scateid, brandid, status, publishTime, lastmodified, 
+    price, unit, repository, number, hit, imgUrl, paramIDs, paramValues, reason
+  </sql>
+  <sql id="Blob_Column_List" >
+    detailDesc, paras, service
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_p_product
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_p_product
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.movision.mybatis.entity.ProductWithBLOBs" >
+    insert into t_p_product (id, name, createid, 
+      fcateid, scateid, brandid, 
+      status, publishTime, lastmodified, 
+      price, unit, repository, 
+      number, hit, imgUrl, 
+      paramIDs, paramValues, reason, 
+      detailDesc, paras, service
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{createid,jdbcType=BIGINT}, 
+      #{fcateid,jdbcType=INTEGER}, #{scateid,jdbcType=INTEGER}, #{brandid,jdbcType=BIGINT}, 
+      #{status,jdbcType=TINYINT}, #{publishtime,jdbcType=TIMESTAMP}, #{lastmodified,jdbcType=TIMESTAMP}, 
+      #{price,jdbcType=DOUBLE}, #{unit,jdbcType=VARCHAR}, #{repository,jdbcType=DOUBLE}, 
+      #{number,jdbcType=DOUBLE}, #{hit,jdbcType=BIGINT}, #{imgurl,jdbcType=VARCHAR}, 
+      #{paramids,jdbcType=VARCHAR}, #{paramvalues,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{detaildesc,jdbcType=LONGVARCHAR}, #{paras,jdbcType=LONGVARCHAR}, #{service,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.movision.mybatis.entity.ProductWithBLOBs" >
+    insert into t_p_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="createid != null" >
+        createid,
+      </if>
+      <if test="fcateid != null" >
+        fcateid,
+      </if>
+      <if test="scateid != null" >
+        scateid,
+      </if>
+      <if test="brandid != null" >
+        brandid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="publishtime != null" >
+        publishTime,
+      </if>
+      <if test="lastmodified != null" >
+        lastmodified,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="repository != null" >
+        repository,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="hit != null" >
+        hit,
+      </if>
+      <if test="imgurl != null" >
+        imgUrl,
+      </if>
+      <if test="paramids != null" >
+        paramIDs,
+      </if>
+      <if test="paramvalues != null" >
+        paramValues,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="detaildesc != null" >
+        detailDesc,
+      </if>
+      <if test="paras != null" >
+        paras,
+      </if>
+      <if test="service != null" >
+        service,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createid != null" >
+        #{createid,jdbcType=BIGINT},
+      </if>
+      <if test="fcateid != null" >
+        #{fcateid,jdbcType=INTEGER},
+      </if>
+      <if test="scateid != null" >
+        #{scateid,jdbcType=INTEGER},
+      </if>
+      <if test="brandid != null" >
+        #{brandid,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="publishtime != null" >
+        #{publishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodified != null" >
+        #{lastmodified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="repository != null" >
+        #{repository,jdbcType=DOUBLE},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=DOUBLE},
+      </if>
+      <if test="hit != null" >
+        #{hit,jdbcType=BIGINT},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="paramids != null" >
+        #{paramids,jdbcType=VARCHAR},
+      </if>
+      <if test="paramvalues != null" >
+        #{paramvalues,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="detaildesc != null" >
+        #{detaildesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="paras != null" >
+        #{paras,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="service != null" >
+        #{service,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movision.mybatis.entity.ProductWithBLOBs" >
+    update t_p_product
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createid != null" >
+        createid = #{createid,jdbcType=BIGINT},
+      </if>
+      <if test="fcateid != null" >
+        fcateid = #{fcateid,jdbcType=INTEGER},
+      </if>
+      <if test="scateid != null" >
+        scateid = #{scateid,jdbcType=INTEGER},
+      </if>
+      <if test="brandid != null" >
+        brandid = #{brandid,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="publishtime != null" >
+        publishTime = #{publishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodified != null" >
+        lastmodified = #{lastmodified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="repository != null" >
+        repository = #{repository,jdbcType=DOUBLE},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=DOUBLE},
+      </if>
+      <if test="hit != null" >
+        hit = #{hit,jdbcType=BIGINT},
+      </if>
+      <if test="imgurl != null" >
+        imgUrl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="paramids != null" >
+        paramIDs = #{paramids,jdbcType=VARCHAR},
+      </if>
+      <if test="paramvalues != null" >
+        paramValues = #{paramvalues,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="detaildesc != null" >
+        detailDesc = #{detaildesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="paras != null" >
+        paras = #{paras,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="service != null" >
+        service = #{service,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.movision.mybatis.entity.ProductWithBLOBs" >
+    update t_p_product
+    set name = #{name,jdbcType=VARCHAR},
+      createid = #{createid,jdbcType=BIGINT},
+      fcateid = #{fcateid,jdbcType=INTEGER},
+      scateid = #{scateid,jdbcType=INTEGER},
+      brandid = #{brandid,jdbcType=BIGINT},
+      status = #{status,jdbcType=TINYINT},
+      publishTime = #{publishtime,jdbcType=TIMESTAMP},
+      lastmodified = #{lastmodified,jdbcType=TIMESTAMP},
+      price = #{price,jdbcType=DOUBLE},
+      unit = #{unit,jdbcType=VARCHAR},
+      repository = #{repository,jdbcType=DOUBLE},
+      number = #{number,jdbcType=DOUBLE},
+      hit = #{hit,jdbcType=BIGINT},
+      imgUrl = #{imgurl,jdbcType=VARCHAR},
+      paramIDs = #{paramids,jdbcType=VARCHAR},
+      paramValues = #{paramvalues,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      detailDesc = #{detaildesc,jdbcType=LONGVARCHAR},
+      paras = #{paras,jdbcType=LONGVARCHAR},
+      service = #{service,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movision.mybatis.entity.Product" >
+    update t_p_product
+    set name = #{name,jdbcType=VARCHAR},
+      createid = #{createid,jdbcType=BIGINT},
+      fcateid = #{fcateid,jdbcType=INTEGER},
+      scateid = #{scateid,jdbcType=INTEGER},
+      brandid = #{brandid,jdbcType=BIGINT},
+      status = #{status,jdbcType=TINYINT},
+      publishTime = #{publishtime,jdbcType=TIMESTAMP},
+      lastmodified = #{lastmodified,jdbcType=TIMESTAMP},
+      price = #{price,jdbcType=DOUBLE},
+      unit = #{unit,jdbcType=VARCHAR},
+      repository = #{repository,jdbcType=DOUBLE},
+      number = #{number,jdbcType=DOUBLE},
+      hit = #{hit,jdbcType=BIGINT},
+      imgUrl = #{imgurl,jdbcType=VARCHAR},
+      paramIDs = #{paramids,jdbcType=VARCHAR},
+      paramValues = #{paramvalues,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectImg" resultType="java.util.Map">
+  	<![CDATA[  
+  	SELECT
+      id,
+      imgUrl
+    FROM
+      t_p_product m
+    WHERE imgUrl IS NOT NULL
+      AND imgUrl <> ''
+      AND LOCATE('default',imgUrl)=0	
+      AND NOT EXISTS
+      (SELECT
+        1
+      FROM
+        t_img_compress_log l
+      WHERE l.`relation_id` = m.`id`
+        AND l.`img_url` = m.`imgUrl`
+        AND l.`source_table` = 't_p_product'
+        )
+        LIMIT 500
+  	]]> 
+  </select>
+  
+</mapper>

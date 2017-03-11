@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movision.mybatis.mapper.PackageMapper" >
+  <resultMap id="BaseResultMap" type="com.movision.mybatis.entity.Package" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="package_name" property="packageName" jdbcType="VARCHAR" />
+    <result column="package_type" property="packageType" jdbcType="INTEGER" />
+    <result column="package_period" property="packagePeriod" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="original_price" property="originalPrice" jdbcType="DECIMAL" />
+    <result column="items_id" property="itemsId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="operator_id" property="operatorId" jdbcType="BIGINT" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, package_name, package_type, package_period, price, original_price, items_id, 
+    status, operator_id, add_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_package
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_package
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.movision.mybatis.entity.Package" >
+    insert into t_package (id, package_name, package_type, 
+      package_period, price, original_price, 
+      items_id, status, operator_id, 
+      add_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{packageName,jdbcType=VARCHAR}, #{packageType,jdbcType=INTEGER}, 
+      #{packagePeriod,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{originalPrice,jdbcType=DECIMAL}, 
+      #{itemsId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{operatorId,jdbcType=BIGINT}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.movision.mybatis.entity.Package" >
+    insert into t_package
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="packageName != null" >
+        package_name,
+      </if>
+      <if test="packageType != null" >
+        package_type,
+      </if>
+      <if test="packagePeriod != null" >
+        package_period,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="originalPrice != null" >
+        original_price,
+      </if>
+      <if test="itemsId != null" >
+        items_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="operatorId != null" >
+        operator_id,
+      </if>
+        add_time,
+        update_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="packageName != null" >
+        #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="packageType != null" >
+        #{packageType,jdbcType=INTEGER},
+      </if>
+      <if test="packagePeriod != null" >
+        #{packagePeriod,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="originalPrice != null" >
+        #{originalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="itemsId != null" >
+        #{itemsId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=BIGINT},
+      </if>
+        now(),
+        now(),
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movision.mybatis.entity.Package" >
+    update t_package
+    <set >
+      <if test="packageName != null" >
+        package_name = #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="packageType != null" >
+        package_type = #{packageType,jdbcType=INTEGER},
+      </if>
+      <if test="packagePeriod != null" >
+        package_period = #{packagePeriod,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="originalPrice != null" >
+        original_price = #{originalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="itemsId != null" >
+        items_id = #{itemsId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null" >
+        operator_id = #{operatorId,jdbcType=BIGINT},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+        update_time = now(),
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movision.mybatis.entity.Package" >
+    update t_package
+    set package_name = #{packageName,jdbcType=VARCHAR},
+      package_type = #{packageType,jdbcType=INTEGER},
+      package_period = #{packagePeriod,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      original_price = #{originalPrice,jdbcType=DECIMAL},
+      items_id = #{itemsId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      operator_id = #{operatorId,jdbcType=BIGINT},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findAllPackagePager" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from t_package
+    where 1=1
+    <if test="packageName != null and packageName != ''">
+      and package_name like CONCAT('%',#{packageName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="packageType != null and packageType != ''">
+      and package_type = #{packageType,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <select id="selPackageList" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from t_package
+    where 1=1
+    AND  status = 2
+  </select>
+</mapper>

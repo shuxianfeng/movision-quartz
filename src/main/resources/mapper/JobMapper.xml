@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movision.mybatis.mapper.JobMapper">
+    <resultMap id="BaseResultMap" type="com.movision.mybatis.entity.Job">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="createid" property="createid" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="publishTime" property="publishTime" jdbcType="VARCHAR"/>
+        <result column="updateTime" property="updateTime" jdbcType="VARCHAR"/>
+        <result column="positionType" property="positionType" jdbcType="VARCHAR"/>
+        <result column="positionTypeName" property="positionTypeName" jdbcType="VARCHAR"/>
+        <result column="parentId" property="parentId" jdbcType="VARCHAR"/>
+        <result column="enterpriseName" property="enterpriseName" jdbcType="VARCHAR"/>
+        <result column="salary" property="salary" jdbcType="INTEGER"/>
+        <result column="salaryName" property="salaryName" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="area" property="area" jdbcType="VARCHAR"/>
+        <result column="workArea" property="workArea" jdbcType="VARCHAR"/>
+        <result column="education" property="education" jdbcType="INTEGER"/>
+        <result column="experience" property="experience" jdbcType="INTEGER"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="welfare" property="welfare" jdbcType="VARCHAR"/>
+        <result column="department" property="department" jdbcType="VARCHAR"/>
+        <result column="superior" property="superior" jdbcType="VARCHAR"/>
+        <result column="number" property="number" jdbcType="VARCHAR"/>
+        <result column="profession" property="profession" jdbcType="VARCHAR"/>
+        <result column="is_deleted" property="is_deleted" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="getFbzwCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(1) FROM t_i_job j
+    WHERE j.createid = #{userId} and j.is_deleted = 0
+             <![CDATA[
+               and  j.publishTime  <= #{expireTime}
+               AND  j.publishTime  >= #{activeTime}
+        ]]>
+    </select>
+
+    <update id="deletePosition" parameterType="com.movision.mybatis.entity.Job">
+        UPDATE t_i_job SET is_deleted = 1 WHERE id = #{id}
+    </update>
+
+
+    <select id="getResumeCount" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+        select
+       count(1)
+        from t_i_resume_download_record
+        where 1=1
+        <![CDATA[
+               and  publishDate  <= #{expireTime}
+               AND  publishDate  >= #{activeTime}
+        ]]>
+        and companyID = #{userId}
+    </select>
+
+    <select id="selectExpireDownloadResume" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+        select
+        id,companyID,resumeID
+        from t_i_resume_download_record
+        where 1=1
+        <![CDATA[
+               and  publishDate  <= (select SUBDATE(CURDATE(),INTERVAL 3 month))
+        ]]>
+        and is_deleted = 0
+    </select>
+
+    <update id="deleteDownloadRecord" parameterType="java.lang.String">
+        UPDATE t_i_resume_download_record SET is_deleted = 1 WHERE id = #{id}
+    </update>
+
+    <select id="selectViewGoods" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select id from t_zhb_viewGoods t where t.companyId = #{companyId} and t.goodsId = #{goodsId} and t.type='CXXZJL' and status = 0
+             <![CDATA[
+                AND viewTime  <= (select SUBDATE(CURDATE(),INTERVAL 3 month))
+
+
+
+
+
+        ]]>
+    </select>
+
+    <update id="deleteViewGoods" parameterType="java.lang.String">
+        UPDATE t_zhb_viewGoods SET status = 1 WHERE id = #{id}
+    </update>
+
+</mapper>

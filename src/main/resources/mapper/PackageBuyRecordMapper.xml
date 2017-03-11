@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movision.mybatis.mapper.PackageBuyRecordMapper">
+    <resultMap id="BaseResultMap" type="com.movision.mybatis.entity.PackageBuyRecord">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="buyer_id" property="buyerId" jdbcType="BIGINT"/>
+        <result column="package_id" property="packageId" jdbcType="BIGINT"/>
+        <result column="active_time" property="activeTime" jdbcType="TIMESTAMP"/>
+        <result column="expire_time" property="expireTime" jdbcType="TIMESTAMP"/>
+        <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="contract_no" property="contractNo" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="operator_id" property="operatorId" jdbcType="BIGINT"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, buyer_id, package_id, active_time, expire_time, add_time, update_time,contract_no,
+    status, operator_id,price
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+         a.id, a.buyer_id, a.package_id, a.active_time, a.expire_time, a.add_time, a.update_time,a.contract_no,a.price,
+         a.status, a.operator_id
+        from t_package_buy_record  a
+        where a.id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_package_buy_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.movision.mybatis.entity.PackageBuyRecord">
+    insert into t_package_buy_record (id, buyer_id, package_id, 
+      active_time, expire_time, add_time, 
+      update_time,contract_no,price)
+    values (#{id,jdbcType=BIGINT}, #{buyerId,jdbcType=BIGINT}, #{packageId,jdbcType=BIGINT}, 
+      #{activeTime,jdbcType=TIMESTAMP}, #{expireTime,jdbcType=TIMESTAMP}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{contractNo,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{operatorId,jdbcType=BIGINT}, #{price,jdbcType=DECIMAL})
+  </insert>
+    <insert id="insertSelective" parameterType="com.movision.mybatis.entity.PackageBuyRecord">
+        insert into t_package_buy_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="buyerId != null">
+                buyer_id,
+            </if>
+            <if test="packageId != null">
+                package_id,
+            </if>
+            <if test="activeTime != null">
+                active_time,
+            </if>
+            <if test="expireTime != null">
+                expire_time,
+            </if>
+            add_time,
+            update_time,
+            <if test="contractNo != null">
+                contract_no,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="operatorId != null">
+                operator_id,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="buyerId != null">
+                #{buyerId,jdbcType=BIGINT},
+            </if>
+            <if test="packageId != null">
+                #{packageId,jdbcType=BIGINT},
+            </if>
+            <if test="activeTime != null">
+                #{activeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expireTime != null">
+                #{expireTime,jdbcType=TIMESTAMP},
+            </if>
+            now(),
+            now(),
+            <if test="contractNo != null">
+                #{contractNo,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="operatorId != null">
+                #{operatorId,jdbcType=BIGINT},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.movision.mybatis.entity.PackageBuyRecord">
+        update t_package_buy_record
+        <set>
+            <if test="buyerId != null">
+                buyer_id = #{buyerId,jdbcType=BIGINT},
+            </if>
+            <if test="packageId != null">
+                package_id = #{packageId,jdbcType=BIGINT},
+            </if>
+            <if test="activeTime != null">
+                active_time = #{activeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expireTime != null">
+                expire_time = #{expireTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="addTime != null">
+                add_time = #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            update_time = now(),
+            <if test="contractNo != null">
+                contract_no = #{contractNo,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="operatorId != null">
+                operator_id = #{operatorId,jdbcType=BIGINT},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.movision.mybatis.entity.PackageBuyRecord">
+    update t_package_buy_record
+    set buyer_id = #{buyerId,jdbcType=BIGINT},
+      package_id = #{packageId,jdbcType=BIGINT},
+      active_time = #{activeTime,jdbcType=TIMESTAMP},
+      expire_time = #{expireTime,jdbcType=TIMESTAMP},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+            status = #{status,jdbcType=INTEGER},
+      operator_id = #{operatorId,jdbcType=BIGINT},
+      contract_no = #{contractNo,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="findIneffectivePackageBuyRecord" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        a.id, a.buyer_id, a.package_id, a.active_time, a.expire_time, a.add_time, a.update_time,a.contract_no,a.price,
+        a.status, a.operator_id
+        from t_package_buy_record  a
+        where 1=1
+              <![CDATA[
+               and  a.expire_time  <= NOW()
+        ]]>
+            and a.status = 3
+    </select>
+
+    <select id="findEffectivePackageBuyRecord" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        a.id, a.buyer_id, a.package_id, a.active_time, a.expire_time, a.add_time, a.update_time,a.contract_no,a.price,
+        a.status, a.operator_id
+        from t_package_buy_record  a
+        where 1=1
+        <![CDATA[
+               and  a.active_time  <= NOW()
+        ]]>
+        and a.status = 2
+    </select>
+
+
+    <select id="getPackageByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        a.id, a.buyer_id, a.package_id, a.active_time, a.expire_time, a.add_time, a.update_time,a.contract_no,a.price,
+        a.status, a.operator_id
+        from t_package_buy_record  a
+        where 1=1
+        and status = 4
+        and a.buyer_id = #{userId,jdbcType=BIGINT}
+        ORDER by a.id desc limit 1
+    </select>
+</mapper>

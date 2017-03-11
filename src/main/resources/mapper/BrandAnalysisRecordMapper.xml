@@ -1,0 +1,903 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movision.mybatis.mapper.BrandAnalysisRecordMapper">
+    <resultMap id="BaseResultMap" type="com.movision.mybatis.entity.BrandAnalysisRecord">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="analysis_id" property="analysisId" jdbcType="BIGINT"/>
+        <result column="brand_id" property="brandId" jdbcType="BIGINT"/>
+        <result column="category_id" property="categoryId" jdbcType="BIGINT"/>
+        <result column="brand_name" property="brandName" jdbcType="VARCHAR"/>
+        <result column="report_time" property="reportTime" jdbcType="TIMESTAMP"/>
+        <result column="total_score" property="totalScore" jdbcType="INTEGER"/>
+        <result column="total_differentiation_degrees_score" property="totalDifferentiationDegreesScore"
+                jdbcType="INTEGER"/>
+        <result column="total_market_performance_score" property="totalMarketPerformanceScore" jdbcType="INTEGER"/>
+        <result column="total_exposure_value_score" property="totalExposureValueScore" jdbcType="INTEGER"/>
+        <result column="total_reputation_score" property="totalReputationScore" jdbcType="INTEGER"/>
+        <result column="rank" property="rank" jdbcType="INTEGER"/>
+        <result column="last_rank" property="lastRank" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="score_logo" property="scoreLogo" jdbcType="INTEGER"/>
+        <result column="score_china_name" property="scoreChinaName" jdbcType="INTEGER"/>
+        <result column="score_english_name" property="scoreEnglishName" jdbcType="INTEGER"/>
+        <result column="score_trademark" property="scoreTrademark" jdbcType="INTEGER"/>
+        <result column="score_domain_name" property="scoreDomainName" jdbcType="INTEGER"/>
+        <result column="score_patents" property="scorePatents" jdbcType="INTEGER"/>
+        <result column="score_brand_hue" property="scoreBrandHue" jdbcType="INTEGER"/>
+        <result column="score_brand_spokesman" property="scoreBrandSpokesman" jdbcType="INTEGER"/>
+        <result column="score_brand_history" property="scoreBrandHistory" jdbcType="INTEGER"/>
+        <result column="score_ipo" property="scoreIpo" jdbcType="INTEGER"/>
+        <result column="score_internationalization" property="scoreInternationalization" jdbcType="INTEGER"/>
+        <result column="score_differentiation_degrees_extra" property="scoreDifferentiationDegreesExtra"
+                jdbcType="INTEGER"/>
+        <result column="score_enterprise_scale" property="scoreEnterpriseScale" jdbcType="INTEGER"/>
+        <result column="score_mobile" property="scoreMobile" jdbcType="INTEGER"/>
+        <result column="score_website" property="scoreWebsite" jdbcType="INTEGER"/>
+        <result column="score_ecommerce" property="scoreECommerce" jdbcType="INTEGER"/>
+        <result column="score_customer_resource_management" property="scoreCustomerResourceManagement"
+                jdbcType="INTEGER"/>
+        <result column="score_quality_management_system" property="scoreQualityManagementSystem" jdbcType="INTEGER"/>
+        <result column="score_layout" property="scoreLayout" jdbcType="INTEGER"/>
+        <result column="score_marketing_channel" property="scoreMarketingChannel" jdbcType="INTEGER"/>
+        <result column="score_customer_training" property="scoreCustomerTraining" jdbcType="INTEGER"/>
+        <result column="score_industrial_standard" property="scoreIndustrialStandard" jdbcType="INTEGER"/>
+        <result column="score_big_customer" property="scoreBigCustomer" jdbcType="INTEGER"/>
+        <result column="score_customer_relations" property="scoreCustomerRelations" jdbcType="INTEGER"/>
+        <result column="score_project_case" property="scoreProjectCase" jdbcType="INTEGER"/>
+        <result column="score_market_shares" property="scoreMarketShares" jdbcType="INTEGER"/>
+        <result column="score_market_performance_extra" property="scoreMarketPerformanceExtra" jdbcType="INTEGER"/>
+        <result column="score_traditional_media" property="scoreTraditionalMedia" jdbcType="INTEGER"/>
+        <result column="score_network_media" property="scoreNetworkMedia" jdbcType="INTEGER"/>
+        <result column="score_baidu_search" property="scoreBaiduSearch" jdbcType="INTEGER"/>
+        <result column="score_360_search" property="score360Search" jdbcType="INTEGER"/>
+        <result column="score_exhibition" property="scoreExhibition" jdbcType="INTEGER"/>
+        <result column="score_proseminar_history" property="scoreProseminarHistory" jdbcType="INTEGER"/>
+        <result column="score_proseminar_curent" property="scoreProseminarCurent" jdbcType="INTEGER"/>
+        <result column="score_exposure_value_extra" property="scoreExposureValueExtra" jdbcType="INTEGER"/>
+        <result column="score_public_welfare_cause" property="scorePublicWelfareCause" jdbcType="INTEGER"/>
+        <result column="score_international_honor" property="scoreInternationalHonor" jdbcType="INTEGER"/>
+        <result column="score_country_honor" property="scoreCountryHonor" jdbcType="INTEGER"/>
+        <result column="score_province_honor" property="scoreProvinceHonor" jdbcType="INTEGER"/>
+        <result column="score_tender_succ" property="scoreTenderSucc" jdbcType="INTEGER"/>
+        <result column="score_project_scale" property="scoreProjectScale" jdbcType="INTEGER"/>
+        <result column="score_user_feedback" property="scoreUserFeedback" jdbcType="INTEGER"/>
+        <result column="score_project_advertise" property="scoreProjectAdvertise" jdbcType="INTEGER"/>
+        <result column="score_bbs_history" property="scoreBbsHistory" jdbcType="INTEGER"/>
+        <result column="score_bbs_curent" property="scoreBbsCurent" jdbcType="INTEGER"/>
+        <result column="score_weibo_history" property="scoreWeiboHistory" jdbcType="INTEGER"/>
+        <result column="score_weibo_curent" property="scoreWeiboCurent" jdbcType="INTEGER"/>
+        <result column="score_negative_msg" property="scoreNegativeMsg" jdbcType="INTEGER"/>
+        <result column="score_reputation_extra" property="scoreReputationExtra" jdbcType="INTEGER"/>
+        <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, analysis_id, brand_id,category_id,brand_name, report_time, total_score, total_differentiation_degrees_score,
+    total_market_performance_score, total_exposure_value_score, total_reputation_score, 
+    rank, last_rank, status, score_logo, score_china_name, score_english_name, score_trademark, 
+    score_domain_name, score_patents, score_brand_hue, score_brand_spokesman, score_brand_history, 
+    score_ipo, score_internationalization, score_differentiation_degrees_extra, score_enterprise_scale, 
+    score_mobile, score_website, score_ecommerce, score_customer_resource_management, 
+    score_quality_management_system, score_layout, score_marketing_channel, score_customer_training, 
+    score_industrial_standard, score_big_customer, score_customer_relations, score_project_case, 
+    score_market_shares, score_market_performance_extra, score_traditional_media, score_network_media, 
+    score_baidu_search, score_360_search, score_exhibition, score_proseminar_history, 
+    score_proseminar_curent, score_exposure_value_extra, score_public_welfare_cause, 
+    score_international_honor, score_country_honor, score_province_honor, score_tender_succ, 
+    score_project_scale, score_user_feedback, score_project_advertise, score_bbs_history, 
+    score_bbs_curent, score_weibo_history, score_weibo_curent, score_negative_msg, score_reputation_extra, 
+    add_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_brand_analysis_record
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_brand_analysis_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.movision.mybatis.entity.BrandAnalysisRecord">
+    insert into t_brand_analysis_record (id, analysis_id, brand_id, category_id,
+      report_time, total_score, total_differentiation_degrees_score, 
+      total_market_performance_score, total_exposure_value_score, 
+      total_reputation_score, rank, last_rank, 
+      status, score_logo, score_china_name, 
+      score_english_name, score_trademark, score_domain_name, 
+      score_patents, score_brand_hue, score_brand_spokesman, 
+      score_brand_history, score_ipo, score_internationalization, 
+      score_differentiation_degrees_extra, score_enterprise_scale, 
+      score_mobile, score_website, score_ecommerce, 
+      score_customer_resource_management, score_quality_management_system, 
+      score_layout, score_marketing_channel, score_customer_training, 
+      score_industrial_standard, score_big_customer, 
+      score_customer_relations, score_project_case, 
+      score_market_shares, score_market_performance_extra, 
+      score_traditional_media, score_network_media, 
+      score_baidu_search, score_360_search, score_exhibition, 
+      score_proseminar_history, score_proseminar_curent, 
+      score_exposure_value_extra, score_public_welfare_cause, 
+      score_international_honor, score_country_honor, 
+      score_province_honor, score_tender_succ, score_project_scale, 
+      score_user_feedback, score_project_advertise, 
+      score_bbs_history, score_bbs_curent, score_weibo_history, 
+      score_weibo_curent, score_negative_msg, score_reputation_extra, 
+      add_time, update_time, brand_name
+      )
+    values (#{id,jdbcType=BIGINT}, #{analysisId,jdbcType=BIGINT}, #{brandId,jdbcType=BIGINT},  #{categoryId,jdbcType=BIGINT},
+      #{reportTime,jdbcType=TIMESTAMP}, #{totalScore,jdbcType=INTEGER}, #{totalDifferentiationDegreesScore,jdbcType=INTEGER}, 
+      #{totalMarketPerformanceScore,jdbcType=INTEGER}, #{totalExposureValueScore,jdbcType=INTEGER}, 
+      #{totalReputationScore,jdbcType=INTEGER}, #{rank,jdbcType=INTEGER}, #{lastRank,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{scoreLogo,jdbcType=INTEGER}, #{scoreChinaName,jdbcType=INTEGER}, 
+      #{scoreEnglishName,jdbcType=INTEGER}, #{scoreTrademark,jdbcType=INTEGER}, #{scoreDomainName,jdbcType=INTEGER}, 
+      #{scorePatents,jdbcType=INTEGER}, #{scoreBrandHue,jdbcType=INTEGER}, #{scoreBrandSpokesman,jdbcType=INTEGER}, 
+      #{scoreBrandHistory,jdbcType=INTEGER}, #{scoreIpo,jdbcType=INTEGER}, #{scoreInternationalization,jdbcType=INTEGER}, 
+      #{scoreDifferentiationDegreesExtra,jdbcType=INTEGER}, #{scoreEnterpriseScale,jdbcType=INTEGER}, 
+      #{scoreMobile,jdbcType=INTEGER}, #{scoreWebsite,jdbcType=INTEGER}, #{scoreECommerce,jdbcType=INTEGER}, 
+      #{scoreCustomerResourceManagement,jdbcType=INTEGER}, #{scoreQualityManagementSystem,jdbcType=INTEGER}, 
+      #{scoreLayout,jdbcType=INTEGER}, #{scoreMarketingChannel,jdbcType=INTEGER}, #{scoreCustomerTraining,jdbcType=INTEGER}, 
+      #{scoreIndustrialStandard,jdbcType=INTEGER}, #{scoreBigCustomer,jdbcType=INTEGER}, 
+      #{scoreCustomerRelations,jdbcType=INTEGER}, #{scoreProjectCase,jdbcType=INTEGER}, 
+      #{scoreMarketShares,jdbcType=INTEGER}, #{scoreMarketPerformanceExtra,jdbcType=INTEGER}, 
+      #{scoreTraditionalMedia,jdbcType=INTEGER}, #{scoreNetworkMedia,jdbcType=INTEGER}, 
+      #{scoreBaiduSearch,jdbcType=INTEGER}, #{score360Search,jdbcType=INTEGER}, #{scoreExhibition,jdbcType=INTEGER}, 
+      #{scoreProseminarHistory,jdbcType=INTEGER}, #{scoreProseminarCurent,jdbcType=INTEGER}, 
+      #{scoreExposureValueExtra,jdbcType=INTEGER}, #{scorePublicWelfareCause,jdbcType=INTEGER}, 
+      #{scoreInternationalHonor,jdbcType=INTEGER}, #{scoreCountryHonor,jdbcType=INTEGER}, 
+      #{scoreProvinceHonor,jdbcType=INTEGER}, #{scoreTenderSucc,jdbcType=INTEGER}, #{scoreProjectScale,jdbcType=INTEGER}, 
+      #{scoreUserFeedback,jdbcType=INTEGER}, #{scoreProjectAdvertise,jdbcType=INTEGER}, 
+      #{scoreBbsHistory,jdbcType=INTEGER}, #{scoreBbsCurent,jdbcType=INTEGER}, #{scoreWeiboHistory,jdbcType=INTEGER}, 
+      #{scoreWeiboCurent,jdbcType=INTEGER}, #{scoreNegativeMsg,jdbcType=INTEGER}, #{scoreReputationExtra,jdbcType=INTEGER}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{brandName,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.movision.mybatis.entity.BrandAnalysisRecord">
+        insert into t_brand_analysis_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="analysisId != null">
+                analysis_id,
+            </if>
+            <if test="brandId != null">
+                brand_id,
+            </if>
+            <if test="categoryId != null">
+                category_id,
+            </if>
+            <if test="reportTime != null">
+                report_time,
+            </if>
+            <if test="totalScore != null">
+                total_score,
+            </if>
+            <if test="totalDifferentiationDegreesScore != null">
+                total_differentiation_degrees_score,
+            </if>
+            <if test="totalMarketPerformanceScore != null">
+                total_market_performance_score,
+            </if>
+            <if test="totalExposureValueScore != null">
+                total_exposure_value_score,
+            </if>
+            <if test="totalReputationScore != null">
+                total_reputation_score,
+            </if>
+            <if test="rank != null">
+                rank,
+            </if>
+            <if test="lastRank != null">
+                last_rank,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="scoreLogo != null">
+                score_logo,
+            </if>
+            <if test="scoreChinaName != null">
+                score_china_name,
+            </if>
+            <if test="scoreEnglishName != null">
+                score_english_name,
+            </if>
+            <if test="scoreTrademark != null">
+                score_trademark,
+            </if>
+            <if test="scoreDomainName != null">
+                score_domain_name,
+            </if>
+            <if test="scorePatents != null">
+                score_patents,
+            </if>
+            <if test="scoreBrandHue != null">
+                score_brand_hue,
+            </if>
+            <if test="scoreBrandSpokesman != null">
+                score_brand_spokesman,
+            </if>
+            <if test="scoreBrandHistory != null">
+                score_brand_history,
+            </if>
+            <if test="scoreIpo != null">
+                score_ipo,
+            </if>
+            <if test="scoreInternationalization != null">
+                score_internationalization,
+            </if>
+            <if test="scoreDifferentiationDegreesExtra != null">
+                score_differentiation_degrees_extra,
+            </if>
+            <if test="scoreEnterpriseScale != null">
+                score_enterprise_scale,
+            </if>
+            <if test="scoreMobile != null">
+                score_mobile,
+            </if>
+            <if test="scoreWebsite != null">
+                score_website,
+            </if>
+            <if test="scoreECommerce != null">
+                score_ecommerce,
+            </if>
+            <if test="scoreCustomerResourceManagement != null">
+                score_customer_resource_management,
+            </if>
+            <if test="scoreQualityManagementSystem != null">
+                score_quality_management_system,
+            </if>
+            <if test="scoreLayout != null">
+                score_layout,
+            </if>
+            <if test="scoreMarketingChannel != null">
+                score_marketing_channel,
+            </if>
+            <if test="scoreCustomerTraining != null">
+                score_customer_training,
+            </if>
+            <if test="scoreIndustrialStandard != null">
+                score_industrial_standard,
+            </if>
+            <if test="scoreBigCustomer != null">
+                score_big_customer,
+            </if>
+            <if test="scoreCustomerRelations != null">
+                score_customer_relations,
+            </if>
+            <if test="scoreProjectCase != null">
+                score_project_case,
+            </if>
+            <if test="scoreMarketShares != null">
+                score_market_shares,
+            </if>
+            <if test="scoreMarketPerformanceExtra != null">
+                score_market_performance_extra,
+            </if>
+            <if test="scoreTraditionalMedia != null">
+                score_traditional_media,
+            </if>
+            <if test="scoreNetworkMedia != null">
+                score_network_media,
+            </if>
+            <if test="scoreBaiduSearch != null">
+                score_baidu_search,
+            </if>
+            <if test="score360Search != null">
+                score_360_search,
+            </if>
+            <if test="scoreExhibition != null">
+                score_exhibition,
+            </if>
+            <if test="scoreProseminarHistory != null">
+                score_proseminar_history,
+            </if>
+            <if test="scoreProseminarCurent != null">
+                score_proseminar_curent,
+            </if>
+            <if test="scoreExposureValueExtra != null">
+                score_exposure_value_extra,
+            </if>
+            <if test="scorePublicWelfareCause != null">
+                score_public_welfare_cause,
+            </if>
+            <if test="scoreInternationalHonor != null">
+                score_international_honor,
+            </if>
+            <if test="scoreCountryHonor != null">
+                score_country_honor,
+            </if>
+            <if test="scoreProvinceHonor != null">
+                score_province_honor,
+            </if>
+            <if test="scoreTenderSucc != null">
+                score_tender_succ,
+            </if>
+            <if test="scoreProjectScale != null">
+                score_project_scale,
+            </if>
+            <if test="scoreUserFeedback != null">
+                score_user_feedback,
+            </if>
+            <if test="scoreProjectAdvertise != null">
+                score_project_advertise,
+            </if>
+            <if test="scoreBbsHistory != null">
+                score_bbs_history,
+            </if>
+            <if test="scoreBbsCurent != null">
+                score_bbs_curent,
+            </if>
+            <if test="scoreWeiboHistory != null">
+                score_weibo_history,
+            </if>
+            <if test="scoreWeiboCurent != null">
+                score_weibo_curent,
+            </if>
+            <if test="scoreNegativeMsg != null">
+                score_negative_msg,
+            </if>
+            <if test="scoreReputationExtra != null">
+                score_reputation_extra,
+            </if>
+            <if test="addTime != null">
+                add_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="brandName != null">
+                brand_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="analysisId != null">
+                #{analysisId,jdbcType=BIGINT},
+            </if>
+            <if test="brandId != null">
+                #{brandId,jdbcType=BIGINT},
+            </if>
+            <if test="categoryId != null">
+                #{categoryId,jdbcType=BIGINT},
+            </if>
+            <if test="reportTime != null">
+                #{reportTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="totalScore != null">
+                #{totalScore,jdbcType=INTEGER},
+            </if>
+            <if test="totalDifferentiationDegreesScore != null">
+                #{totalDifferentiationDegreesScore,jdbcType=INTEGER},
+            </if>
+            <if test="totalMarketPerformanceScore != null">
+                #{totalMarketPerformanceScore,jdbcType=INTEGER},
+            </if>
+            <if test="totalExposureValueScore != null">
+                #{totalExposureValueScore,jdbcType=INTEGER},
+            </if>
+            <if test="totalReputationScore != null">
+                #{totalReputationScore,jdbcType=INTEGER},
+            </if>
+            <if test="rank != null">
+                #{rank,jdbcType=INTEGER},
+            </if>
+            <if test="lastRank != null">
+                #{lastRank,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="scoreLogo != null">
+                #{scoreLogo,jdbcType=INTEGER},
+            </if>
+            <if test="scoreChinaName != null">
+                #{scoreChinaName,jdbcType=INTEGER},
+            </if>
+            <if test="scoreEnglishName != null">
+                #{scoreEnglishName,jdbcType=INTEGER},
+            </if>
+            <if test="scoreTrademark != null">
+                #{scoreTrademark,jdbcType=INTEGER},
+            </if>
+            <if test="scoreDomainName != null">
+                #{scoreDomainName,jdbcType=INTEGER},
+            </if>
+            <if test="scorePatents != null">
+                #{scorePatents,jdbcType=INTEGER},
+            </if>
+            <if test="scoreBrandHue != null">
+                #{scoreBrandHue,jdbcType=INTEGER},
+            </if>
+            <if test="scoreBrandSpokesman != null">
+                #{scoreBrandSpokesman,jdbcType=INTEGER},
+            </if>
+            <if test="scoreBrandHistory != null">
+                #{scoreBrandHistory,jdbcType=INTEGER},
+            </if>
+            <if test="scoreIpo != null">
+                #{scoreIpo,jdbcType=INTEGER},
+            </if>
+            <if test="scoreInternationalization != null">
+                #{scoreInternationalization,jdbcType=INTEGER},
+            </if>
+            <if test="scoreDifferentiationDegreesExtra != null">
+                #{scoreDifferentiationDegreesExtra,jdbcType=INTEGER},
+            </if>
+            <if test="scoreEnterpriseScale != null">
+                #{scoreEnterpriseScale,jdbcType=INTEGER},
+            </if>
+            <if test="scoreMobile != null">
+                #{scoreMobile,jdbcType=INTEGER},
+            </if>
+            <if test="scoreWebsite != null">
+                #{scoreWebsite,jdbcType=INTEGER},
+            </if>
+            <if test="scoreECommerce != null">
+                #{scoreECommerce,jdbcType=INTEGER},
+            </if>
+            <if test="scoreCustomerResourceManagement != null">
+                #{scoreCustomerResourceManagement,jdbcType=INTEGER},
+            </if>
+            <if test="scoreQualityManagementSystem != null">
+                #{scoreQualityManagementSystem,jdbcType=INTEGER},
+            </if>
+            <if test="scoreLayout != null">
+                #{scoreLayout,jdbcType=INTEGER},
+            </if>
+            <if test="scoreMarketingChannel != null">
+                #{scoreMarketingChannel,jdbcType=INTEGER},
+            </if>
+            <if test="scoreCustomerTraining != null">
+                #{scoreCustomerTraining,jdbcType=INTEGER},
+            </if>
+            <if test="scoreIndustrialStandard != null">
+                #{scoreIndustrialStandard,jdbcType=INTEGER},
+            </if>
+            <if test="scoreBigCustomer != null">
+                #{scoreBigCustomer,jdbcType=INTEGER},
+            </if>
+            <if test="scoreCustomerRelations != null">
+                #{scoreCustomerRelations,jdbcType=INTEGER},
+            </if>
+            <if test="scoreProjectCase != null">
+                #{scoreProjectCase,jdbcType=INTEGER},
+            </if>
+            <if test="scoreMarketShares != null">
+                #{scoreMarketShares,jdbcType=INTEGER},
+            </if>
+            <if test="scoreMarketPerformanceExtra != null">
+                #{scoreMarketPerformanceExtra,jdbcType=INTEGER},
+            </if>
+            <if test="scoreTraditionalMedia != null">
+                #{scoreTraditionalMedia,jdbcType=INTEGER},
+            </if>
+            <if test="scoreNetworkMedia != null">
+                #{scoreNetworkMedia,jdbcType=INTEGER},
+            </if>
+            <if test="scoreBaiduSearch != null">
+                #{scoreBaiduSearch,jdbcType=INTEGER},
+            </if>
+            <if test="score360Search != null">
+                #{score360Search,jdbcType=INTEGER},
+            </if>
+            <if test="scoreExhibition != null">
+                #{scoreExhibition,jdbcType=INTEGER},
+            </if>
+            <if test="scoreProseminarHistory != null">
+                #{scoreProseminarHistory,jdbcType=INTEGER},
+            </if>
+            <if test="scoreProseminarCurent != null">
+                #{scoreProseminarCurent,jdbcType=INTEGER},
+            </if>
+            <if test="scoreExposureValueExtra != null">
+                #{scoreExposureValueExtra,jdbcType=INTEGER},
+            </if>
+            <if test="scorePublicWelfareCause != null">
+                #{scorePublicWelfareCause,jdbcType=INTEGER},
+            </if>
+            <if test="scoreInternationalHonor != null">
+                #{scoreInternationalHonor,jdbcType=INTEGER},
+            </if>
+            <if test="scoreCountryHonor != null">
+                #{scoreCountryHonor,jdbcType=INTEGER},
+            </if>
+            <if test="scoreProvinceHonor != null">
+                #{scoreProvinceHonor,jdbcType=INTEGER},
+            </if>
+            <if test="scoreTenderSucc != null">
+                #{scoreTenderSucc,jdbcType=INTEGER},
+            </if>
+            <if test="scoreProjectScale != null">
+                #{scoreProjectScale,jdbcType=INTEGER},
+            </if>
+            <if test="scoreUserFeedback != null">
+                #{scoreUserFeedback,jdbcType=INTEGER},
+            </if>
+            <if test="scoreProjectAdvertise != null">
+                #{scoreProjectAdvertise,jdbcType=INTEGER},
+            </if>
+            <if test="scoreBbsHistory != null">
+                #{scoreBbsHistory,jdbcType=INTEGER},
+            </if>
+            <if test="scoreBbsCurent != null">
+                #{scoreBbsCurent,jdbcType=INTEGER},
+            </if>
+            <if test="scoreWeiboHistory != null">
+                #{scoreWeiboHistory,jdbcType=INTEGER},
+            </if>
+            <if test="scoreWeiboCurent != null">
+                #{scoreWeiboCurent,jdbcType=INTEGER},
+            </if>
+            <if test="scoreNegativeMsg != null">
+                #{scoreNegativeMsg,jdbcType=INTEGER},
+            </if>
+            <if test="scoreReputationExtra != null">
+                #{scoreReputationExtra,jdbcType=INTEGER},
+            </if>
+            <if test="addTime != null">
+                #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="brandName != null">
+                #{brandName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.movision.mybatis.entity.BrandAnalysisRecord">
+        update t_brand_analysis_record
+        <set>
+            <if test="analysisId != null">
+                analysis_id = #{analysisId,jdbcType=BIGINT},
+            </if>
+            <if test="brandId != null">
+                brand_id = #{brandId,jdbcType=BIGINT},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId,jdbcType=BIGINT},
+            </if>
+            <if test="reportTime != null">
+                report_time = #{reportTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="totalScore != null">
+                total_score = #{totalScore,jdbcType=INTEGER},
+            </if>
+            <if test="totalDifferentiationDegreesScore != null">
+                total_differentiation_degrees_score = #{totalDifferentiationDegreesScore,jdbcType=INTEGER},
+            </if>
+            <if test="totalMarketPerformanceScore != null">
+                total_market_performance_score = #{totalMarketPerformanceScore,jdbcType=INTEGER},
+            </if>
+            <if test="totalExposureValueScore != null">
+                total_exposure_value_score = #{totalExposureValueScore,jdbcType=INTEGER},
+            </if>
+            <if test="totalReputationScore != null">
+                total_reputation_score = #{totalReputationScore,jdbcType=INTEGER},
+            </if>
+            <if test="rank != null">
+                rank = #{rank,jdbcType=INTEGER},
+            </if>
+            <if test="lastRank != null">
+                last_rank = #{lastRank,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="scoreLogo != null">
+                score_logo = #{scoreLogo,jdbcType=INTEGER},
+            </if>
+            <if test="scoreChinaName != null">
+                score_china_name = #{scoreChinaName,jdbcType=INTEGER},
+            </if>
+            <if test="scoreEnglishName != null">
+                score_english_name = #{scoreEnglishName,jdbcType=INTEGER},
+            </if>
+            <if test="scoreTrademark != null">
+                score_trademark = #{scoreTrademark,jdbcType=INTEGER},
+            </if>
+            <if test="scoreDomainName != null">
+                score_domain_name = #{scoreDomainName,jdbcType=INTEGER},
+            </if>
+            <if test="scorePatents != null">
+                score_patents = #{scorePatents,jdbcType=INTEGER},
+            </if>
+            <if test="scoreBrandHue != null">
+                score_brand_hue = #{scoreBrandHue,jdbcType=INTEGER},
+            </if>
+            <if test="scoreBrandSpokesman != null">
+                score_brand_spokesman = #{scoreBrandSpokesman,jdbcType=INTEGER},
+            </if>
+            <if test="scoreBrandHistory != null">
+                score_brand_history = #{scoreBrandHistory,jdbcType=INTEGER},
+            </if>
+            <if test="scoreIpo != null">
+                score_ipo = #{scoreIpo,jdbcType=INTEGER},
+            </if>
+            <if test="scoreInternationalization != null">
+                score_internationalization = #{scoreInternationalization,jdbcType=INTEGER},
+            </if>
+            <if test="scoreDifferentiationDegreesExtra != null">
+                score_differentiation_degrees_extra = #{scoreDifferentiationDegreesExtra,jdbcType=INTEGER},
+            </if>
+            <if test="scoreEnterpriseScale != null">
+                score_enterprise_scale = #{scoreEnterpriseScale,jdbcType=INTEGER},
+            </if>
+            <if test="scoreMobile != null">
+                score_mobile = #{scoreMobile,jdbcType=INTEGER},
+            </if>
+            <if test="scoreWebsite != null">
+                score_website = #{scoreWebsite,jdbcType=INTEGER},
+            </if>
+            <if test="scoreECommerce != null">
+                score_ecommerce = #{scoreECommerce,jdbcType=INTEGER},
+            </if>
+            <if test="scoreCustomerResourceManagement != null">
+                score_customer_resource_management = #{scoreCustomerResourceManagement,jdbcType=INTEGER},
+            </if>
+            <if test="scoreQualityManagementSystem != null">
+                score_quality_management_system = #{scoreQualityManagementSystem,jdbcType=INTEGER},
+            </if>
+            <if test="scoreLayout != null">
+                score_layout = #{scoreLayout,jdbcType=INTEGER},
+            </if>
+            <if test="scoreMarketingChannel != null">
+                score_marketing_channel = #{scoreMarketingChannel,jdbcType=INTEGER},
+            </if>
+            <if test="scoreCustomerTraining != null">
+                score_customer_training = #{scoreCustomerTraining,jdbcType=INTEGER},
+            </if>
+            <if test="scoreIndustrialStandard != null">
+                score_industrial_standard = #{scoreIndustrialStandard,jdbcType=INTEGER},
+            </if>
+            <if test="scoreBigCustomer != null">
+                score_big_customer = #{scoreBigCustomer,jdbcType=INTEGER},
+            </if>
+            <if test="scoreCustomerRelations != null">
+                score_customer_relations = #{scoreCustomerRelations,jdbcType=INTEGER},
+            </if>
+            <if test="scoreProjectCase != null">
+                score_project_case = #{scoreProjectCase,jdbcType=INTEGER},
+            </if>
+            <if test="scoreMarketShares != null">
+                score_market_shares = #{scoreMarketShares,jdbcType=INTEGER},
+            </if>
+            <if test="scoreMarketPerformanceExtra != null">
+                score_market_performance_extra = #{scoreMarketPerformanceExtra,jdbcType=INTEGER},
+            </if>
+            <if test="scoreTraditionalMedia != null">
+                score_traditional_media = #{scoreTraditionalMedia,jdbcType=INTEGER},
+            </if>
+            <if test="scoreNetworkMedia != null">
+                score_network_media = #{scoreNetworkMedia,jdbcType=INTEGER},
+            </if>
+            <if test="scoreBaiduSearch != null">
+                score_baidu_search = #{scoreBaiduSearch,jdbcType=INTEGER},
+            </if>
+            <if test="score360Search != null">
+                score_360_search = #{score360Search,jdbcType=INTEGER},
+            </if>
+            <if test="scoreExhibition != null">
+                score_exhibition = #{scoreExhibition,jdbcType=INTEGER},
+            </if>
+            <if test="scoreProseminarHistory != null">
+                score_proseminar_history = #{scoreProseminarHistory,jdbcType=INTEGER},
+            </if>
+            <if test="scoreProseminarCurent != null">
+                score_proseminar_curent = #{scoreProseminarCurent,jdbcType=INTEGER},
+            </if>
+            <if test="scoreExposureValueExtra != null">
+                score_exposure_value_extra = #{scoreExposureValueExtra,jdbcType=INTEGER},
+            </if>
+            <if test="scorePublicWelfareCause != null">
+                score_public_welfare_cause = #{scorePublicWelfareCause,jdbcType=INTEGER},
+            </if>
+            <if test="scoreInternationalHonor != null">
+                score_international_honor = #{scoreInternationalHonor,jdbcType=INTEGER},
+            </if>
+            <if test="scoreCountryHonor != null">
+                score_country_honor = #{scoreCountryHonor,jdbcType=INTEGER},
+            </if>
+            <if test="scoreProvinceHonor != null">
+                score_province_honor = #{scoreProvinceHonor,jdbcType=INTEGER},
+            </if>
+            <if test="scoreTenderSucc != null">
+                score_tender_succ = #{scoreTenderSucc,jdbcType=INTEGER},
+            </if>
+            <if test="scoreProjectScale != null">
+                score_project_scale = #{scoreProjectScale,jdbcType=INTEGER},
+            </if>
+            <if test="scoreUserFeedback != null">
+                score_user_feedback = #{scoreUserFeedback,jdbcType=INTEGER},
+            </if>
+            <if test="scoreProjectAdvertise != null">
+                score_project_advertise = #{scoreProjectAdvertise,jdbcType=INTEGER},
+            </if>
+            <if test="scoreBbsHistory != null">
+                score_bbs_history = #{scoreBbsHistory,jdbcType=INTEGER},
+            </if>
+            <if test="scoreBbsCurent != null">
+                score_bbs_curent = #{scoreBbsCurent,jdbcType=INTEGER},
+            </if>
+            <if test="scoreWeiboHistory != null">
+                score_weibo_history = #{scoreWeiboHistory,jdbcType=INTEGER},
+            </if>
+            <if test="scoreWeiboCurent != null">
+                score_weibo_curent = #{scoreWeiboCurent,jdbcType=INTEGER},
+            </if>
+            <if test="scoreNegativeMsg != null">
+                score_negative_msg = #{scoreNegativeMsg,jdbcType=INTEGER},
+            </if>
+            <if test="scoreReputationExtra != null">
+                score_reputation_extra = #{scoreReputationExtra,jdbcType=INTEGER},
+            </if>
+            <if test="addTime != null">
+                add_time = #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="brandName != null">
+                brand_name = #{brandName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.movision.mybatis.entity.BrandAnalysisRecord">
+    update t_brand_analysis_record
+    set analysis_id = #{analysisId,jdbcType=BIGINT},
+      brand_id = #{brandId,jdbcType=BIGINT},
+      category_id = #{categoryId,jdbcType=BIGINT},
+      report_time = #{reportTime,jdbcType=TIMESTAMP},
+      total_score = #{totalScore,jdbcType=INTEGER},
+      total_differentiation_degrees_score = #{totalDifferentiationDegreesScore,jdbcType=INTEGER},
+      total_market_performance_score = #{totalMarketPerformanceScore,jdbcType=INTEGER},
+      total_exposure_value_score = #{totalExposureValueScore,jdbcType=INTEGER},
+      total_reputation_score = #{totalReputationScore,jdbcType=INTEGER},
+      rank = #{rank,jdbcType=INTEGER},
+      last_rank = #{lastRank,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      score_logo = #{scoreLogo,jdbcType=INTEGER},
+      score_china_name = #{scoreChinaName,jdbcType=INTEGER},
+      score_english_name = #{scoreEnglishName,jdbcType=INTEGER},
+      score_trademark = #{scoreTrademark,jdbcType=INTEGER},
+      score_domain_name = #{scoreDomainName,jdbcType=INTEGER},
+      score_patents = #{scorePatents,jdbcType=INTEGER},
+      score_brand_hue = #{scoreBrandHue,jdbcType=INTEGER},
+      score_brand_spokesman = #{scoreBrandSpokesman,jdbcType=INTEGER},
+      score_brand_history = #{scoreBrandHistory,jdbcType=INTEGER},
+      score_ipo = #{scoreIpo,jdbcType=INTEGER},
+      score_internationalization = #{scoreInternationalization,jdbcType=INTEGER},
+      score_differentiation_degrees_extra = #{scoreDifferentiationDegreesExtra,jdbcType=INTEGER},
+      score_enterprise_scale = #{scoreEnterpriseScale,jdbcType=INTEGER},
+      score_mobile = #{scoreMobile,jdbcType=INTEGER},
+      score_website = #{scoreWebsite,jdbcType=INTEGER},
+      score_ecommerce = #{scoreECommerce,jdbcType=INTEGER},
+      score_customer_resource_management = #{scoreCustomerResourceManagement,jdbcType=INTEGER},
+      score_quality_management_system = #{scoreQualityManagementSystem,jdbcType=INTEGER},
+      score_layout = #{scoreLayout,jdbcType=INTEGER},
+      score_marketing_channel = #{scoreMarketingChannel,jdbcType=INTEGER},
+      score_customer_training = #{scoreCustomerTraining,jdbcType=INTEGER},
+      score_industrial_standard = #{scoreIndustrialStandard,jdbcType=INTEGER},
+      score_big_customer = #{scoreBigCustomer,jdbcType=INTEGER},
+      score_customer_relations = #{scoreCustomerRelations,jdbcType=INTEGER},
+      score_project_case = #{scoreProjectCase,jdbcType=INTEGER},
+      score_market_shares = #{scoreMarketShares,jdbcType=INTEGER},
+      score_market_performance_extra = #{scoreMarketPerformanceExtra,jdbcType=INTEGER},
+      score_traditional_media = #{scoreTraditionalMedia,jdbcType=INTEGER},
+      score_network_media = #{scoreNetworkMedia,jdbcType=INTEGER},
+      score_baidu_search = #{scoreBaiduSearch,jdbcType=INTEGER},
+      score_360_search = #{score360Search,jdbcType=INTEGER},
+      score_exhibition = #{scoreExhibition,jdbcType=INTEGER},
+      score_proseminar_history = #{scoreProseminarHistory,jdbcType=INTEGER},
+      score_proseminar_curent = #{scoreProseminarCurent,jdbcType=INTEGER},
+      score_exposure_value_extra = #{scoreExposureValueExtra,jdbcType=INTEGER},
+      score_public_welfare_cause = #{scorePublicWelfareCause,jdbcType=INTEGER},
+      score_international_honor = #{scoreInternationalHonor,jdbcType=INTEGER},
+      score_country_honor = #{scoreCountryHonor,jdbcType=INTEGER},
+      score_province_honor = #{scoreProvinceHonor,jdbcType=INTEGER},
+      score_tender_succ = #{scoreTenderSucc,jdbcType=INTEGER},
+      score_project_scale = #{scoreProjectScale,jdbcType=INTEGER},
+      score_user_feedback = #{scoreUserFeedback,jdbcType=INTEGER},
+      score_project_advertise = #{scoreProjectAdvertise,jdbcType=INTEGER},
+      score_bbs_history = #{scoreBbsHistory,jdbcType=INTEGER},
+      score_bbs_curent = #{scoreBbsCurent,jdbcType=INTEGER},
+      score_weibo_history = #{scoreWeiboHistory,jdbcType=INTEGER},
+      score_weibo_curent = #{scoreWeiboCurent,jdbcType=INTEGER},
+      score_negative_msg = #{scoreNegativeMsg,jdbcType=INTEGER},
+      score_reputation_extra = #{scoreReputationExtra,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      brand_name = #{brandName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.movision.mybatis.entity.BrandAnalysisRecord">
+    update t_brand_analysis_record
+    set analysis_id = #{analysisId,jdbcType=BIGINT},
+      brand_id = #{brandId,jdbcType=BIGINT},
+      category_id = #{categoryId,jdbcType=BIGINT},
+      brand_name = #{brandName,jdbcType=VARCHAR}
+      report_time = #{reportTime,jdbcType=TIMESTAMP},
+      total_score = #{totalScore,jdbcType=INTEGER},
+      total_differentiation_degrees_score = #{totalDifferentiationDegreesScore,jdbcType=INTEGER},
+      total_market_performance_score = #{totalMarketPerformanceScore,jdbcType=INTEGER},
+      total_exposure_value_score = #{totalExposureValueScore,jdbcType=INTEGER},
+      total_reputation_score = #{totalReputationScore,jdbcType=INTEGER},
+      rank = #{rank,jdbcType=INTEGER},
+      last_rank = #{lastRank,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      score_logo = #{scoreLogo,jdbcType=INTEGER},
+      score_china_name = #{scoreChinaName,jdbcType=INTEGER},
+      score_english_name = #{scoreEnglishName,jdbcType=INTEGER},
+      score_trademark = #{scoreTrademark,jdbcType=INTEGER},
+      score_domain_name = #{scoreDomainName,jdbcType=INTEGER},
+      score_patents = #{scorePatents,jdbcType=INTEGER},
+      score_brand_hue = #{scoreBrandHue,jdbcType=INTEGER},
+      score_brand_spokesman = #{scoreBrandSpokesman,jdbcType=INTEGER},
+      score_brand_history = #{scoreBrandHistory,jdbcType=INTEGER},
+      score_ipo = #{scoreIpo,jdbcType=INTEGER},
+      score_internationalization = #{scoreInternationalization,jdbcType=INTEGER},
+      score_differentiation_degrees_extra = #{scoreDifferentiationDegreesExtra,jdbcType=INTEGER},
+      score_enterprise_scale = #{scoreEnterpriseScale,jdbcType=INTEGER},
+      score_mobile = #{scoreMobile,jdbcType=INTEGER},
+      score_website = #{scoreWebsite,jdbcType=INTEGER},
+      score_ecommerce = #{scoreECommerce,jdbcType=INTEGER},
+      score_customer_resource_management = #{scoreCustomerResourceManagement,jdbcType=INTEGER},
+      score_quality_management_system = #{scoreQualityManagementSystem,jdbcType=INTEGER},
+      score_layout = #{scoreLayout,jdbcType=INTEGER},
+      score_marketing_channel = #{scoreMarketingChannel,jdbcType=INTEGER},
+      score_customer_training = #{scoreCustomerTraining,jdbcType=INTEGER},
+      score_industrial_standard = #{scoreIndustrialStandard,jdbcType=INTEGER},
+      score_big_customer = #{scoreBigCustomer,jdbcType=INTEGER},
+      score_customer_relations = #{scoreCustomerRelations,jdbcType=INTEGER},
+      score_project_case = #{scoreProjectCase,jdbcType=INTEGER},
+      score_market_shares = #{scoreMarketShares,jdbcType=INTEGER},
+      score_market_performance_extra = #{scoreMarketPerformanceExtra,jdbcType=INTEGER},
+      score_traditional_media = #{scoreTraditionalMedia,jdbcType=INTEGER},
+      score_network_media = #{scoreNetworkMedia,jdbcType=INTEGER},
+      score_baidu_search = #{scoreBaiduSearch,jdbcType=INTEGER},
+      score_360_search = #{score360Search,jdbcType=INTEGER},
+      score_exhibition = #{scoreExhibition,jdbcType=INTEGER},
+      score_proseminar_history = #{scoreProseminarHistory,jdbcType=INTEGER},
+      score_proseminar_curent = #{scoreProseminarCurent,jdbcType=INTEGER},
+      score_exposure_value_extra = #{scoreExposureValueExtra,jdbcType=INTEGER},
+      score_public_welfare_cause = #{scorePublicWelfareCause,jdbcType=INTEGER},
+      score_international_honor = #{scoreInternationalHonor,jdbcType=INTEGER},
+      score_country_honor = #{scoreCountryHonor,jdbcType=INTEGER},
+      score_province_honor = #{scoreProvinceHonor,jdbcType=INTEGER},
+      score_tender_succ = #{scoreTenderSucc,jdbcType=INTEGER},
+      score_project_scale = #{scoreProjectScale,jdbcType=INTEGER},
+      score_user_feedback = #{scoreUserFeedback,jdbcType=INTEGER},
+      score_project_advertise = #{scoreProjectAdvertise,jdbcType=INTEGER},
+      score_bbs_history = #{scoreBbsHistory,jdbcType=INTEGER},
+      score_bbs_curent = #{scoreBbsCurent,jdbcType=INTEGER},
+      score_weibo_history = #{scoreWeiboHistory,jdbcType=INTEGER},
+      score_weibo_curent = #{scoreWeiboCurent,jdbcType=INTEGER},
+      score_negative_msg = #{scoreNegativeMsg,jdbcType=INTEGER},
+      score_reputation_extra = #{scoreReputationExtra,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectRecordsByReportTime" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_brand_analysis_record r
+        WHERE   report_time BETWEEN #{reportTimeA,jdbcType=TIMESTAMP} AND #{reportTimeB,jdbcType=TIMESTAMP}
+        and EXISTS  (SELECT  1 from t_brand_analysis a where a.id = r.analysis_id )
+    </select>
+
+    <select id="selectLastRecordByAnalysisId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_brand_analysis_record
+        WHERE analysis_id = #{analysisId,jdbcType=BIGINT}
+        ORDER by report_time DESC
+        limit 1
+    </select>
+
+</mapper>

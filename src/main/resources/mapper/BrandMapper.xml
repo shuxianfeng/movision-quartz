@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movision.mybatis.mapper.BrandMapper" >
+  <resultMap id="BaseResultMap" type="com.movision.mybatis.entity.Brand" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="CNName" property="cnname" jdbcType="VARCHAR" />
+    <result column="ENName" property="enname" jdbcType="VARCHAR" />
+    <result column="views" property="views" jdbcType="BIGINT" />
+    <result column="weight" property="weight" jdbcType="INTEGER" />
+    <result column="logourl" property="logourl" jdbcType="VARCHAR" />
+    <result column="createid" property="createid" jdbcType="BIGINT" />
+    <result column="imgurl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="owner" property="owner" jdbcType="VARCHAR" />
+    <result column="certificate" property="certificate" jdbcType="VARCHAR" />
+    <result column="webSite" property="website" jdbcType="VARCHAR" />
+    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
+    <result column="checkTime" property="checktime" jdbcType="TIMESTAMP" />
+    <result column="lastModifyTime" property="lastmodifytime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.movision.mybatis.entity.Brand" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, CNName, ENName, views, weight, logourl, createid, imgurl, status, owner, certificate, 
+    webSite, publishTime, checkTime, lastModifyTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_p_brand
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_p_brand
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.movision.mybatis.entity.Brand" >
+    insert into t_p_brand (id, CNName, ENName, 
+      views, weight, logourl, 
+      createid, imgurl, status, 
+      owner, certificate, webSite, 
+      publishTime, checkTime, lastModifyTime, 
+      description)
+    values (#{id,jdbcType=BIGINT}, #{cnname,jdbcType=VARCHAR}, #{enname,jdbcType=VARCHAR}, 
+      #{views,jdbcType=BIGINT}, #{weight,jdbcType=INTEGER}, #{logourl,jdbcType=VARCHAR}, 
+      #{createid,jdbcType=BIGINT}, #{imgurl,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{owner,jdbcType=VARCHAR}, #{certificate,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, 
+      #{publishtime,jdbcType=TIMESTAMP}, #{checktime,jdbcType=TIMESTAMP}, #{lastmodifytime,jdbcType=TIMESTAMP}, 
+      #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.movision.mybatis.entity.Brand" >
+    insert into t_p_brand
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cnname != null" >
+        CNName,
+      </if>
+      <if test="enname != null" >
+        ENName,
+      </if>
+      <if test="views != null" >
+        views,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="logourl != null" >
+        logourl,
+      </if>
+      <if test="createid != null" >
+        createid,
+      </if>
+      <if test="imgurl != null" >
+        imgurl,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="owner != null" >
+        owner,
+      </if>
+      <if test="certificate != null" >
+        certificate,
+      </if>
+      <if test="website != null" >
+        webSite,
+      </if>
+      <if test="publishtime != null" >
+        publishTime,
+      </if>
+      <if test="checktime != null" >
+        checkTime,
+      </if>
+      <if test="lastmodifytime != null" >
+        lastModifyTime,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cnname != null" >
+        #{cnname,jdbcType=VARCHAR},
+      </if>
+      <if test="enname != null" >
+        #{enname,jdbcType=VARCHAR},
+      </if>
+      <if test="views != null" >
+        #{views,jdbcType=BIGINT},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="logourl != null" >
+        #{logourl,jdbcType=VARCHAR},
+      </if>
+      <if test="createid != null" >
+        #{createid,jdbcType=BIGINT},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="owner != null" >
+        #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="certificate != null" >
+        #{certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null" >
+        #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="publishtime != null" >
+        #{publishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checktime != null" >
+        #{checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifytime != null" >
+        #{lastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movision.mybatis.entity.Brand" >
+    update t_p_brand
+    <set >
+      <if test="cnname != null" >
+        CNName = #{cnname,jdbcType=VARCHAR},
+      </if>
+      <if test="enname != null" >
+        ENName = #{enname,jdbcType=VARCHAR},
+      </if>
+      <if test="views != null" >
+        views = #{views,jdbcType=BIGINT},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="logourl != null" >
+        logourl = #{logourl,jdbcType=VARCHAR},
+      </if>
+      <if test="createid != null" >
+        createid = #{createid,jdbcType=BIGINT},
+      </if>
+      <if test="imgurl != null" >
+        imgurl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="owner != null" >
+        owner = #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="certificate != null" >
+        certificate = #{certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null" >
+        webSite = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="publishtime != null" >
+        publishTime = #{publishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checktime != null" >
+        checkTime = #{checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifytime != null" >
+        lastModifyTime = #{lastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.movision.mybatis.entity.Brand" >
+    update t_p_brand
+    set CNName = #{cnname,jdbcType=VARCHAR},
+      ENName = #{enname,jdbcType=VARCHAR},
+      views = #{views,jdbcType=BIGINT},
+      weight = #{weight,jdbcType=INTEGER},
+      logourl = #{logourl,jdbcType=VARCHAR},
+      createid = #{createid,jdbcType=BIGINT},
+      imgurl = #{imgurl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      owner = #{owner,jdbcType=VARCHAR},
+      certificate = #{certificate,jdbcType=VARCHAR},
+      webSite = #{website,jdbcType=VARCHAR},
+      publishTime = #{publishtime,jdbcType=TIMESTAMP},
+      checkTime = #{checktime,jdbcType=TIMESTAMP},
+      lastModifyTime = #{lastmodifytime,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movision.mybatis.entity.Brand" >
+    update t_p_brand
+    set CNName = #{cnname,jdbcType=VARCHAR},
+      ENName = #{enname,jdbcType=VARCHAR},
+      views = #{views,jdbcType=BIGINT},
+      weight = #{weight,jdbcType=INTEGER},
+      logourl = #{logourl,jdbcType=VARCHAR},
+      createid = #{createid,jdbcType=BIGINT},
+      imgurl = #{imgurl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      owner = #{owner,jdbcType=VARCHAR},
+      certificate = #{certificate,jdbcType=VARCHAR},
+      webSite = #{website,jdbcType=VARCHAR},
+      publishTime = #{publishtime,jdbcType=TIMESTAMP},
+      checkTime = #{checktime,jdbcType=TIMESTAMP},
+      lastModifyTime = #{lastmodifytime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectImg" resultType="java.util.Map">
+  	<![CDATA[  
+  	SELECT
+      id,
+      logourl
+    FROM
+      t_p_brand m
+    WHERE logourl IS NOT NULL
+      AND logourl <> ''
+      AND LOCATE('default',logourl)=0	
+      AND NOT EXISTS
+      (SELECT
+        1
+      FROM
+        t_img_compress_log l
+      WHERE l.`relation_id` = m.`id`
+        AND l.`img_url` = m.`logourl`
+        AND l.`source_table` = 't_p_brand')
+        LIMIT 500
+  	]]> 
+  </select>
+</mapper>

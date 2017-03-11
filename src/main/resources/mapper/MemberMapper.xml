@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movision.mybatis.mapper.MemberMapper" >
+  <resultMap id="BaseResultMap" type="com.movision.mybatis.entity.Member" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="emailCheckCode" property="emailCheckCode" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="registerTime" property="registerTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="identify" property="identify" jdbcType="VARCHAR" />
+    <result column="enterpriseName" property="enterpriseName" jdbcType="VARCHAR" />
+    <result column="workType" property="workType" jdbcType="INTEGER" />
+    <result column="enterpriseEmployeeParentId" property="enterpriseEmployeeParentId" jdbcType="BIGINT" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="enterpriseType" property="enterpriseType" jdbcType="INTEGER" />
+    <result column="enterpriseLogo" property="enterpriseLogo" jdbcType="VARCHAR" />
+    <result column="headShot" property="headShot" jdbcType="VARCHAR" />
+    <result column="saleProductDesc" property="saleProductDesc" jdbcType="VARCHAR" />
+    <result column="enterpriseCreaterTime" property="enterpriseCreaterTime" jdbcType="TIMESTAMP" />
+    <result column="registerCapital" property="registerCapital" jdbcType="VARCHAR" />
+    <result column="currency" property="currency" jdbcType="CHAR" />
+    <result column="employeeNumber" property="employeeNumber" jdbcType="VARCHAR" />
+    <result column="coBusLicNum" property="coBusLicNum" jdbcType="VARCHAR" />
+    <result column="companyBusinessLicenseImg" property="companyBusinessLicenseImg" jdbcType="VARCHAR" />
+    <result column="enterpriseProvince" property="enterpriseProvince" jdbcType="VARCHAR" />
+    <result column="enterpriseCity" property="enterpriseCity" jdbcType="VARCHAR" />
+    <result column="enterpriseArea" property="enterpriseArea" jdbcType="VARCHAR" />
+    <result column="enterpriseAddress" property="enterpriseAddress" jdbcType="VARCHAR" />
+    <result column="enterpriseTelephone" property="enterpriseTelephone" jdbcType="VARCHAR" />
+    <result column="enterpriseFox" property="enterpriseFox" jdbcType="VARCHAR" />
+    <result column="enterpriseWebSite" property="enterpriseWebSite" jdbcType="VARCHAR" />
+    <result column="enterpriseLinkman" property="enterpriseLinkman" jdbcType="VARCHAR" />
+    <result column="enterpriseLMDep" property="enterpriseLMDep" jdbcType="VARCHAR" />
+    <result column="fixedTelephone" property="fixedTelephone" jdbcType="VARCHAR" />
+    <result column="fixedMobile" property="fixedMobile" jdbcType="VARCHAR" />
+    <result column="QQ" property="QQ" jdbcType="VARCHAR" />
+    <result column="personRealName" property="personRealName" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="personCompanyType" property="personCompanyType" jdbcType="VARCHAR" />
+    <result column="personIdentifyCard" property="personIdentifyCard" jdbcType="VARCHAR" />
+    <result column="personIDFrontImgUrl" property="personIDFrontImgUrl" jdbcType="VARCHAR" />
+    <result column="personIDBackImgUrl" property="personIDBackImgUrl" jdbcType="VARCHAR" />
+    <result column="isrecommend" property="isrecommend" jdbcType="BIT" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.movision.mybatis.entity.Member" extends="BaseResultMap" >
+    <result column="enterpriseDesc" property="enterpriseDesc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, mobile, email, emailCheckCode, password, registerTime, status, identify, enterpriseName, 
+    workType, enterpriseEmployeeParentId, province, city, area, address, enterpriseType, 
+    enterpriseLogo, headShot, saleProductDesc, enterpriseCreaterTime, registerCapital, 
+    currency, employeeNumber, coBusLicNum, companyBusinessLicenseImg, enterpriseProvince, 
+    enterpriseCity, enterpriseArea, enterpriseAddress, enterpriseTelephone, enterpriseFox, 
+    enterpriseWebSite, enterpriseLinkman, enterpriseLMDep, fixedTelephone, fixedMobile, 
+    QQ, personRealName, nickname, sex, personCompanyType, personIdentifyCard, personIDFrontImgUrl, 
+    personIDBackImgUrl, isrecommend, reason
+  </sql>
+  <sql id="Blob_Column_List" >
+    enterpriseDesc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_m_member
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_m_member
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.movision.mybatis.entity.Member" >
+    insert into t_m_member (id, mobile, email, 
+      emailCheckCode, password, registerTime, 
+      status, identify, enterpriseName, 
+      workType, enterpriseEmployeeParentId, province, 
+      city, area, address, 
+      enterpriseType, enterpriseLogo, headShot, 
+      saleProductDesc, enterpriseCreaterTime, 
+      registerCapital, currency, employeeNumber, 
+      coBusLicNum, companyBusinessLicenseImg, 
+      enterpriseProvince, enterpriseCity, enterpriseArea, 
+      enterpriseAddress, enterpriseTelephone, 
+      enterpriseFox, enterpriseWebSite, enterpriseLinkman, 
+      enterpriseLMDep, fixedTelephone, fixedMobile, 
+      QQ, personRealName, nickname, 
+      sex, personCompanyType, personIdentifyCard, 
+      personIDFrontImgUrl, personIDBackImgUrl, 
+      isrecommend, reason, enterpriseDesc
+      )
+    values (#{id,jdbcType=BIGINT}, #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{emailCheckCode,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{identify,jdbcType=VARCHAR}, #{enterpriseName,jdbcType=VARCHAR}, 
+      #{workType,jdbcType=INTEGER}, #{enterpriseEmployeeParentId,jdbcType=BIGINT}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{enterpriseType,jdbcType=INTEGER}, #{enterpriseLogo,jdbcType=VARCHAR}, #{headShot,jdbcType=VARCHAR}, 
+      #{saleProductDesc,jdbcType=VARCHAR}, #{enterpriseCreaterTime,jdbcType=TIMESTAMP}, 
+      #{registerCapital,jdbcType=VARCHAR}, #{currency,jdbcType=CHAR}, #{employeeNumber,jdbcType=VARCHAR}, 
+      #{coBusLicNum,jdbcType=VARCHAR}, #{companyBusinessLicenseImg,jdbcType=VARCHAR}, 
+      #{enterpriseProvince,jdbcType=VARCHAR}, #{enterpriseCity,jdbcType=VARCHAR}, #{enterpriseArea,jdbcType=VARCHAR}, 
+      #{enterpriseAddress,jdbcType=VARCHAR}, #{enterpriseTelephone,jdbcType=VARCHAR}, 
+      #{enterpriseFox,jdbcType=VARCHAR}, #{enterpriseWebSite,jdbcType=VARCHAR}, #{enterpriseLinkman,jdbcType=VARCHAR}, 
+      #{enterpriseLMDep,jdbcType=VARCHAR}, #{fixedTelephone,jdbcType=VARCHAR}, #{fixedMobile,jdbcType=VARCHAR}, 
+      #{QQ,jdbcType=VARCHAR}, #{personRealName,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{personCompanyType,jdbcType=VARCHAR}, #{personIdentifyCard,jdbcType=VARCHAR}, 
+      #{personIDFrontImgUrl,jdbcType=VARCHAR}, #{personIDBackImgUrl,jdbcType=VARCHAR}, 
+      #{isrecommend,jdbcType=BIT}, #{reason,jdbcType=VARCHAR}, #{enterpriseDesc,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.movision.mybatis.entity.Member" >
+    insert into t_m_member
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="emailCheckCode != null" >
+        emailCheckCode,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="registerTime != null" >
+        registerTime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="identify != null" >
+        identify,
+      </if>
+      <if test="enterpriseName != null" >
+        enterpriseName,
+      </if>
+      <if test="workType != null" >
+        workType,
+      </if>
+      <if test="enterpriseEmployeeParentId != null" >
+        enterpriseEmployeeParentId,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="enterpriseType != null" >
+        enterpriseType,
+      </if>
+      <if test="enterpriseLogo != null" >
+        enterpriseLogo,
+      </if>
+      <if test="headShot != null" >
+        headShot,
+      </if>
+      <if test="saleProductDesc != null" >
+        saleProductDesc,
+      </if>
+      <if test="enterpriseCreaterTime != null" >
+        enterpriseCreaterTime,
+      </if>
+      <if test="registerCapital != null" >
+        registerCapital,
+      </if>
+      <if test="currency != null" >
+        currency,
+      </if>
+      <if test="employeeNumber != null" >
+        employeeNumber,
+      </if>
+      <if test="coBusLicNum != null" >
+        coBusLicNum,
+      </if>
+      <if test="companyBusinessLicenseImg != null" >
+        companyBusinessLicenseImg,
+      </if>
+      <if test="enterpriseProvince != null" >
+        enterpriseProvince,
+      </if>
+      <if test="enterpriseCity != null" >
+        enterpriseCity,
+      </if>
+      <if test="enterpriseArea != null" >
+        enterpriseArea,
+      </if>
+      <if test="enterpriseAddress != null" >
+        enterpriseAddress,
+      </if>
+      <if test="enterpriseTelephone != null" >
+        enterpriseTelephone,
+      </if>
+      <if test="enterpriseFox != null" >
+        enterpriseFox,
+      </if>
+      <if test="enterpriseWebSite != null" >
+        enterpriseWebSite,
+      </if>
+      <if test="enterpriseLinkman != null" >
+        enterpriseLinkman,
+      </if>
+      <if test="enterpriseLMDep != null" >
+        enterpriseLMDep,
+      </if>
+      <if test="fixedTelephone != null" >
+        fixedTelephone,
+      </if>
+      <if test="fixedMobile != null" >
+        fixedMobile,
+      </if>
+      <if test="QQ != null" >
+        QQ,
+      </if>
+      <if test="personRealName != null" >
+        personRealName,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="personCompanyType != null" >
+        personCompanyType,
+      </if>
+      <if test="personIdentifyCard != null" >
+        personIdentifyCard,
+      </if>
+      <if test="personIDFrontImgUrl != null" >
+        personIDFrontImgUrl,
+      </if>
+      <if test="personIDBackImgUrl != null" >
+        personIDBackImgUrl,
+      </if>
+      <if test="isrecommend != null" >
+        isrecommend,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="enterpriseDesc != null" >
+        enterpriseDesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emailCheckCode != null" >
+        #{emailCheckCode,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="identify != null" >
+        #{identify,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null" >
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="workType != null" >
+        #{workType,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseEmployeeParentId != null" >
+        #{enterpriseEmployeeParentId,jdbcType=BIGINT},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseType != null" >
+        #{enterpriseType,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseLogo != null" >
+        #{enterpriseLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="headShot != null" >
+        #{headShot,jdbcType=VARCHAR},
+      </if>
+      <if test="saleProductDesc != null" >
+        #{saleProductDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseCreaterTime != null" >
+        #{enterpriseCreaterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registerCapital != null" >
+        #{registerCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=CHAR},
+      </if>
+      <if test="employeeNumber != null" >
+        #{employeeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="coBusLicNum != null" >
+        #{coBusLicNum,jdbcType=VARCHAR},
+      </if>
+      <if test="companyBusinessLicenseImg != null" >
+        #{companyBusinessLicenseImg,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseProvince != null" >
+        #{enterpriseProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseCity != null" >
+        #{enterpriseCity,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseArea != null" >
+        #{enterpriseArea,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseAddress != null" >
+        #{enterpriseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseTelephone != null" >
+        #{enterpriseTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseFox != null" >
+        #{enterpriseFox,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseWebSite != null" >
+        #{enterpriseWebSite,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseLinkman != null" >
+        #{enterpriseLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseLMDep != null" >
+        #{enterpriseLMDep,jdbcType=VARCHAR},
+      </if>
+      <if test="fixedTelephone != null" >
+        #{fixedTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="fixedMobile != null" >
+        #{fixedMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="QQ != null" >
+        #{QQ,jdbcType=VARCHAR},
+      </if>
+      <if test="personRealName != null" >
+        #{personRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="personCompanyType != null" >
+        #{personCompanyType,jdbcType=VARCHAR},
+      </if>
+      <if test="personIdentifyCard != null" >
+        #{personIdentifyCard,jdbcType=VARCHAR},
+      </if>
+      <if test="personIDFrontImgUrl != null" >
+        #{personIDFrontImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="personIDBackImgUrl != null" >
+        #{personIDBackImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isrecommend != null" >
+        #{isrecommend,jdbcType=BIT},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseDesc != null" >
+        #{enterpriseDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movision.mybatis.entity.Member" >
+    update t_m_member
+    <set >
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emailCheckCode != null" >
+        emailCheckCode = #{emailCheckCode,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        registerTime = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="identify != null" >
+        identify = #{identify,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null" >
+        enterpriseName = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="workType != null" >
+        workType = #{workType,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseEmployeeParentId != null" >
+        enterpriseEmployeeParentId = #{enterpriseEmployeeParentId,jdbcType=BIGINT},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseType != null" >
+        enterpriseType = #{enterpriseType,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseLogo != null" >
+        enterpriseLogo = #{enterpriseLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="headShot != null" >
+        headShot = #{headShot,jdbcType=VARCHAR},
+      </if>
+      <if test="saleProductDesc != null" >
+        saleProductDesc = #{saleProductDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseCreaterTime != null" >
+        enterpriseCreaterTime = #{enterpriseCreaterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registerCapital != null" >
+        registerCapital = #{registerCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        currency = #{currency,jdbcType=CHAR},
+      </if>
+      <if test="employeeNumber != null" >
+        employeeNumber = #{employeeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="coBusLicNum != null" >
+        coBusLicNum = #{coBusLicNum,jdbcType=VARCHAR},
+      </if>
+      <if test="companyBusinessLicenseImg != null" >
+        companyBusinessLicenseImg = #{companyBusinessLicenseImg,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseProvince != null" >
+        enterpriseProvince = #{enterpriseProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseCity != null" >
+        enterpriseCity = #{enterpriseCity,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseArea != null" >
+        enterpriseArea = #{enterpriseArea,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseAddress != null" >
+        enterpriseAddress = #{enterpriseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseTelephone != null" >
+        enterpriseTelephone = #{enterpriseTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseFox != null" >
+        enterpriseFox = #{enterpriseFox,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseWebSite != null" >
+        enterpriseWebSite = #{enterpriseWebSite,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseLinkman != null" >
+        enterpriseLinkman = #{enterpriseLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseLMDep != null" >
+        enterpriseLMDep = #{enterpriseLMDep,jdbcType=VARCHAR},
+      </if>
+      <if test="fixedTelephone != null" >
+        fixedTelephone = #{fixedTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="fixedMobile != null" >
+        fixedMobile = #{fixedMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="QQ != null" >
+        QQ = #{QQ,jdbcType=VARCHAR},
+      </if>
+      <if test="personRealName != null" >
+        personRealName = #{personRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="personCompanyType != null" >
+        personCompanyType = #{personCompanyType,jdbcType=VARCHAR},
+      </if>
+      <if test="personIdentifyCard != null" >
+        personIdentifyCard = #{personIdentifyCard,jdbcType=VARCHAR},
+      </if>
+      <if test="personIDFrontImgUrl != null" >
+        personIDFrontImgUrl = #{personIDFrontImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="personIDBackImgUrl != null" >
+        personIDBackImgUrl = #{personIDBackImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isrecommend != null" >
+        isrecommend = #{isrecommend,jdbcType=BIT},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseDesc != null" >
+        enterpriseDesc = #{enterpriseDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.movision.mybatis.entity.Member" >
+    update t_m_member
+    set mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      emailCheckCode = #{emailCheckCode,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      registerTime = #{registerTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      identify = #{identify,jdbcType=VARCHAR},
+      enterpriseName = #{enterpriseName,jdbcType=VARCHAR},
+      workType = #{workType,jdbcType=INTEGER},
+      enterpriseEmployeeParentId = #{enterpriseEmployeeParentId,jdbcType=BIGINT},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      enterpriseType = #{enterpriseType,jdbcType=INTEGER},
+      enterpriseLogo = #{enterpriseLogo,jdbcType=VARCHAR},
+      headShot = #{headShot,jdbcType=VARCHAR},
+      saleProductDesc = #{saleProductDesc,jdbcType=VARCHAR},
+      enterpriseCreaterTime = #{enterpriseCreaterTime,jdbcType=TIMESTAMP},
+      registerCapital = #{registerCapital,jdbcType=VARCHAR},
+      currency = #{currency,jdbcType=CHAR},
+      employeeNumber = #{employeeNumber,jdbcType=VARCHAR},
+      coBusLicNum = #{coBusLicNum,jdbcType=VARCHAR},
+      companyBusinessLicenseImg = #{companyBusinessLicenseImg,jdbcType=VARCHAR},
+      enterpriseProvince = #{enterpriseProvince,jdbcType=VARCHAR},
+      enterpriseCity = #{enterpriseCity,jdbcType=VARCHAR},
+      enterpriseArea = #{enterpriseArea,jdbcType=VARCHAR},
+      enterpriseAddress = #{enterpriseAddress,jdbcType=VARCHAR},
+      enterpriseTelephone = #{enterpriseTelephone,jdbcType=VARCHAR},
+      enterpriseFox = #{enterpriseFox,jdbcType=VARCHAR},
+      enterpriseWebSite = #{enterpriseWebSite,jdbcType=VARCHAR},
+      enterpriseLinkman = #{enterpriseLinkman,jdbcType=VARCHAR},
+      enterpriseLMDep = #{enterpriseLMDep,jdbcType=VARCHAR},
+      fixedTelephone = #{fixedTelephone,jdbcType=VARCHAR},
+      fixedMobile = #{fixedMobile,jdbcType=VARCHAR},
+      QQ = #{QQ,jdbcType=VARCHAR},
+      personRealName = #{personRealName,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      personCompanyType = #{personCompanyType,jdbcType=VARCHAR},
+      personIdentifyCard = #{personIdentifyCard,jdbcType=VARCHAR},
+      personIDFrontImgUrl = #{personIDFrontImgUrl,jdbcType=VARCHAR},
+      personIDBackImgUrl = #{personIDBackImgUrl,jdbcType=VARCHAR},
+      isrecommend = #{isrecommend,jdbcType=BIT},
+      reason = #{reason,jdbcType=VARCHAR},
+      enterpriseDesc = #{enterpriseDesc,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movision.mybatis.entity.Member" >
+    update t_m_member
+    set mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      emailCheckCode = #{emailCheckCode,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      registerTime = #{registerTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      identify = #{identify,jdbcType=VARCHAR},
+      enterpriseName = #{enterpriseName,jdbcType=VARCHAR},
+      workType = #{workType,jdbcType=INTEGER},
+      enterpriseEmployeeParentId = #{enterpriseEmployeeParentId,jdbcType=BIGINT},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      enterpriseType = #{enterpriseType,jdbcType=INTEGER},
+      enterpriseLogo = #{enterpriseLogo,jdbcType=VARCHAR},
+      headShot = #{headShot,jdbcType=VARCHAR},
+      saleProductDesc = #{saleProductDesc,jdbcType=VARCHAR},
+      enterpriseCreaterTime = #{enterpriseCreaterTime,jdbcType=TIMESTAMP},
+      registerCapital = #{registerCapital,jdbcType=VARCHAR},
+      currency = #{currency,jdbcType=CHAR},
+      employeeNumber = #{employeeNumber,jdbcType=VARCHAR},
+      coBusLicNum = #{coBusLicNum,jdbcType=VARCHAR},
+      companyBusinessLicenseImg = #{companyBusinessLicenseImg,jdbcType=VARCHAR},
+      enterpriseProvince = #{enterpriseProvince,jdbcType=VARCHAR},
+      enterpriseCity = #{enterpriseCity,jdbcType=VARCHAR},
+      enterpriseArea = #{enterpriseArea,jdbcType=VARCHAR},
+      enterpriseAddress = #{enterpriseAddress,jdbcType=VARCHAR},
+      enterpriseTelephone = #{enterpriseTelephone,jdbcType=VARCHAR},
+      enterpriseFox = #{enterpriseFox,jdbcType=VARCHAR},
+      enterpriseWebSite = #{enterpriseWebSite,jdbcType=VARCHAR},
+      enterpriseLinkman = #{enterpriseLinkman,jdbcType=VARCHAR},
+      enterpriseLMDep = #{enterpriseLMDep,jdbcType=VARCHAR},
+      fixedTelephone = #{fixedTelephone,jdbcType=VARCHAR},
+      fixedMobile = #{fixedMobile,jdbcType=VARCHAR},
+      QQ = #{QQ,jdbcType=VARCHAR},
+      personRealName = #{personRealName,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      personCompanyType = #{personCompanyType,jdbcType=VARCHAR},
+      personIdentifyCard = #{personIdentifyCard,jdbcType=VARCHAR},
+      personIDFrontImgUrl = #{personIDFrontImgUrl,jdbcType=VARCHAR},
+      personIDBackImgUrl = #{personIDBackImgUrl,jdbcType=VARCHAR},
+      isrecommend = #{isrecommend,jdbcType=BIT},
+      reason = #{reason,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findMobileByCreateid" resultType="java.util.Map" parameterType="java.lang.String" >
+    select m.mobile,
+    case when m.identify = 2 then m.nickname
+    when m.identify !=2 then m.enterpriseName end as name
+    from t_m_member m where m.id = #{id}
+  </select>
+  
+  <select id="selectEnterpriseLogo" resultType="java.util.Map">
+  	<![CDATA[  
+  	SELECT
+      id,
+      enterpriseLogo
+    FROM
+      t_m_member m
+    WHERE enterpriseLogo IS NOT NULL
+      AND enterpriseLogo <> ''
+      AND LOCATE('default',enterpriseLogo)=0	
+      AND NOT EXISTS
+      (SELECT
+        1
+      FROM
+        t_img_compress_log l
+      WHERE l.`relation_id` = m.`id`
+        AND l.`img_url` = m.`enterpriseLogo`
+        AND l.`source_table` = 't_m_member')
+        LIMIT 500
+  	]]> 
+  </select>
+</mapper>

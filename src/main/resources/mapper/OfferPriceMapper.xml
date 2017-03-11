@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movision.mybatis.mapper.OfferPriceMapper" >
+  <resultMap id="BaseResultMap" type="com.movision.mybatis.entity.OfferPrice" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="askid" property="askid" jdbcType="BIGINT" />
+    <result column="createid" property="createid" jdbcType="BIGINT" />
+    <result column="offerTime" property="offerTime" jdbcType="TIMESTAMP" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="billurl" property="billurl" jdbcType="VARCHAR" />
+    <result column="isShow" property="isShow" jdbcType="BIT" />
+    <result column="companyName" property="companyName" jdbcType="VARCHAR" />
+    <result column="linkMan" property="linkMan" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, askid, createid, offerTime, content, billurl, isShow, companyName, linkMan, telephone, 
+    email
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_p_offer_price
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_p_offer_price
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.movision.mybatis.entity.OfferPrice" >
+    insert into t_p_offer_price (id, askid, createid, 
+      offerTime, content, billurl, 
+      isShow, companyName, linkMan, 
+      telephone, email)
+    values (#{id,jdbcType=BIGINT}, #{askid,jdbcType=BIGINT}, #{createid,jdbcType=BIGINT}, 
+      #{offerTime,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, #{billurl,jdbcType=VARCHAR}, 
+      #{isShow,jdbcType=BIT}, #{companyName,jdbcType=VARCHAR}, #{linkMan,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.movision.mybatis.entity.OfferPrice" >
+    insert into t_p_offer_price
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="askid != null" >
+        askid,
+      </if>
+      <if test="createid != null" >
+        createid,
+      </if>
+      <if test="offerTime != null" >
+        offerTime,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="billurl != null" >
+        billurl,
+      </if>
+      <if test="isShow != null" >
+        isShow,
+      </if>
+      <if test="companyName != null" >
+        companyName,
+      </if>
+      <if test="linkMan != null" >
+        linkMan,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="askid != null" >
+        #{askid,jdbcType=BIGINT},
+      </if>
+      <if test="createid != null" >
+        #{createid,jdbcType=BIGINT},
+      </if>
+      <if test="offerTime != null" >
+        #{offerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="billurl != null" >
+        #{billurl,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null" >
+        #{isShow,jdbcType=BIT},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkMan != null" >
+        #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movision.mybatis.entity.OfferPrice" >
+    update t_p_offer_price
+    <set >
+      <if test="askid != null" >
+        askid = #{askid,jdbcType=BIGINT},
+      </if>
+      <if test="createid != null" >
+        createid = #{createid,jdbcType=BIGINT},
+      </if>
+      <if test="offerTime != null" >
+        offerTime = #{offerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="billurl != null" >
+        billurl = #{billurl,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null" >
+        isShow = #{isShow,jdbcType=BIT},
+      </if>
+      <if test="companyName != null" >
+        companyName = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkMan != null" >
+        linkMan = #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movision.mybatis.entity.OfferPrice" >
+    update t_p_offer_price
+    set askid = #{askid,jdbcType=BIGINT},
+      createid = #{createid,jdbcType=BIGINT},
+      offerTime = #{offerTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=VARCHAR},
+      billurl = #{billurl,jdbcType=VARCHAR},
+      isShow = #{isShow,jdbcType=BIT},
+      companyName = #{companyName,jdbcType=VARCHAR},
+      linkMan = #{linkMan,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findLatestOfferPriceList" resultType="java.util.Map" parameterType="java.lang.String" >
+    select distinct ap.createid from t_p_offer_price op
+    left join t_p_ask_price ap on op.askid = ap.id
+    where ap.endTime >= now()
+    and ap.`status` = 1
+    and op.offerTime &lt;= now() and op.offerTime &gt;= date_sub(now(), interval #{hour} hour_second)
+  </select>
+</mapper>

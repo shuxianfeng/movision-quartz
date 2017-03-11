@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movision.mybatis.mapper.OrderFlowMapper">
+    <resultMap id="BaseResultMap" type="com.movision.mybatis.entity.OrderFlow">
+        <result column="orderNo" property="orderNo" jdbcType="VARCHAR"/>
+        <result column="tradeMode" property="tradeMode" jdbcType="CHAR"/>
+        <result column="tradeFee" property="tradeFee" jdbcType="DECIMAL"/>
+        <result column="tradeStatus" property="tradeStatus" jdbcType="CHAR"/>
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="tradeTime" property="tradeTime" jdbcType="TIMESTAMP"/>
+        <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.movision.mybatis.entity.OrderFlow">
+    insert into t_o_order_flow (orderNo, tradeMode, tradeFee, 
+      tradeStatus, createTime, tradeTime, 
+      updateTime)
+    values (#{orderNo,jdbcType=VARCHAR}, #{tradeMode,jdbcType=CHAR}, #{tradeFee,jdbcType=DECIMAL}, 
+      #{tradeStatus,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{tradeTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.movision.mybatis.entity.OrderFlow">
+        insert into t_o_order_flow
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">
+                orderNo,
+            </if>
+            <if test="tradeMode != null">
+                tradeMode,
+            </if>
+            <if test="tradeFee != null">
+                tradeFee,
+            </if>
+            <if test="tradeStatus != null">
+                tradeStatus,
+            </if>
+            <if test="createTime != null">
+                createTime,
+            </if>
+            <if test="tradeTime != null">
+                tradeTime,
+            </if>
+            <if test="updateTime != null">
+                updateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeMode != null">
+                #{tradeMode,jdbcType=CHAR},
+            </if>
+            <if test="tradeFee != null">
+                #{tradeFee,jdbcType=DECIMAL},
+            </if>
+            <if test="tradeStatus != null">
+                #{tradeStatus,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tradeTime != null">
+                #{tradeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByOrderNo" parameterType="com.movision.mybatis.entity.OrderFlow">
+        update t_o_order_flow
+        <set>
+            <if test="tradeMode != null">
+                tradeMode = #{tradeMode,jdbcType=CHAR},
+            </if>
+            <if test="tradeFee != null">
+                tradeFee = #{tradeFee,jdbcType=DECIMAL},
+            </if>
+            <if test="tradeStatus != null">
+                tradeStatus = #{tradeStatus,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                createTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tradeTime != null">
+                tradeTime = #{tradeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                updateTime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where orderNo= #{orderNo,jdbcType=VARCHAR}
+    </update>
+</mapper>

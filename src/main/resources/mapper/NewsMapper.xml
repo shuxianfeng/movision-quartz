@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movision.mybatis.mapper.NewsMapper" >
+  <resultMap id="BaseResultMap" type="com.movision.mybatis.entity.News" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="sub_type" property="subType" jdbcType="INTEGER" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="short_title" property="shortTitle" jdbcType="VARCHAR" />
+    <result column="jump_url" property="jumpUrl" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="keywords" property="keywords" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="views" property="views" jdbcType="BIGINT" />
+    <result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+    <result column="publisher_id" property="publisherId" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="attach_name" property="attachName" jdbcType="VARCHAR" />
+    <result column="attach_url" property="attachUrl" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.movision.mybatis.entity.News" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, type, sub_type, photo, title, short_title, jump_url, source, keywords, introduction, 
+    views, publish_time, publisher_id, status, attach_name, attach_url, add_time, update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_n_news
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_n_news
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.movision.mybatis.entity.News" >
+    insert into t_n_news (id, type, sub_type, 
+      photo, title, short_title, 
+      jump_url, source, keywords, 
+      introduction, views, publish_time, 
+      publisher_id, status, attach_name, 
+      attach_url, add_time, update_time, 
+      content)
+    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{subType,jdbcType=INTEGER}, 
+      #{photo,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{shortTitle,jdbcType=VARCHAR}, 
+      #{jumpUrl,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, 
+      #{introduction,jdbcType=VARCHAR}, #{views,jdbcType=BIGINT}, #{publishTime,jdbcType=TIMESTAMP}, 
+      #{publisherId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{attachName,jdbcType=VARCHAR}, 
+      #{attachUrl,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.movision.mybatis.entity.News" >
+    insert into t_n_news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="subType != null" >
+        sub_type,
+      </if>
+      <if test="photo != null" >
+        photo,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="shortTitle != null" >
+        short_title,
+      </if>
+      <if test="jumpUrl != null" >
+        jump_url,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="keywords != null" >
+        keywords,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="views != null" >
+        views,
+      </if>
+      <if test="publishTime != null" >
+        publish_time,
+      </if>
+      <if test="publisherId != null" >
+        publisher_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="attachName != null" >
+        attach_name,
+      </if>
+      <if test="attachUrl != null" >
+        attach_url,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="subType != null" >
+        #{subType,jdbcType=INTEGER},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="shortTitle != null" >
+        #{shortTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="jumpUrl != null" >
+        #{jumpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="views != null" >
+        #{views,jdbcType=BIGINT},
+      </if>
+      <if test="publishTime != null" >
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publisherId != null" >
+        #{publisherId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="attachName != null" >
+        #{attachName,jdbcType=VARCHAR},
+      </if>
+      <if test="attachUrl != null" >
+        #{attachUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movision.mybatis.entity.News" >
+    update t_n_news
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="subType != null" >
+        sub_type = #{subType,jdbcType=INTEGER},
+      </if>
+      <if test="photo != null" >
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="shortTitle != null" >
+        short_title = #{shortTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="jumpUrl != null" >
+        jump_url = #{jumpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        keywords = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="views != null" >
+        views = #{views,jdbcType=BIGINT},
+      </if>
+      <if test="publishTime != null" >
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publisherId != null" >
+        publisher_id = #{publisherId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="attachName != null" >
+        attach_name = #{attachName,jdbcType=VARCHAR},
+      </if>
+      <if test="attachUrl != null" >
+        attach_url = #{attachUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.movision.mybatis.entity.News" >
+    update t_n_news
+    set type = #{type,jdbcType=INTEGER},
+      sub_type = #{subType,jdbcType=INTEGER},
+      photo = #{photo,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      short_title = #{shortTitle,jdbcType=VARCHAR},
+      jump_url = #{jumpUrl,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      views = #{views,jdbcType=BIGINT},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      publisher_id = #{publisherId,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
+      attach_name = #{attachName,jdbcType=VARCHAR},
+      attach_url = #{attachUrl,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movision.mybatis.entity.News" >
+    update t_n_news
+    set type = #{type,jdbcType=INTEGER},
+      sub_type = #{subType,jdbcType=INTEGER},
+      photo = #{photo,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      short_title = #{shortTitle,jdbcType=VARCHAR},
+      jump_url = #{jumpUrl,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      views = #{views,jdbcType=BIGINT},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      publisher_id = #{publisherId,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
+      attach_name = #{attachName,jdbcType=VARCHAR},
+      attach_url = #{attachUrl,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectImg" resultType="java.util.Map">
+  	<![CDATA[  
+  	SELECT
+      id,
+      photo
+    FROM
+      t_n_news m
+    WHERE photo IS NOT NULL
+      AND photo <> ''
+      AND LOCATE('default',photo)=0	
+      AND NOT EXISTS
+      (SELECT
+        1
+      FROM
+        t_img_compress_log l
+      WHERE l.`relation_id` = m.`id`
+        AND l.`img_url` = m.`photo`
+        AND l.`source_table` = 't_n_news')
+        LIMIT 500
+  	]]> 
+  </select>
+  
+</mapper>
