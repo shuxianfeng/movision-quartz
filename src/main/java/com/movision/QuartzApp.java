@@ -7,6 +7,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * 本地调试启动
+ *
+ * 该定时任务启动tomcat后，通过控制QuartzApp的启动来控制定时任务的开/关
+ *
  * @author zhuangyuhao
  * @since 15/7/13.
  */
