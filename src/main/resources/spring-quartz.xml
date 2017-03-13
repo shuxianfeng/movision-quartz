@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 启动触发器的配置 -->
+    <bean name="startQuertz" lazy-init="false" autowire="no"
+          class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="orderJobTrigger"/>
+                <!--<ref bean="courseJobTrigger"/>-->
+                <!--<ref bean="statJobTrigger"/>-->
+                <!--<ref bean="vipExpiredJobTrigger"/>-->
+                <!--<ref bean="courseProcessJobTrigger"/>-->
+                <!--<ref bean="priceJobTrigger"/>-->
+                <!--<ref bean="otherPriceJobTrigger"/>-->
+                <!--&lt;!&ndash;<ref bean="imgCompressTrigger" />&ndash;&gt;-->
+                <!--<ref bean="packageTrigger"/>-->
+                <!--<ref bean="zhbExpiredTrigger"/>-->
+                <!--<ref bean="zhbExpiredNoticeTrigger"/>-->
+                <!--<ref bean="resumeDownloadRecordTrigger"/>-->
+                <!--<ref bean="brandAnalysisRecordBatchAddTrigger"/>-->
+            </list>
+        </property>
+        <property name="jobDetails">
+            <list>
+                <ref bean="orderJobDetail"/>
+                <!--<ref bean="courseJobDetail"/>-->
+                <!--<ref bean="statJobDetail"/>-->
+                <!--<ref bean="vipExpiredJobDetail"/>-->
+                <!--<ref bean="courseProcessJobDetail"/>-->
+                <!--<ref bean="priceJobDetail"/>-->
+                <!--<ref bean="otherPriceJobDetail"/>-->
+                <!--<ref bean="packageDetail"/>-->
+                <!--<ref bean="zhbExpiredDetail"/>-->
+                <!--<ref bean="zhbExpiredNoticeDetail"/>-->
+                <!--<ref bean="resumeDownloadRecordDetail"/>-->
+                <!--<ref bean="brandAnalysisRecordBatchAddDetail"/>-->
+            </list>
+        </property>
+
+    </bean>
+
+    <!--调度触发器-->
+    <bean id="orderJobTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="orderJobDetail"/>
+        <property name="cronExpression" value="${order_cronExpression}"/>
+    </bean>
+    <!--<bean id="vipExpiredJobTrigger"-->
+          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="vipExpiredJobDetail"/>-->
+        <!--<property name="cronExpression" value="${vip_cronExpression}"/>-->
+    <!--</bean>-->
+    <!--<bean id="courseJobTrigger"-->
+          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="courseJobDetail"/>-->
+        <!--<property name="cronExpression" value="${course_cronExpression}"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="statJobTrigger"-->
+          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="statJobDetail"/>-->
+        <!--<property name="cronExpression" value="${stat_cronExpression}"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="courseProcessJobTrigger"-->
+          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="courseProcessJobDetail"/>-->
+        <!--<property name="cronExpression" value="${course_process_cronExpression}"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="priceJobTrigger"-->
+          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="priceJobDetail"/>-->
+        <!--<property name="cronExpression" value="${price_cronExpression}"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="otherPriceJobTrigger"-->
+          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="otherPriceJobDetail"/>-->
+        <!--<property name="cronExpression" value="${other_price_cronExpression}"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="imgCompressTrigger"-->
+          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="imgCompressDetail"/>-->
+        <!--<property name="cronExpression" value="${img_compress_cronExpression}"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="packageTrigger"-->
+          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="packageDetail"/>-->
+        <!--<property name="cronExpression" value="${package_cronExpression}"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="zhbExpiredTrigger"-->
+          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="zhbExpiredDetail"/>-->
+        <!--<property name="cronExpression" value="${zhbExpired_cronExpression}"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="zhbExpiredNoticeTrigger"-->
+          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="zhbExpiredNoticeDetail"/>-->
+        <!--<property name="cronExpression" value="${zhbExpiredNotice_cronExpression}"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="resumeDownloadRecordTrigger"-->
+          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="resumeDownloadRecordDetail"/>-->
+        <!--<property name="cronExpression" value="${resume_downloadRecord_cronExpression}"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="brandAnalysisRecordBatchAddTrigger"-->
+          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="brandAnalysisRecordBatchAddDetail"/>-->
+        <!--<property name="cronExpression" value="${brandAnalysisRecordBatchAdd_cronExpression}"/>-->
+    <!--</bean>-->
+
+    <!-- job的配置 -->
+    <bean id="orderJobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="orderJob"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
+    <!--<bean id="vipExpiredJobDetail"-->
+          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject" ref="vipExpiredJob"/>-->
+        <!--<property name="targetMethod" value="execute"/>-->
+    <!--</bean>-->
+    <!--<bean id="courseJobDetail"-->
+          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject" ref="courseJob"/>-->
+        <!--<property name="targetMethod" value="execute"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="statJobDetail"-->
+          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject" ref="statJob"/>-->
+        <!--<property name="targetMethod" value="execute"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="courseProcessJobDetail"-->
+          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject" ref="courseProcessJob"/>-->
+        <!--<property name="targetMethod" value="execute"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="priceJobDetail"-->
+          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject" ref="priceJob"/>-->
+        <!--<property name="targetMethod" value="execute"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="otherPriceJobDetail"-->
+          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject" ref="otherPriceJob"/>-->
+        <!--<property name="targetMethod" value="execute"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="imgCompressDetail"-->
+          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject" ref="imgCompressJob"/>-->
+        <!--<property name="targetMethod" value="execute"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="packageDetail"-->
+          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject" ref="packageJob"/>-->
+        <!--<property name="targetMethod" value="execute"/>-->
+    <!--</bean>-->
+    <!--<bean id="zhbExpiredDetail"-->
+          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject" ref="zhbExpiredJob"/>-->
+        <!--<property name="targetMethod" value="execute"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="zhbExpiredNoticeDetail"-->
+          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject" ref="zhbExpiredNoticeJob"/>-->
+        <!--<property name="targetMethod" value="execute"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="resumeDownloadRecordDetail"-->
+          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject" ref="resumeDownloadRecordJob"/>-->
+        <!--<property name="targetMethod" value="execute"/>-->
+    <!--</bean>-->
+    <!--<bean id="brandAnalysisRecordBatchAddDetail"-->
+          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject" ref="brandAnalysisRecordBatchAddJob"/>-->
+        <!--<property name="targetMethod" value="execute"/>-->
+    <!--</bean>-->
+
+    <!-- 工作的bean -->
+    <bean id="orderJob" class="com.movision.job.CancelOrdersJob"/>
+    <!--<bean id="vipExpiredJob" class="com.movision.job.VipExpiredJob"/>-->
+    <!--<bean id="courseJob" class="com.movision.job.CourseJob"/>-->
+    <!--<bean id="statJob" class="com.movision.job.StatQuartzJob"/>-->
+    <!--<bean id="courseProcessJob" class="com.movision.job.CourseProcessJob"/>-->
+    <!--<bean id="priceJob" class="com.movision.job.PriceJob"/>-->
+    <!--<bean id="otherPriceJob" class="com.movision.job.OtherPriceJob"/>-->
+    <!--<bean id="imgCompressJob" class="com.movision.job.ImgCompressJob"/>-->
+    <!--<bean id="packageJob" class="com.movision.job.PackageJob"/>-->
+    <!--<bean id="zhbExpiredJob" class="com.movision.job.ZhbExpiredJob"/>-->
+    <!--<bean id="zhbExpiredNoticeJob" class="com.movision.job.ZhbExpiredNoticeJob"/>-->
+    <!--<bean id="resumeDownloadRecordJob" class="com.movision.job.ResumeDownloadRecordJob"/>-->
+    <!--<bean id="brandAnalysisRecordBatchAddJob" class="com.movision.job.BrandAnalysisRecordBatchAddJob"/>-->
+</beans>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movision.mybatis.mapper.StatMapper" >
+    <!--@author:zhuangyuhao@since 2016.06.15 统计平台业务数据 -->
+  <update id="platformStat" parameterType="com.movision.mybatis.entity.Order" statementType="CALLABLE">
+    {call proc_platform_statisitics()}
+  </update>
+  
+</mapper>

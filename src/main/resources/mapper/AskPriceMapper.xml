@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movision.mybatis.mapper.AskPriceMapper" >
+  <resultMap id="BaseResultMap" type="com.movision.mybatis.entity.AskPrice" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="createid" property="createid" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="billurl" property="billurl" jdbcType="VARCHAR" />
+    <result column="publishTime" property="publishTime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="provinceCode" property="provinceCode" jdbcType="VARCHAR" />
+    <result column="cityCode" property="cityCode" jdbcType="VARCHAR" />
+    <result column="areaCode" property="areaCode" jdbcType="VARCHAR" />
+    <result column="fcateid" property="fcateid" jdbcType="INTEGER" />
+    <result column="brandName" property="brandName" jdbcType="VARCHAR" />
+    <result column="productid" property="productid" jdbcType="BIGINT" />
+    <result column="productName" property="productName" jdbcType="VARCHAR" />
+    <result column="brandid" property="brandid" jdbcType="BIGINT" />
+    <result column="supplierid" property="supplierid" jdbcType="VARCHAR" />
+    <result column="isTax" property="isTax" jdbcType="BIT" />
+    <result column="period" property="period" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="isShow" property="isShow" jdbcType="BIT" />
+    <result column="companyName" property="companyName" jdbcType="VARCHAR" />
+    <result column="linkMan" property="linkMan" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, createid, title, status, type, content, billurl, publishTime, endTime, provinceCode, 
+    cityCode, areaCode, fcateid, brandName, productid, productName, brandid, supplierid, 
+    isTax, period, description, isShow, companyName, linkMan, telephone, email
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_p_ask_price
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_p_ask_price
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.movision.mybatis.entity.AskPrice" >
+    insert into t_p_ask_price (id, createid, title, 
+      status, type, content, 
+      billurl, publishTime, endTime, 
+      provinceCode, cityCode, areaCode, 
+      fcateid, brandName, productid, 
+      productName, brandid, supplierid, 
+      isTax, period, description, 
+      isShow, companyName, linkMan, 
+      telephone, email)
+    values (#{id,jdbcType=BIGINT}, #{createid,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, #{content,jdbcType=VARCHAR}, 
+      #{billurl,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{provinceCode,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
+      #{fcateid,jdbcType=INTEGER}, #{brandName,jdbcType=VARCHAR}, #{productid,jdbcType=BIGINT}, 
+      #{productName,jdbcType=VARCHAR}, #{brandid,jdbcType=BIGINT}, #{supplierid,jdbcType=VARCHAR}, 
+      #{isTax,jdbcType=BIT}, #{period,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
+      #{isShow,jdbcType=BIT}, #{companyName,jdbcType=VARCHAR}, #{linkMan,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.movision.mybatis.entity.AskPrice" >
+    insert into t_p_ask_price
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createid != null" >
+        createid,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="billurl != null" >
+        billurl,
+      </if>
+      <if test="publishTime != null" >
+        publishTime,
+      </if>
+      <if test="endTime != null" >
+        endTime,
+      </if>
+      <if test="provinceCode != null" >
+        provinceCode,
+      </if>
+      <if test="cityCode != null" >
+        cityCode,
+      </if>
+      <if test="areaCode != null" >
+        areaCode,
+      </if>
+      <if test="fcateid != null" >
+        fcateid,
+      </if>
+      <if test="brandName != null" >
+        brandName,
+      </if>
+      <if test="productid != null" >
+        productid,
+      </if>
+      <if test="productName != null" >
+        productName,
+      </if>
+      <if test="brandid != null" >
+        brandid,
+      </if>
+      <if test="supplierid != null" >
+        supplierid,
+      </if>
+      <if test="isTax != null" >
+        isTax,
+      </if>
+      <if test="period != null" >
+        period,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="isShow != null" >
+        isShow,
+      </if>
+      <if test="companyName != null" >
+        companyName,
+      </if>
+      <if test="linkMan != null" >
+        linkMan,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createid != null" >
+        #{createid,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="billurl != null" >
+        #{billurl,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null" >
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="provinceCode != null" >
+        #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fcateid != null" >
+        #{fcateid,jdbcType=INTEGER},
+      </if>
+      <if test="brandName != null" >
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=BIGINT},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandid != null" >
+        #{brandid,jdbcType=BIGINT},
+      </if>
+      <if test="supplierid != null" >
+        #{supplierid,jdbcType=VARCHAR},
+      </if>
+      <if test="isTax != null" >
+        #{isTax,jdbcType=BIT},
+      </if>
+      <if test="period != null" >
+        #{period,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null" >
+        #{isShow,jdbcType=BIT},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkMan != null" >
+        #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movision.mybatis.entity.AskPrice" >
+    update t_p_ask_price
+    <set >
+      <if test="createid != null" >
+        createid = #{createid,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="billurl != null" >
+        billurl = #{billurl,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null" >
+        publishTime = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        endTime = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="provinceCode != null" >
+        provinceCode = #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        cityCode = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        areaCode = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fcateid != null" >
+        fcateid = #{fcateid,jdbcType=INTEGER},
+      </if>
+      <if test="brandName != null" >
+        brandName = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        productid = #{productid,jdbcType=BIGINT},
+      </if>
+      <if test="productName != null" >
+        productName = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandid != null" >
+        brandid = #{brandid,jdbcType=BIGINT},
+      </if>
+      <if test="supplierid != null" >
+        supplierid = #{supplierid,jdbcType=VARCHAR},
+      </if>
+      <if test="isTax != null" >
+        isTax = #{isTax,jdbcType=BIT},
+      </if>
+      <if test="period != null" >
+        period = #{period,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null" >
+        isShow = #{isShow,jdbcType=BIT},
+      </if>
+      <if test="companyName != null" >
+        companyName = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkMan != null" >
+        linkMan = #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movision.mybatis.entity.AskPrice" >
+    update t_p_ask_price
+    set createid = #{createid,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      type = #{type,jdbcType=TINYINT},
+      content = #{content,jdbcType=VARCHAR},
+      billurl = #{billurl,jdbcType=VARCHAR},
+      publishTime = #{publishTime,jdbcType=TIMESTAMP},
+      endTime = #{endTime,jdbcType=TIMESTAMP},
+      provinceCode = #{provinceCode,jdbcType=VARCHAR},
+      cityCode = #{cityCode,jdbcType=VARCHAR},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      fcateid = #{fcateid,jdbcType=INTEGER},
+      brandName = #{brandName,jdbcType=VARCHAR},
+      productid = #{productid,jdbcType=BIGINT},
+      productName = #{productName,jdbcType=VARCHAR},
+      brandid = #{brandid,jdbcType=BIGINT},
+      supplierid = #{supplierid,jdbcType=VARCHAR},
+      isTax = #{isTax,jdbcType=BIT},
+      period = #{period,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      isShow = #{isShow,jdbcType=BIT},
+      companyName = #{companyName,jdbcType=VARCHAR},
+      linkMan = #{linkMan,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findLatestAskPriceList" resultType="java.util.Map" parameterType="java.lang.String" >
+    select distinct p.supplierid from t_p_ask_price p
+    where p.`type` = 2
+    and p.publishTime &lt;= now() and p.publishTime &gt;= date_sub(now(), interval #{hour} hour_second)
+    and p.endTime >= now()
+    and p.`status` = 1
+  </select>
+</mapper>

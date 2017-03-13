@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movision.mybatis.mapper.OrderSmsMapper" >
+  <resultMap id="BaseResultMap" type="com.movision.mybatis.entity.OrderSms" >
+    <id column="templateCode" property="templateCode" jdbcType="VARCHAR" />
+    <id column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <id column="orderNo" property="orderNo" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="sendTime" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    templateCode, mobile, orderNo, content, status, sendTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.movision.mybatis.entity.OrderSmsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_o_sms
+    where templateCode = #{templateCode,jdbcType=VARCHAR}
+      and mobile = #{mobile,jdbcType=VARCHAR}
+      and orderNo = #{orderNo,jdbcType=VARCHAR}
+  </select>
+  <select id="findByOrderNoAndStatusCode" resultType="com.movision.mybatis.entity.OrderSms">
+    select
+    <include refid="Base_Column_List" />
+    from t_o_sms where orderNo in
+    <foreach close=")" collection="orderNos" index="index" item="item" open="(" separator=",">
+      #{item}
+    </foreach>
+    and status = #{status}
+    and templateCode = #{templateCode}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.movision.mybatis.entity.OrderSmsKey" >
+    delete from t_o_sms
+    where templateCode = #{templateCode,jdbcType=VARCHAR}
+      and mobile = #{mobile,jdbcType=VARCHAR}
+      and orderNo = #{orderNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.movision.mybatis.entity.OrderSms" >
+    insert into t_o_sms (templateCode, mobile, orderNo, 
+      content, status, sendTime, 
+      updateTime)
+    values (#{templateCode,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{sendTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.movision.mybatis.entity.OrderSms" >
+    insert into t_o_sms
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="templateCode != null" >
+        templateCode,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="orderNo != null" >
+        orderNo,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="sendTime != null" >
+        sendTime,
+      </if>
+      <if test="updateTime != null" >
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="templateCode != null" >
+        #{templateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="sendTime != null" >
+        #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movision.mybatis.entity.OrderSms" >
+    update t_o_sms
+    <set >
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="sendTime != null" >
+        sendTime = #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where templateCode = #{templateCode,jdbcType=VARCHAR}
+      and mobile = #{mobile,jdbcType=VARCHAR}
+      and orderNo = #{orderNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movision.mybatis.entity.OrderSms" >
+    update t_o_sms
+    set content = #{content,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      sendTime = #{sendTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where templateCode = #{templateCode,jdbcType=VARCHAR}
+      and mobile = #{mobile,jdbcType=VARCHAR}
+      and orderNo = #{orderNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movision.mybatis.mapper.ShopMapper" >
+  <resultMap id="BaseResultMap" type="com.movision.mybatis.entity.Shop" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="shopName" property="shopname" jdbcType="VARCHAR" />
+    <result column="companyId" property="companyid" jdbcType="INTEGER" />
+    <result column="companyName" property="companyname" jdbcType="VARCHAR" />
+    <result column="companyAccount" property="companyaccount" jdbcType="VARCHAR" />
+    <result column="mobile_banner_url_t" property="mobileBannerUrlT" jdbcType="VARCHAR" />
+    <result column="mobile_banner_url_s" property="mobileBannerUrlS" jdbcType="VARCHAR" />
+    <result column="mobile_banner_url_f" property="mobileBannerUrlF" jdbcType="VARCHAR" />
+    <result column="bannerUrl" property="bannerurl" jdbcType="VARCHAR" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="opreatorId" property="opreatorid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, shopName, companyId, companyName, companyAccount, mobile_banner_url_t, mobile_banner_url_s, 
+    mobile_banner_url_f, bannerUrl, updateTime, opreatorId, status, reason
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_m_shop
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_m_shop
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.movision.mybatis.entity.Shop" >
+    insert into t_m_shop (id, shopName, companyId, 
+      companyName, companyAccount, mobile_banner_url_t, 
+      mobile_banner_url_s, mobile_banner_url_f, bannerUrl, 
+      updateTime, opreatorId, status, 
+      reason)
+    values (#{id,jdbcType=INTEGER}, #{shopname,jdbcType=VARCHAR}, #{companyid,jdbcType=INTEGER}, 
+      #{companyname,jdbcType=VARCHAR}, #{companyaccount,jdbcType=VARCHAR}, #{mobileBannerUrlT,jdbcType=VARCHAR}, 
+      #{mobileBannerUrlS,jdbcType=VARCHAR}, #{mobileBannerUrlF,jdbcType=VARCHAR}, #{bannerurl,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{opreatorid,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, 
+      #{reason,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.movision.mybatis.entity.Shop" >
+    insert into t_m_shop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="shopname != null" >
+        shopName,
+      </if>
+      <if test="companyid != null" >
+        companyId,
+      </if>
+      <if test="companyname != null" >
+        companyName,
+      </if>
+      <if test="companyaccount != null" >
+        companyAccount,
+      </if>
+      <if test="mobileBannerUrlT != null" >
+        mobile_banner_url_t,
+      </if>
+      <if test="mobileBannerUrlS != null" >
+        mobile_banner_url_s,
+      </if>
+      <if test="mobileBannerUrlF != null" >
+        mobile_banner_url_f,
+      </if>
+      <if test="bannerurl != null" >
+        bannerUrl,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="opreatorid != null" >
+        opreatorId,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="shopname != null" >
+        #{shopname,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="companyname != null" >
+        #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="companyaccount != null" >
+        #{companyaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileBannerUrlT != null" >
+        #{mobileBannerUrlT,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileBannerUrlS != null" >
+        #{mobileBannerUrlS,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileBannerUrlF != null" >
+        #{mobileBannerUrlF,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerurl != null" >
+        #{bannerurl,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opreatorid != null" >
+        #{opreatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movision.mybatis.entity.Shop" >
+    update t_m_shop
+    <set >
+      <if test="shopname != null" >
+        shopName = #{shopname,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        companyId = #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="companyname != null" >
+        companyName = #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="companyaccount != null" >
+        companyAccount = #{companyaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileBannerUrlT != null" >
+        mobile_banner_url_t = #{mobileBannerUrlT,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileBannerUrlS != null" >
+        mobile_banner_url_s = #{mobileBannerUrlS,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileBannerUrlF != null" >
+        mobile_banner_url_f = #{mobileBannerUrlF,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerurl != null" >
+        bannerUrl = #{bannerurl,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opreatorid != null" >
+        opreatorId = #{opreatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movision.mybatis.entity.Shop" >
+    update t_m_shop
+    set shopName = #{shopname,jdbcType=VARCHAR},
+      companyId = #{companyid,jdbcType=INTEGER},
+      companyName = #{companyname,jdbcType=VARCHAR},
+      companyAccount = #{companyaccount,jdbcType=VARCHAR},
+      mobile_banner_url_t = #{mobileBannerUrlT,jdbcType=VARCHAR},
+      mobile_banner_url_s = #{mobileBannerUrlS,jdbcType=VARCHAR},
+      mobile_banner_url_f = #{mobileBannerUrlF,jdbcType=VARCHAR},
+      bannerUrl = #{bannerurl,jdbcType=VARCHAR},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      opreatorId = #{opreatorid,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      reason = #{reason,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectImg" resultType="java.util.Map">
+  	<![CDATA[  
+    SELECT
+      id,
+      mobile_banner_url_t img1,
+      mobile_banner_url_s,
+      mobile_banner_url_f,
+      bannerUrl
+    FROM
+      t_m_shop m
+    WHERE (
+        LOCATE('default', mobile_banner_url_t) = 0
+        OR LOCATE('default', mobile_banner_url_s) = 0
+        OR LOCATE('default', mobile_banner_url_f) = 0
+        OR LOCATE('default', bannerUrl) = 0
+      )
+      AND NOT EXISTS
+      (SELECT
+        1
+      FROM
+        t_img_compress_log l
+      WHERE l.`relation_id` = m.`id`
+        AND l.`img_url` IN (
+          m.`mobile_banner_url_t`,
+          m.`mobile_banner_url_s`,
+          m.`mobile_banner_url_f`,
+          m.`bannerUrl`
+        )
+        AND l.`source_table` = 't_m_shop')
+    LIMIT 500
+  	]]> 
+  </select>
+  
+</mapper>

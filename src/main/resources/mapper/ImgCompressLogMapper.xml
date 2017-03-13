@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movision.mybatis.mapper.ImgCompressLogMapper" >
+  <resultMap id="BaseResultMap" type="com.movision.mybatis.entity.ImgCompressLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="source_table" property="sourceTable" jdbcType="VARCHAR" />
+    <result column="relation_id" property="relationId" jdbcType="BIGINT" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="process_time" property="processTime" jdbcType="TIMESTAMP" />
+    <result column="compress_flag" property="compressFlag" jdbcType="INTEGER" />
+    <result column="des_size" property="desSize" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, source_table, relation_id, img_url, process_time, compress_flag, des_size
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_img_compress_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_img_compress_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.movision.mybatis.entity.ImgCompressLog" >
+    insert into t_img_compress_log (id, source_table, relation_id, 
+      img_url, process_time, compress_flag, des_size
+      )
+    values (#{id,jdbcType=BIGINT}, #{sourceTable,jdbcType=VARCHAR}, #{relationId,jdbcType=BIGINT}, 
+      #{imgUrl,jdbcType=VARCHAR}, #{processTime,jdbcType=TIMESTAMP}, #{compressFlag,jdbcType=INTEGER},
+      #{desSize,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.movision.mybatis.entity.ImgCompressLog" >
+    insert into t_img_compress_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sourceTable != null" >
+        source_table,
+      </if>
+      <if test="relationId != null" >
+        relation_id,
+      </if>
+      <if test="imgUrl != null" >
+        img_url,
+      </if>
+      <if test="processTime != null" >
+        process_time,
+      </if>
+      <if test="compressFlag != null" >
+        compress_flag,
+      </if>
+      <if test="desSize != null" >
+        des_size,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="sourceTable != null" >
+        #{sourceTable,jdbcType=VARCHAR},
+      </if>
+      <if test="relationId != null" >
+        #{relationId,jdbcType=BIGINT},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="processTime != null" >
+        #{processTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="compressFlag != null" >
+        #{compressFlag,jdbcType=INTEGER},
+      </if>
+      <if test="desSize != null" >
+        #{desSize,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movision.mybatis.entity.ImgCompressLog" >
+    update t_img_compress_log
+    <set >
+      <if test="sourceTable != null" >
+        source_table = #{sourceTable,jdbcType=VARCHAR},
+      </if>
+      <if test="relationId != null" >
+        relation_id = #{relationId,jdbcType=BIGINT},
+      </if>
+      <if test="imgUrl != null" >
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="processTime != null" >
+        process_time = #{processTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="compressFlag != null" >
+        compress_flag = #{compressFlag,jdbcType=INTEGER},
+      </if>
+      <if test="desSize != null" >
+        des_size = #{desSize,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movision.mybatis.entity.ImgCompressLog" >
+    update t_img_compress_log
+    set source_table = #{sourceTable,jdbcType=VARCHAR},
+      relation_id = #{relationId,jdbcType=BIGINT},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      process_time = #{processTime,jdbcType=TIMESTAMP},
+      compress_flag = #{compressFlag,jdbcType=INTEGER},
+      des_size = #{desSize,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
