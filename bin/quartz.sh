@@ -4,17 +4,21 @@
 #启动方式 quartz.sh start
 #停止方式 quartz.sh stop
 #查看状态 quartz.sh status
+#更新代码到指定路径 quartz.sh update
 ##########################
 
 
 #JDK所在路径
-JAVA_HOME="/usr/lib/jvm/java-7-oracle/"
+JAVA_HOME="/usr/java/jdk1.8.0_111"
+
+#版本号
+version_name=$1
 
 #执行程序启动所使用的系统用户，考虑到安全，推荐不使用root帐号
 RUNNING_USER=root
 
 #Java程序所在的目录
-APP_HOME=/home/app/movision-quartz
+APP_HOME=/home/app/projects/quartz
 
 #需要启动的Java主程序（main方法类）
 APP_MAINCLASS=com.movision.QuartzApp
@@ -49,6 +53,18 @@ checkpid() {
    fi
 }
 
+###################################
+update() {
+    cd "$code_path"
+    git checkout master
+    git pull
+
+    if [ -n $version_name ];
+    then
+      git checkout $version_name
+      git pull
+    fi
+}
 ###################################
 #(函数)启动程序
 #
