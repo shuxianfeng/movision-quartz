@@ -199,12 +199,9 @@
         <resources>
             <resource>
                 <directory>${basedir}/src/main/resources</directory>
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.xml</include>
-                    <include>**/*.tld</include>
-                </includes>
-                <filtering>true</filtering>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
             </resource>
         </resources>
         <plugins>

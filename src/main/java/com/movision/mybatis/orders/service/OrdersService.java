@@ -1,10 +1,10 @@
 package com.movision.mybatis.orders.service;
 
-import com.movision.mybatis.goods.mapper.GoodsMapper;
+import com.movision.mybatis.mapper.GoodsMapper;
 import com.movision.mybatis.orders.entity.Orders;
-import com.movision.mybatis.orders.mapper.OrdersMapper;
+import com.movision.mybatis.mapper.OrdersMapper;
 import com.movision.mybatis.subOrder.entity.SubOrder;
-import com.movision.mybatis.subOrder.mapper.SubOrderMapper;
+import com.movision.mybatis.mapper.SubOrderMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,11 @@
-package com.movision.mybatis.goods.mapper;
+package com.movision.mybatis.mapper;
 
 import com.movision.mybatis.goods.entity.Goods;
+import org.springframework.stereotype.Repository;
 
 import java.util.Map;
 
+@Repository
 public interface GoodsMapper {
     int deleteByPrimaryKey(Integer id);
 

@@ -20,7 +20,8 @@ import java.util.Map;
  * @Date 2017/3/11 17:09
  */
 @Service
-@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+//@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+@Transactional
 public class CancelOrdersTask {
 
     private static final Logger log = LoggerFactory.getLogger(CancelOrdersTask.class);
@@ -55,7 +56,7 @@ public class CancelOrdersTask {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void CancelOrder(Orders orders) {
 
-        //根据传过的订单id取消订单
+        //根据传入的订单id取消订单
         ordersService.CancelOrder(orders.getId());
 
         //如果有优惠券返还优惠券
@@ -79,7 +80,7 @@ public class CancelOrdersTask {
         List<SubOrder> subOrderList = ordersService.querySubOrdersList(orders.getId());
         //取库存恢复商品库存
         for (int i = 0; i < subOrderList.size(); i++) {
-            int goodsid = subOrderList.get(i).getId();//商品id
+            int goodsid = subOrderList.get(i).getGoodsid();//商品id
             int sum = subOrderList.get(i).getSum();//件数
 
             Map<String, Object> parammap = new HashMap<>();

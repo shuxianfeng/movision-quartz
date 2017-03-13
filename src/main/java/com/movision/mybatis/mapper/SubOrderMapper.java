@@ -1,9 +1,11 @@
-package com.movision.mybatis.subOrder.mapper;
+package com.movision.mybatis.mapper;
 
 import com.movision.mybatis.subOrder.entity.SubOrder;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface SubOrderMapper {
     int deleteByPrimaryKey(Integer id);
 

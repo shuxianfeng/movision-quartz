@@ -1,10 +1,12 @@
-package com.movision.mybatis.orders.mapper;
+package com.movision.mybatis.mapper;
 
 import com.movision.mybatis.orders.entity.Orders;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public interface OrdersMapper {
     int deleteByPrimaryKey(Integer id);
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.movision.mybatis.subOrder.mapper.SubOrderMapper">
+<mapper namespace="com.movision.mybatis.mapper.SubOrderMapper">
     <resultMap id="BaseResultMap" type="com.movision.mybatis.subOrder.entity.SubOrder">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="porderid" property="porderid" jdbcType="INTEGER"/>
