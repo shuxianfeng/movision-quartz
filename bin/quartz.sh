@@ -64,6 +64,11 @@ update() {
       git checkout $version_name
       git pull
     fi
+
+    mvn clean install -Dmaven.test.skip=true -Pdevelopment
+    result=$?
+    if [ $result -ne 0 ]; then echo "mvn Bad result $result"; exit $result
+    fi
 }
 ###################################
 #(函数)启动程序
@@ -75,7 +80,7 @@ update() {
 #4. 启动命令执行后，再次调用checkpid函数
 #5. 如果步骤4的结果能够确认程序的pid,则打印[OK]，否则打印[Failed]
 #注意：echo -n 表示打印字符后，不换行
-#注意: "nohup 某命令 >/dev/null 2>&1 &" 的用法
+#注意: "nohup 某命令 >/dev/null 2>&1 &" 的用法 --让程序在后台以job的形式进行
 ###################################
 start() {
    checkpid
