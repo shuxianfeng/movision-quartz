@@ -41,7 +41,7 @@
 
     <!--获取订单表中所有待支付的订单-->
     <select id="queryAllNoPayOrdersList" resultType="com.movision.mybatis.orders.entity.Orders">
-        SELECT * FROM yw_orders WHERE status = '0'
+        SELECT * FROM yw_orders WHERE status IN (0,4000,6001,6002)
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

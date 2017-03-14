@@ -20,7 +20,6 @@ import java.util.Map;
  * @Date 2017/3/11 17:09
  */
 @Service
-//@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 @Transactional
 public class CancelOrdersTask {
 
@@ -30,9 +29,9 @@ public class CancelOrdersTask {
     private OrdersService ordersService;
 
     public void run() {
-        log.info("轮训所有待支付订单的task开始...");
+        log.info("轮训所有未支付完成订单的task开始...");
 
-        //获取订单表中未支付的所有订单
+        //获取订单表中未支付完成的所有订单
         List<Orders> noPayOrdersList = ordersService.queryAllNoPayOrdersList();
 
         //轮训所有订单，检查时间
@@ -50,7 +49,7 @@ public class CancelOrdersTask {
             }
         }
 
-        log.info("轮训所有待支付订单的task结束...");
+        log.info("轮训所有未支付完成订单的task结束...");
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)

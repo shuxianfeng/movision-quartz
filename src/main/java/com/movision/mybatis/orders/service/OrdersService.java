@@ -32,10 +32,10 @@ public class OrdersService {
 
     public List<Orders> queryAllNoPayOrdersList() {
         try {
-            log.info("获取订单表中所有待支付的订单");
+            log.info("获取订单表中所有未完成支付的订单");
             return ordersMapper.queryAllNoPayOrdersList();
         } catch (Exception e) {
-            log.error("获取订单表中所有待支付的订单失败");
+            log.error("获取订单表中所有未完成支付的订单失败");
             throw e;
         }
     }
