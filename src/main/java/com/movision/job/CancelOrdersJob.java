@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * @Author shuxf
  * @Date 2017/3/11 17:07
+ * 实时订单超过30分钟不支付的自动取消订单
  */
 public class CancelOrdersJob {
     private static final Logger logger = LoggerFactory.getLogger(CancelOrdersJob.class);
