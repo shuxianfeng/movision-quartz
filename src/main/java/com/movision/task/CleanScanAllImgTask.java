@@ -39,7 +39,7 @@ public class CleanScanAllImgTask {
 
         //扫描所有帖子的内容和封面进行检查
         for (int i = 0; i < allPostList.size(); i++) {
-
+            log.info("当前处理的帖子id>>>>>>>>>>>>>>>>>>" + allPostList.get(i).getId());
         }
     }
 }
