@@ -24,7 +24,7 @@ public class CleanScanAllImgTask {
 
     public void run() {
 
-        log.info("开始查询所有的帖子列表>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        log.info("开始查询所有的帖子列表");
         //开始查询所有的帖子列表
         List<Post> allPostList = postService.queryAllPost();
 
@@ -34,8 +34,10 @@ public class CleanScanAllImgTask {
         String activeprotoimgpath = PropertiesLoader.getValue("active.proto.img.domain");//活动内容中原图的存放路径
         String postprotovideopath = PropertiesLoader.getValue("post.proto.video.domain");//帖子内容中视频存放路径
 
-        String path = System.getProperty("user.dir");
-        log.info("打印绝对路径>>>>>>>>>>>>>>>>>>>" + path);
+        log.info("帖子内容中压缩后的图片存放路径>>>>>>>>>>>>>>>>>>>" + compressimgpath);
+        log.info("帖子内容中原图存放路径>>>>>>>>>>>>>>>>>>>" + postprotoimgpath);
+        log.info("活动内容中原图的存放路径>>>>>>>>>>>>>>>>>>>" + activeprotoimgpath);
+        log.info("帖子内容中视频存放路径>>>>>>>>>>>>>>>>>>>" + postprotovideopath);
 
         //扫描所有帖子的内容和封面进行检查
         for (int i = 0; i < allPostList.size(); i++) {
