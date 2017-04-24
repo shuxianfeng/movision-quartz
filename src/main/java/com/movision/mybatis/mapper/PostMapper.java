@@ -1,4 +1,4 @@
-package com.movision.mybatis.post.mapper;
+package com.movision.mybatis.mapper;
 
 import com.movision.mybatis.post.entity.Post;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,7 @@
 package com.movision.mybatis.post.service;
 
 import com.movision.mybatis.post.entity.Post;
-import com.movision.mybatis.post.mapper.PostMapper;
+import com.movision.mybatis.mapper.PostMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
