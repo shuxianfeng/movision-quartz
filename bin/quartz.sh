@@ -18,10 +18,14 @@ version_name=$1
 RUNNING_USER=root
 
 #Java程序所在的目录
-APP_HOME=/home/app/projects/quartz
+APP_HOME=/home/app/projects/quartz/target
 
 #需要启动的Java主程序（main方法类）
 APP_MAINCLASS=com.movision.QuartzApp
+
+#代码的地址
+code_path="/home/app/projects/quartz"
+
 
 #拼凑完整的classpath参数，包括指定lib目录下所有的jar
 CLASSPATH=$APP_HOME/classes
@@ -52,7 +56,8 @@ checkpid() {
       psid=0
    fi
 }
-
+###################################
+#(函数) 从git上更新源码，并编译
 ###################################
 update() {
     cd "$code_path"
@@ -175,7 +180,8 @@ info() {
 
 help(){
   echo "***********help***********"
-  echo "命令:./quartz.sh start|stop|status|info"
+  echo "命令:./quartz.sh update|start|stop|status|info"
+  echo "# 更新源码并编译 ./quartz.sh update"
   echo "# 启动方式 ./quartz.sh start "
   echo "# 停止方式 ./quartz.sh stop"
   echo "# 查看状态 ./quartz.sh status"
@@ -188,6 +194,9 @@ help(){
 #如参数不在指定范围之内，则打印帮助信息
 ###################################
 case "$1" in
+   'update')
+      update
+      ;;
    'start')
       start
       ;;
@@ -208,7 +217,7 @@ case "$1" in
      help
      ;;
   *)
-     echo "Usage: $0 {start|stop|restart|status|info}"
+     echo "Usage: $0 {update|start|stop|restart|status|info}"
      exit 1
 esac
 exit 0
