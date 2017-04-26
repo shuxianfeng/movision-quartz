@@ -18,7 +18,7 @@ version_name=$1
 RUNNING_USER=root
 
 #Java程序所在的目录
-APP_HOME=/home/app/projects/quartz/target
+APP_HOME=/home/app/projects/quartz
 
 #需要启动的Java主程序（main方法类）
 APP_MAINCLASS=com.movision.QuartzApp
@@ -28,7 +28,7 @@ code_path="/home/app/projects/quartz"
 
 
 #拼凑完整的classpath参数，包括指定lib目录下所有的jar
-CLASSPATH=$APP_HOME/classes
+CLASSPATH=$APP_HOME/target/classes
 for i in "$APP_HOME"/lib/*.jar; do
    CLASSPATH="$CLASSPATH":"$i"
 done
