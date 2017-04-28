@@ -43,7 +43,10 @@
 
     <!--查询所有帖子-->
     <select id="queryAllPost" resultType="com.movision.mybatis.post.entity.Post">
-        SELECT id, title, postcontent, coverimg, hotimgurl, intime FROM yw_post
+        SELECT t1.id, t1.title, t1.postcontent, t1.coverimg, t1.hotimgurl, t1.intime, t2.videourl
+        FROM yw_post t1
+        LEFT JOIN yw_video t2
+        ON t1.id = t2.postid
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

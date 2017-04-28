@@ -1,6 +1,7 @@
 package com.movision.task;
 
 import com.movision.mybatis.post.entity.Post;
+import com.movision.mybatis.post.entity.PostVo;
 import com.movision.mybatis.post.service.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,7 @@ public class CleanScanAllImgTask {
 
         log.info("开始查询所有的帖子列表");
         //开始查询所有的帖子列表
-        List<Post> allPostList = postService.queryAllPost();
+        List<PostVo> allPostList = postService.queryAllPost();
 
         //扫描服务器下帖子图片和封面存放路径下的所有图片
         String compressimgpath = PropertiesLoader.getValue("post.compress.img.domain");//帖子内容中压缩后的图片存放路径
@@ -45,33 +46,23 @@ public class CleanScanAllImgTask {
         String [] postprotoimgFileName = getFileName(postprotoimgpath);//帖子中原图文件名数组
         String [] activeprotoimgFileName = getFileName(activeprotoimgpath);//活动中原图文件名数组
         String [] postprotovideoFileName = getFileName(postprotovideopath);//帖子中视频存放路径
+
+        //遍历所有文件夹下的文件名
         for(String name:compressimgFileName)
         {
-            //定义标志位（0 未使用到 1 有使用到）
-            int flag = 0;//初始化为未使用到
-            for (int i = 0; i < allPostList.size(); i++){
-                int index = allPostList.get(i).getPostcontent().indexOf(name);
-                if (index != -1){
-                    flag = flag + 1;//每使用一次+1
-                }
-            }
-            //删除所有未使用到的图片文件
-            if (flag == 0){
-                String filepath = compressimgpath + name;//文件路径和文件名
-                
-            }
+            clean(name, allPostList, compressimgpath);//清理图片
         }
         for(String name:postprotoimgFileName)
         {
-            System.out.println(name);
+            clean(name, allPostList, postprotoimgpath);//清理图片
         }
         for(String name:activeprotoimgFileName)
         {
-            System.out.println(name);
+            clean(name, allPostList, activeprotoimgpath);//清理图片
         }
         for(String name:postprotovideoFileName)
         {
-            System.out.println(name);
+            cleanvideo(name, allPostList, postprotovideopath);//清理视频
         }
 
 
@@ -85,5 +76,43 @@ public class CleanScanAllImgTask {
         File file = new File(path);
         String [] fileName = file.list();
         return fileName;
+    }
+
+    //清理帖子或活动内容中未使用到的图片
+    public void clean(String name, List<PostVo> allPostList, String path){
+        //定义标志位（0 未使用到 1 有使用到）
+        int flag = 0;//初始化为未使用到
+        for (int i = 0; i < allPostList.size(); i++){
+            int index = allPostList.get(i).getPostcontent().indexOf(name);
+            if (index != -1){
+                flag = flag + 1;//每使用一次+1
+            }
+        }
+        //删除所有未使用到的图片文件
+        if (flag == 0){
+            String filepath = path + name;//文件路径和文件名
+            File file = new File(filepath);
+            file.delete();
+        }
+    }
+
+    //清理或活动中无用的视频文件
+    public void cleanvideo(String name, List<PostVo> allPostList, String path){
+        //定义标志位（0 未使用到 1 有使用到）
+        int flag = 0;//初始化为未使用到
+        for (int i = 0; i < allPostList.size(); i++){
+            if (null != allPostList.get(i).getVideourl()) {
+                int index = allPostList.get(i).getVideourl().indexOf(name);
+                if (index != -1) {
+                    flag = flag + 1;//每使用一次+1
+                }
+            }
+        }
+        //删除所有未使用到的视频文件
+        if (flag == 0){
+            String filepath = path + name;//文件路径和文件名
+            File file = new File(filepath);
+            file.delete();
+        }
     }
 }
