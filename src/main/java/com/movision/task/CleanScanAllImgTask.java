@@ -3,6 +3,7 @@ package com.movision.task;
 import com.movision.mybatis.post.entity.Post;
 import com.movision.mybatis.post.entity.PostVo;
 import com.movision.mybatis.post.service.PostService;
+import javafx.scene.shape.Circle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ public class CleanScanAllImgTask {
         log.info("开始查询所有的帖子列表");
         //开始查询所有的帖子列表
         List<PostVo> allPostList = postService.queryAllPost();
+        //开始查询所有的圈子列表
+//        List<Circle> allCircleList = circleService.queryAllCircle();
 
         //扫描服务器下帖子图片和封面存放路径下的所有图片
         String compressimgpath = PropertiesLoader.getValue("post.compress.img.domain");//帖子内容中压缩后的图片存放路径
@@ -83,8 +86,11 @@ public class CleanScanAllImgTask {
         //定义标志位（0 未使用到 >1 有使用到）
         int flag = 0;//初始化为未使用到
         for (int i = 0; i < allPostList.size(); i++){
-            int index = allPostList.get(i).getPostcontent().indexOf(name);
-            if (index != -1){
+            int contentindex = allPostList.get(i).getPostcontent().indexOf(name);
+            int coverimgindex = allPostList.get(i).getCoverimg().indexOf(name);
+
+            //如果帖子封面或者帖子内容中被用到
+            if (contentindex != -1 || coverimgindex != -1){
                 flag = flag + 1;//每使用一次+1
             }
         }
