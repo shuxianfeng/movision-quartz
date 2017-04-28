@@ -62,6 +62,8 @@ public class PostVo implements Serializable {
 
     private String videourl;//视频帖时这个字段不为空（分享视频和原生视频帖的视频地址）
 
+    private String videocoverurl;//视频封面图片
+
     public Integer getId() {
         return id;
     }
@@ -276,5 +278,13 @@ public class PostVo implements Serializable {
 
     public void setVideourl(String videourl) {
         this.videourl = videourl;
+    }
+
+    public String getVideocoverurl() {
+        return videocoverurl;
+    }
+
+    public void setVideocoverurl(String videocoverurl) {
+        this.videocoverurl = videocoverurl;
     }
 }

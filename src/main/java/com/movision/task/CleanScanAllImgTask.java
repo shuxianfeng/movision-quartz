@@ -89,16 +89,17 @@ public class CleanScanAllImgTask {
         return fileName;
     }
 
-    //清理帖子或活动内容中未使用到的图片
+    //清理帖子或活动内容或视频封面图片中未使用到的图片
     public void clean(String name, List<PostVo> allPostList, String path){
         //定义标志位（0 未使用到 >1 有使用到）
         int flag = 0;//初始化为未使用到
         for (int i = 0; i < allPostList.size(); i++){
             int contentindex = allPostList.get(i).getPostcontent().indexOf(name);//帖子活动内容中是否用到
             int coverimgindex = allPostList.get(i).getCoverimg().indexOf(name);//帖子活动封面中是否用到
+            int videocoverindex = allPostList.get(i).getVideocoverurl().indexOf(name);//视频封面图片中是否用到
 
-            //如果帖子活动封面或者帖子活动内容中被用到
-            if (contentindex != -1 || coverimgindex != -1){
+            //如果帖子活动封面或者帖子活动内容或者视频封面图片中被用到flag+1
+            if (contentindex != -1 || coverimgindex != -1 || videocoverindex != -1){
                 flag = flag + 1;//每使用一次+1
             }
         }

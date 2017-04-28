@@ -43,7 +43,7 @@
 
     <!--查询所有帖子-->
     <select id="queryAllPost" resultType="com.movision.mybatis.post.entity.PostVo">
-        SELECT t1.id, t1.title, t1.postcontent, t1.coverimg, t1.hotimgurl, t1.intime, t2.videourl
+        SELECT t1.id, t1.title, t1.postcontent, t1.coverimg, t1.hotimgurl, t1.intime, t2.videourl, t2.bannerimgurl AS videocoverurl
         FROM yw_post t1
         LEFT JOIN yw_video t2
         ON t1.id = t2.postid
