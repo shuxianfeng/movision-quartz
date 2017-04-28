@@ -1,9 +1,9 @@
 package com.movision.task;
 
-import com.movision.mybatis.post.entity.Post;
+import com.movision.mybatis.circle.entity.Circle;
+import com.movision.mybatis.circle.service.CircleService;
 import com.movision.mybatis.post.entity.PostVo;
 import com.movision.mybatis.post.service.PostService;
-import javafx.scene.shape.Circle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,30 +25,36 @@ public class CleanScanAllImgTask {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private CircleService circleService;
+
     public void run() {
 
         log.info("开始查询所有的帖子列表");
         //开始查询所有的帖子列表
         List<PostVo> allPostList = postService.queryAllPost();
         //开始查询所有的圈子列表
-//        List<Circle> allCircleList = circleService.queryAllCircle();
+        List<Circle> allCircleList = circleService.queryAllCircle();
 
         //扫描服务器下帖子图片和封面存放路径下的所有图片
         String compressimgpath = PropertiesLoader.getValue("post.compress.img.domain");//帖子内容中压缩后的图片存放路径
         String postprotoimgpath = PropertiesLoader.getValue("post.proto.img.domain");//帖子内容中原图存放路径
         String activeprotoimgpath = PropertiesLoader.getValue("active.proto.img.domain");//活动内容中原图的存放路径
         String postprotovideopath = PropertiesLoader.getValue("post.proto.video.domain");//帖子内容中视频存放路径
+        String circleimgpath = PropertiesLoader.getValue("circle.img.domain");//圈子封面图片和圈子猜你喜欢小方图存放路径
 
         log.info("帖子内容中压缩后的图片存放路径>>>>>>>>>>>>>>>>>>>" + compressimgpath);
         log.info("帖子内容中原图存放路径>>>>>>>>>>>>>>>>>>>" + postprotoimgpath);
         log.info("活动内容中原图的存放路径>>>>>>>>>>>>>>>>>>>" + activeprotoimgpath);
         log.info("帖子内容中视频存放路径>>>>>>>>>>>>>>>>>>>" + postprotovideopath);
+        log.info("圈子封面图片和圈子猜你喜欢小方图存放路径>>>>>>>>>>>>>>>>>>>" + circleimgpath);
 
         //根据文件路径扫描所有带扫描的文件
         String [] compressimgFileName = getFileName(compressimgpath);//压缩图片文件名数组
         String [] postprotoimgFileName = getFileName(postprotoimgpath);//帖子中原图文件名数组
         String [] activeprotoimgFileName = getFileName(activeprotoimgpath);//活动中原图文件名数组
-        String [] postprotovideoFileName = getFileName(postprotovideopath);//帖子中视频存放路径
+        String [] postprotovideoFileName = getFileName(postprotovideopath);//帖子中视频文件名数组
+        String [] circleimgFileName = getFileName(circleimgpath);//圈子封面图片和圈子猜你喜欢小方图文件名数组
 
         //遍历所有文件夹下的文件名
         for(String name:compressimgFileName)
@@ -67,7 +73,9 @@ public class CleanScanAllImgTask {
         {
             cleanvideo(name, allPostList, postprotovideopath);//清理视频
         }
-
+        for(String name:circleimgFileName){
+            cleanCircleImg(name, allCircleList, circleimgpath);//清理圈子封面和猜你喜欢的圈子小方图
+        }
 
         //扫描所有帖子的内容和封面进行检查
         for (int i = 0; i < allPostList.size(); i++) {
@@ -102,7 +110,7 @@ public class CleanScanAllImgTask {
         }
     }
 
-    //清理或活动中无用的视频文件
+    //清理帖子或活动中无用的视频文件
     public void cleanvideo(String name, List<PostVo> allPostList, String path){
         //定义标志位（0 未使用到 1 有使用到）
         int flag = 0;//初始化为未使用到
@@ -112,6 +120,25 @@ public class CleanScanAllImgTask {
                 if (index != -1) {
                     flag = flag + 1;//每使用一次+1
                 }
+            }
+        }
+        //删除所有未使用到的视频文件
+        if (flag == 0){
+            String filepath = path + name;//文件路径和文件名
+            File file = new File(filepath);
+            file.delete();
+        }
+    }
+
+    //清理圈子封面小方图中无用的图片文件
+    public void cleanCircleImg(String name, List<Circle> allCircleList, String path){
+        //定义标志位（0 未使用到 1 有使用到）
+        int flag = 0;//初始化为未使用到
+        for (int i = 0; i < allCircleList.size(); i++){
+            int indexcover = allCircleList.get(i).getPhoto().indexOf(name);
+            int indexmaylike = allCircleList.get(i).getMaylikeimg().indexOf(name);
+            if (indexcover != -1 || indexmaylike != -1) {
+                flag = flag + 1;//每使用一次+1
             }
         }
         //删除所有未使用到的视频文件
