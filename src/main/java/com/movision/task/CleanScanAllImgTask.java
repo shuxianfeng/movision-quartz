@@ -86,10 +86,10 @@ public class CleanScanAllImgTask {
         //定义标志位（0 未使用到 >1 有使用到）
         int flag = 0;//初始化为未使用到
         for (int i = 0; i < allPostList.size(); i++){
-            int contentindex = allPostList.get(i).getPostcontent().indexOf(name);
-            int coverimgindex = allPostList.get(i).getCoverimg().indexOf(name);
+            int contentindex = allPostList.get(i).getPostcontent().indexOf(name);//帖子活动内容中是否用到
+            int coverimgindex = allPostList.get(i).getCoverimg().indexOf(name);//帖子活动封面中是否用到
 
-            //如果帖子封面或者帖子内容中被用到
+            //如果帖子活动封面或者帖子活动内容中被用到
             if (contentindex != -1 || coverimgindex != -1){
                 flag = flag + 1;//每使用一次+1
             }
