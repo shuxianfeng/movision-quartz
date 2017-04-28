@@ -76,11 +76,6 @@ public class CleanScanAllImgTask {
         for(String name:circleimgFileName){
             cleanCircleImg(name, allCircleList, circleimgpath);//清理圈子封面和猜你喜欢的圈子小方图
         }
-
-        //扫描所有帖子的内容和封面进行检查
-        for (int i = 0; i < allPostList.size(); i++) {
-            log.info("当前处理的帖子id>>>>>>>>>>>>>>>>>>" + allPostList.get(i).getId());
-        }
     }
 
     public static String [] getFileName(String path) {
