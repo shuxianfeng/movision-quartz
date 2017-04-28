@@ -80,7 +80,7 @@ public class CleanScanAllImgTask {
 
     //清理帖子或活动内容中未使用到的图片
     public void clean(String name, List<PostVo> allPostList, String path){
-        //定义标志位（0 未使用到 1 有使用到）
+        //定义标志位（0 未使用到 >1 有使用到）
         int flag = 0;//初始化为未使用到
         for (int i = 0; i < allPostList.size(); i++){
             int index = allPostList.get(i).getPostcontent().indexOf(name);
