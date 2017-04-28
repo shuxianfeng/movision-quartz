@@ -40,17 +40,26 @@ public class CleanScanAllImgTask {
         log.info("活动内容中原图的存放路径>>>>>>>>>>>>>>>>>>>" + activeprotoimgpath);
         log.info("帖子内容中视频存放路径>>>>>>>>>>>>>>>>>>>" + postprotovideopath);
 
-        //定义标志位（0 未使用到 1 有使用到）
-        int flag = 0;//初始化为未使用到
-
         //根据文件路径扫描所有带扫描的文件
-        String [] compressimgFileName = getFileName(compressimgpath);
-        String [] postprotoimgFileName = getFileName(postprotoimgpath);
-        String [] activeprotoimgFileName = getFileName(activeprotoimgpath);
-        String [] postprotovideoFileName = getFileName(postprotovideopath);
+        String [] compressimgFileName = getFileName(compressimgpath);//压缩图片文件名数组
+        String [] postprotoimgFileName = getFileName(postprotoimgpath);//帖子中原图文件名数组
+        String [] activeprotoimgFileName = getFileName(activeprotoimgpath);//活动中原图文件名数组
+        String [] postprotovideoFileName = getFileName(postprotovideopath);//帖子中视频存放路径
         for(String name:compressimgFileName)
         {
-            System.out.println(name);
+            //定义标志位（0 未使用到 1 有使用到）
+            int flag = 0;//初始化为未使用到
+            for (int i = 0; i < allPostList.size(); i++){
+                int index = allPostList.get(i).getPostcontent().indexOf(name);
+                if (index != -1){
+                    flag = flag + 1;//每使用一次+1
+                }
+            }
+            //删除所有未使用到的图片文件
+            if (flag == 0){
+                String filepath = compressimgpath + name;//文件路径和文件名
+                
+            }
         }
         for(String name:postprotoimgFileName)
         {
