@@ -9,7 +9,6 @@
         <property name="triggers">
             <list>
                 <ref bean="orderJobTrigger"/>
-                <ref bean="cleanImgJobTrigger"/>
                 <ref bean="cleanScanAllImgJobTrigger"/>
                 <!--<ref bean="courseJobTrigger"/>-->
                 <!--<ref bean="statJobTrigger"/>-->
@@ -28,7 +27,6 @@
         <property name="jobDetails">
             <list>
                 <ref bean="orderJobDetail"/>
-                <ref bean="cleanImgJobDetail"/>
                 <ref bean="cleanScanAllImgJobDetail"/>
                 <!--<ref bean="courseJobDetail"/>-->
                 <!--<ref bean="statJobDetail"/>-->
@@ -51,11 +49,6 @@
           class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="orderJobDetail"/>
         <property name="cronExpression" value="${order_cronExpression}"/>
-    </bean>
-    <bean id="cleanImgJobTrigger"
-          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="cleanImgJobDetail"/>
-        <property name="cronExpression" value="${cleanImg_cronExpression}"/>
     </bean>
     <bean id="cleanScanAllImgJobTrigger"
           class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
@@ -139,11 +132,6 @@
         <property name="targetObject" ref="orderJob"/>
         <property name="targetMethod" value="execute"/>
     </bean>
-    <bean id="cleanImgJobDetail"
-          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <property name="targetObject" ref="cleanImgJob"/>
-        <property name="targetMethod" value="execute"/>
-    </bean>
     <bean id="cleanScanAllImgJobDetail"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="cleanScanAllImgJob"/>
@@ -220,7 +208,6 @@
 
     <!-- 工作的bean -->
     <bean id="orderJob" class="com.movision.job.CancelOrdersJob"/>
-    <bean id="cleanImgJob" class="com.movision.job.CleanImgJob"/>
     <bean id="cleanScanAllImgJob" class="com.movision.job.CleanScanAllImgJob"/>
     <!--<bean id="vipExpiredJob" class="com.movision.job.VipExpiredJob"/>-->
     <!--<bean id="courseJob" class="com.movision.job.CourseJob"/>-->
