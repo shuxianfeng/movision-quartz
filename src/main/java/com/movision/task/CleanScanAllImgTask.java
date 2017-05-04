@@ -92,13 +92,17 @@ public class CleanScanAllImgTask {
             int contentindex = allPostList.get(i).getPostcontent().indexOf(name);//帖子活动内容中是否用到
             int coverimgindex = allPostList.get(i).getCoverimg().indexOf(name);//帖子活动封面中是否用到
             int videocoverindex = -1;//视频封面图片中是否用到
+            int hotimgindex = -1;//发现页活动封面小方图中是否用到
 
             if (null != allPostList.get(i).getVideocoverurl()) {
                 videocoverindex = allPostList.get(i).getVideocoverurl().indexOf(name);//视频封面图片中是否用到
             }
+            if (null != allPostList.get(i).getHotimgurl()){
+                hotimgindex = allPostList.get(i).getHotimgurl().indexOf(name);//发现页活动封面小方图中是否用到
+            }
 
             //如果帖子活动封面或者帖子活动内容或者视频封面图片中被用到flag+1
-            if (contentindex != -1 || coverimgindex != -1 || videocoverindex != -1){
+            if (contentindex != -1 || coverimgindex != -1 || videocoverindex != -1 || hotimgindex != -1){
                 flag = flag + 1;//每使用一次+1
             }
         }
