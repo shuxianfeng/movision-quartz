@@ -1,6 +1,7 @@
 package com.movision.mybatis.circle.service;
 
 import com.movision.mybatis.circle.entity.Circle;
+import com.movision.mybatis.circle.entity.CircleCategory;
 import com.movision.mybatis.mapper.CircleMapper;
 import com.movision.mybatis.post.entity.PostVo;
 import org.slf4j.Logger;
@@ -27,6 +28,16 @@ public class CircleService {
             return circleMapper.queryAllCircle();
         } catch (Exception e) {
             log.error("查询所有圈子失败", e);
+            throw e;
+        }
+    }
+
+    public List<CircleCategory> queryAllCircleCategory(){
+        try {
+            log.info("查询圈子类别列表");
+            return circleMapper.queryAllCircleCategory();
+        }catch (Exception e){
+            log.error("查询圈子类别列表失败");
             throw e;
         }
     }

@@ -1,6 +1,7 @@
 package com.movision.task;
 
 import com.movision.mybatis.circle.entity.Circle;
+import com.movision.mybatis.circle.entity.CircleCategory;
 import com.movision.mybatis.circle.service.CircleService;
 import com.movision.mybatis.post.entity.PostVo;
 import com.movision.mybatis.post.service.PostService;
@@ -35,6 +36,8 @@ public class CleanScanAllImgTask {
         List<PostVo> allPostList = postService.queryAllPost();
         //开始查询所有的圈子列表
         List<Circle> allCircleList = circleService.queryAllCircle();
+        //开始查询圈子分类列表
+        List<CircleCategory> allCircleCategoryList = circleService.queryAllCircleCategory();
 
         //扫描服务器下帖子图片和封面存放路径下的所有图片
         String compressimgpath = PropertiesLoader.getValue("post.compress.img.domain");//帖子内容中压缩后的图片存放路径
@@ -74,7 +77,7 @@ public class CleanScanAllImgTask {
             cleanvideo(name, allPostList, postprotovideopath);//清理视频
         }
         for(String name:circleimgFileName){
-            cleanCircleImg(name, allCircleList, circleimgpath);//清理圈子封面和猜你喜欢的圈子小方图
+            cleanCircleImg(name, allCircleList, allCircleCategoryList, circleimgpath);//清理圈子封面和猜你喜欢的圈子小方图
         }
     }
 
@@ -135,13 +138,22 @@ public class CleanScanAllImgTask {
     }
 
     //清理圈子封面小方图中无用的图片文件
-    public void cleanCircleImg(String name, List<Circle> allCircleList, String path){
+    public void cleanCircleImg(String name, List<Circle> allCircleList, List<CircleCategory> allCircleCategoryList, String path){
         //定义标志位（0 未使用到 1 有使用到）
         int flag = 0;//初始化为未使用到
+
+        //检查所有圈子类型banner图
+        int indexcircletype = -1;
+        for (int j = 0; j < allCircleCategoryList.size(); j++){
+            indexcircletype = allCircleCategoryList.get(j).getDiscoverpageurl().indexOf(name);//发现页圈子分类图片中是否使用到
+        }
+
+        //检查所有圈子封面和猜你喜欢小方图
         for (int i = 0; i < allCircleList.size(); i++){
-            int indexcover = allCircleList.get(i).getPhoto().indexOf(name);
-            int indexmaylike = allCircleList.get(i).getMaylikeimg().indexOf(name);
-            if (indexcover != -1 || indexmaylike != -1) {
+            int indexcover = allCircleList.get(i).getPhoto().indexOf(name);//圈子封面中是否使用到
+            int indexmaylike = allCircleList.get(i).getMaylikeimg().indexOf(name);//猜你喜欢小方图中是否使用到
+
+            if (indexcover != -1 || indexmaylike != -1 || indexcircletype != -1) {
                 flag = flag + 1;//每使用一次+1
             }
         }

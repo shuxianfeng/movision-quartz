@@ -44,6 +44,11 @@
     SELECT id, photo, maylikeimg FROM yw_circle
   </select>
 
+  <!--查询所有的圈子类别列表-->
+  <select id="queryAllCircleCategory" resultType="com.movision.mybatis.circle.entity.CircleCategory" >
+    SELECT * FROM yw_circle_category
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from yw_circle
     where id = #{id,jdbcType=INTEGER}
