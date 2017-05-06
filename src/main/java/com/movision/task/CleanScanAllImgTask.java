@@ -145,7 +145,11 @@ public class CleanScanAllImgTask {
         //检查所有圈子类型banner图
         int indexcircletype = -1;
         for (int j = 0; j < allCircleCategoryList.size(); j++){
-            indexcircletype = allCircleCategoryList.get(j).getDiscoverpageurl().indexOf(name);//发现页圈子分类图片中是否使用到
+            int indexcircle = allCircleCategoryList.get(j).getDiscoverpageurl().indexOf(name);//发现页圈子分类图片中是否使用到
+
+            if (indexcircle != -1){
+                indexcircletype = indexcircletype + 1;
+            }
         }
 
         //检查所有圈子封面和猜你喜欢小方图
