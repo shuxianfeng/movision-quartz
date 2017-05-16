@@ -3,13 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- 启动触发器的配置 -->
+    <!-- *************************************************启动触发器的配置******************************************* -->
     <bean name="startQuertz" lazy-init="false" autowire="no"
           class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="triggers">
             <list>
-                <ref bean="orderJobTrigger"/>
-                <ref bean="cleanScanAllImgJobTrigger"/>
+                <!--<ref bean="orderJobTrigger"/>
+                <ref bean="cleanScanAllImgJobTrigger"/>-->
                 <!--<ref bean="courseJobTrigger"/>-->
                 <!--<ref bean="statJobTrigger"/>-->
                 <!--<ref bean="vipExpiredJobTrigger"/>-->
@@ -22,12 +22,13 @@
                 <!--<ref bean="zhbExpiredNoticeTrigger"/>-->
                 <!--<ref bean="resumeDownloadRecordTrigger"/>-->
                 <!--<ref bean="brandAnalysisRecordBatchAddTrigger"/>-->
+                <ref bean="testRedisTrigger"/>
             </list>
         </property>
         <property name="jobDetails">
             <list>
-                <ref bean="orderJobDetail"/>
-                <ref bean="cleanScanAllImgJobDetail"/>
+                <!--<ref bean="orderJobDetail"/>
+                <ref bean="cleanScanAllImgJobDetail"/>-->
                 <!--<ref bean="courseJobDetail"/>-->
                 <!--<ref bean="statJobDetail"/>-->
                 <!--<ref bean="vipExpiredJobDetail"/>-->
@@ -39,13 +40,14 @@
                 <!--<ref bean="zhbExpiredNoticeDetail"/>-->
                 <!--<ref bean="resumeDownloadRecordDetail"/>-->
                 <!--<ref bean="brandAnalysisRecordBatchAddDetail"/>-->
+                <ref bean="testRedisDetail"/>
             </list>
         </property>
 
     </bean>
 
-    <!--调度触发器-->
-    <bean id="orderJobTrigger"
+    <!--********************************************调度触发器***********************************************-->
+    <!--<bean id="orderJobTrigger"
           class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="orderJobDetail"/>
         <property name="cronExpression" value="${order_cronExpression}"/>
@@ -54,7 +56,7 @@
           class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="cleanScanAllImgJobDetail"/>
         <property name="cronExpression" value="${cleanScanAllImg_cronExpression}"/>
-    </bean>
+    </bean>-->
     <!--<bean id="vipExpiredJobTrigger"-->
           <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
         <!--<property name="jobDetail" ref="vipExpiredJobDetail"/>-->
@@ -126,17 +128,34 @@
         <!--<property name="cronExpression" value="${brandAnalysisRecordBatchAdd_cronExpression}"/>-->
     <!--</bean>-->
 
-    <!-- job的配置 -->
-    <bean id="orderJobDetail"
-          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <property name="targetObject" ref="orderJob"/>
-        <property name="targetMethod" value="execute"/>
+    <bean id="testRedisTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="testRedisDetail"/>
+        <property name="cronExpression" value="${testRedis_cronExpression}"/>
     </bean>
-    <bean id="cleanScanAllImgJobDetail"
+
+
+    <!-- **************************************job的配置******************************************************* -->
+    <!--<bean id="orderJobDetail"-->
+    <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="targetObject" ref="orderJob"/>-->
+    <!--<property name="targetMethod" value="execute"/>-->
+    <!--</bean>-->
+    <!--<bean id="cleanImgJobDetail"-->
+    <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="targetObject" ref="cleanImgJob"/>-->
+    <!--<property name="targetMethod" value="execute"/>-->
+    <!--</bean>-->
+    <!--<bean id="cleanScanAllImgJobDetail"-->
+    <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="targetObject" ref="cleanScanAllImgJob"/>-->
+    <!--<property name="targetMethod" value="execute"/>-->
+    <!--</bean>-->
+    <!--<bean id="cleanScanAllImgJobDetail"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="cleanScanAllImgJob"/>
         <property name="targetMethod" value="execute"/>
-    </bean>
+    </bean>-->
     <!--<bean id="vipExpiredJobDetail"-->
           <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
         <!--<property name="targetObject" ref="vipExpiredJob"/>-->
@@ -206,9 +225,22 @@
         <!--<property name="targetMethod" value="execute"/>-->
     <!--</bean>-->
 
+    <bean id="testRedisDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="testRedisJob"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
+
+
+    <!-- ********************************************工作的bean**************************************************** -->
+    <!--todo 测试后恢复-->
+    <!--<bean id="orderJob" class="com.movision.job.CancelOrdersJob"/>-->
+    <!--<bean id="cleanImgJob" class="com.movision.job.CleanImgJob"/>-->
+    <!--<bean id="cleanScanAllImgJob" class="com.movision.job.CleanScanAllImgJob"/>-->
+
     <!-- 工作的bean -->
-    <bean id="orderJob" class="com.movision.job.CancelOrdersJob"/>
-    <bean id="cleanScanAllImgJob" class="com.movision.job.CleanScanAllImgJob"/>
+    <!-- <bean id="orderJob" class="com.movision.job.CancelOrdersJob"/>
+     <bean id="cleanScanAllImgJob" class="com.movision.job.CleanScanAllImgJob"/>-->
     <!--<bean id="vipExpiredJob" class="com.movision.job.VipExpiredJob"/>-->
     <!--<bean id="courseJob" class="com.movision.job.CourseJob"/>-->
     <!--<bean id="statJob" class="com.movision.job.StatQuartzJob"/>-->
@@ -221,4 +253,6 @@
     <!--<bean id="zhbExpiredNoticeJob" class="com.movision.job.ZhbExpiredNoticeJob"/>-->
     <!--<bean id="resumeDownloadRecordJob" class="com.movision.job.ResumeDownloadRecordJob"/>-->
     <!--<bean id="brandAnalysisRecordBatchAddJob" class="com.movision.job.BrandAnalysisRecordBatchAddJob"/>-->
+
+    <bean id="testRedisJob" class="com.movision.job.TestRedisJob"/>
 </beans>

@@ -86,6 +86,8 @@ update() {
 #5. 如果步骤4的结果能够确认程序的pid,则打印[OK]，否则打印[Failed]
 #注意：echo -n 表示打印字符后，不换行
 #注意: "nohup 某命令 >/dev/null 2>&1 &" 的用法 --让程序在后台以job的形式进行
+#注意：>/dev/null 2>&1 &  --表示不记录日志
+#注意：若需要记录日志，可以这样写：>/home/app/log/quartz/quartz.out 2>&1 &
 ###################################
 start() {
    checkpid

@@ -189,11 +189,20 @@ public class DateUtil {
         return cal.getTime();
     }
 
+    public static String getCurrentTime() {
+        String returnStr = null;
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        returnStr = f.format(date);
+        return returnStr;
+    }
+
     public static void main(String[] args) {
 
-        String start = "2016-06-16 13:55:40";
+        /*String start = "2016-06-16 13:55:40";
         String end = "2016-06-17 13:55:40";
         long hours = getDistanceHours(start,end);
-        System.out.println(hours);
+        System.out.println(hours);*/
+        System.out.println(getCurrentTime());
     }
 }
