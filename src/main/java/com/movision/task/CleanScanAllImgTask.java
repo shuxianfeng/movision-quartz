@@ -61,24 +61,30 @@ public class CleanScanAllImgTask {
         String [] circleimgFileName = getFileName(circleimgpath);//圈子封面图片和圈子猜你喜欢小方图文件名数组
 
         //遍历所有文件夹下的文件名
-        for(String name:compressimgFileName)
-        {
-            clean(name, allPostList, compressimgpath);//清理图片
+        if (compressimgFileName.length > 0) {
+            for (String name : compressimgFileName) {
+                clean(name, allPostList, compressimgpath);//清理图片
+            }
         }
-        for(String name:postprotoimgFileName)
-        {
-            clean(name, allPostList, postprotoimgpath);//清理图片
+        if (postprotoimgFileName.length > 0) {
+            for (String name : postprotoimgFileName) {
+                clean(name, allPostList, postprotoimgpath);//清理图片
+            }
         }
-        for(String name:activeprotoimgFileName)
-        {
-            clean(name, allPostList, activeprotoimgpath);//清理图片
+        if (activeprotoimgFileName.length > 0) {
+            for (String name : activeprotoimgFileName) {
+                clean(name, allPostList, activeprotoimgpath);//清理图片
+            }
         }
-        for(String name:postprotovideoFileName)
-        {
-            cleanvideo(name, allPostList, postprotovideopath);//清理视频
+        if (postprotovideoFileName.length > 0) {
+            for (String name : postprotovideoFileName) {
+                cleanvideo(name, allPostList, postprotovideopath);//清理视频
+            }
         }
-        for(String name:circleimgFileName){
-            cleanCircleImg(name, allCircleList, allCircleCategoryList, circleimgpath);//清理圈子封面和猜你喜欢的圈子小方图
+        if (circleimgFileName.length > 0) {
+            for (String name : circleimgFileName) {
+                cleanCircleImg(name, allCircleList, allCircleCategoryList, circleimgpath);//清理圈子封面和猜你喜欢的圈子小方图
+            }
         }
     }
 
