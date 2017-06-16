@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.aliyun.oss.model.BucketInfo;
 import com.movision.utils.file.FileUtil;
 import com.movision.utils.propertiesLoader.PropertiesLoader;
 import org.slf4j.Logger;
@@ -84,11 +85,11 @@ public class AliOSSClient {
 
             // 查看Bucket信息。详细请参看“SDK手册 > Java-SDK > 管理Bucket”。
             // 链接地址是：https://help.aliyun.com/document_detail/oss/sdk/java-sdk/manage_bucket.html?spm=5176.docoss/sdk/java-sdk/init
-//            BucketInfo info = ossClient.getBucketInfo(bucketName);
-//            log.debug("Bucket " + bucketName + "的信息如下：");
-//            log.debug("\t数据中心：" + info.getBucket().getLocation());
-//            log.debug("\t创建时间：" + info.getBucket().getCreationDate());
-//            log.debug("\t用户标志：" + info.getBucket().getOwner());
+            BucketInfo info = ossClient.getBucketInfo(bucketName);
+            log.debug("Bucket " + bucketName + "的信息如下：");
+            log.debug("\t数据中心：" + info.getBucket().getLocation());
+            log.debug("\t创建时间：" + info.getBucket().getCreationDate());
+            log.debug("\t用户标志：" + info.getBucket().getOwner());
 
         } catch (ClientException ce) {
             ce.printStackTrace();
