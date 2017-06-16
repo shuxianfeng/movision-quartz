@@ -40,7 +40,7 @@ public class AliOSSClient {
     // 链接地址是：https://help.aliyun.com/document_detail/oss/user_guide/oss_concept/endpoint.html?spm=5176.docoss/user_guide/endpoint_region
     // endpoint的格式形如“http://oss-cn-hangzhou.aliyuncs.com/”，注意http://后不带bucket名称，
     // 比如“http://bucket-name.oss-cn-hangzhou.aliyuncs.com”，是错误的endpoint，请去掉其中的“bucket-name”。
-    private static String endpoint = "http://mofo.oss-cn-shenzhen.aliyuncs.com";// "http://oss-cn-hangzhou.aliyuncs.com";
+    private static String endpoint = "http://doc-movision.oss-cn-shenzhen.aliyuncs.com";// "http://oss-cn-hangzhou.aliyuncs.com";
 
     // accessKeyId和accessKeySecret是OSS的访问密钥，您可以在控制台上创建和查看，
     // 创建和查看访问密钥的链接地址是：https://ak-console.aliyun.com/#/。
