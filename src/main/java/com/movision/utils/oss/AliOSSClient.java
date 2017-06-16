@@ -201,7 +201,8 @@ public class AliOSSClient {
 
             } else if (type.equals("doc")) {
                 //文档
-                bucketName = PropertiesLoader.getValue("file.bucket");
+//                bucketName = PropertiesLoader.getValue("file.bucket");
+                bucketName = "doc-movision";
                 data = fileName;
             }
 
