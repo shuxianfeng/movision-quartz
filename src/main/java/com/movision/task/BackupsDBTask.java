@@ -32,7 +32,7 @@ public class BackupsDBTask {
         //根据时间计算数据库备份文件名，例：movision_20170616_020001.sql.gz
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        String filename = "movision_" + sdf.format(date) + "_020001.sql.gz";
+        String filename = "movision_" + sdf.format(date) + "_020001.sql";
         String path = dir + filename;
         File file = new File(path);
 
