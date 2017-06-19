@@ -29,7 +29,7 @@ public class BackupsDBTask {
         //获取配置文件中的待上传数据库备份文件路径
         String dir = PropertiesLoader.getValue("backups.db.domain");
 
-        //根据时间计算数据库备份文件名，例：movision_20170616_020001.sql.gz
+        //根据时间计算数据库备份文件名，例：movision_20170616.sql
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String filename = "movision_" + sdf.format(date) + ".sql";
