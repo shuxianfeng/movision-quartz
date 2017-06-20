@@ -75,7 +75,7 @@ public class UpdateVideoEncodeTask {
                             }
                         }
 
-                        String str = result.get("VideoMeta");// str如下：
+                        String str = result.get("VideoMeta").toString();// str如下：
 //                         {
 //                                "CoverURL": "http://video.mofo.shop/snapshot/bc684d646cce4d518b72a0f258fc1c2f00001.jpg?auth_key=1497875163-0-0-041a9b7df8d3a4db1db4e2897a85478d",
 //                                "Status": "Normal",
