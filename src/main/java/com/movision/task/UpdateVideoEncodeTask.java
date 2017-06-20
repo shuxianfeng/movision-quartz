@@ -55,7 +55,6 @@ public class UpdateVideoEncodeTask {
                 for (int j = 0; j < moduleArray.size(); j++) {
                     //从img中获取type属性
                     JSONObject moduleobj = JSONObject.parseObject(moduleArray.get(i).toString());
-                    Integer orderid = (Integer) moduleobj.get("orderid");//模块排序
                     Integer type = (Integer) moduleobj.get("type");//帖子模块类型 0 文字 1 图片 2 视频
                     String value = (String) moduleobj.get("value");//模块value
 
