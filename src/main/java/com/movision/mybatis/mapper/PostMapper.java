@@ -5,6 +5,7 @@ import com.movision.mybatis.post.entity.PostVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface PostMapper {
@@ -17,6 +18,10 @@ public interface PostMapper {
     Post selectByPrimaryKey(Integer id);
 
     List<PostVo> queryAllPost();
+
+    List<Post> queryEncodeVideo();
+
+    void updatePostStatus(Map<String, Object> parammap);
 
     int updateByPrimaryKeySelective(Post record);
 

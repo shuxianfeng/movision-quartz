@@ -24,6 +24,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mysql.version>5.1.24</mysql.version>
         <mybatis.spring.version>1.2.2</mybatis.spring.version>
+        <alibaba.fastjson.version>1.1.40</alibaba.fastjson.version>
         <mybatis.version>3.2.7</mybatis.version>
         <spring.version>3.2.4.RELEASE</spring.version>
         <commons.lang3.version>3.1</commons.lang3.version>
@@ -201,6 +202,11 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>2.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${alibaba.fastjson.version}</version>
         </dependency>
 
     </dependencies>

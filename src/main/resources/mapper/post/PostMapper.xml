@@ -49,6 +49,11 @@
         ON t1.id = t2.postid
     </select>
 
+    <!--查询所有视频没有转码完成的帖子列表-->
+    <select id="queryEncodeVideo" resultType="com.movision.mybatis.post.entity.Post" >
+        SELECT t.id, t.postcontent FROM yw_post t WHERE t.isdel IN (2,4,5,6,8)
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from yw_post
     where id = #{id,jdbcType=INTEGER}
@@ -346,4 +351,11 @@
       oprtime = #{oprtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+    <!--帖子视频检测后更新帖子状态-->
+    <update id="updatePostStatus" parameterType="java.util.Map" >
+        UPDATE yw_post
+        SET isdel = #{isdel,jdbcType=INTEGER}
+        WHERE id = #{postid,jdbcType=INTEGER}
+    </update>
 </mapper>

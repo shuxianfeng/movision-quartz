@@ -11,6 +11,7 @@
                 <ref bean="orderJobTrigger"/>
                 <ref bean="cleanScanAllImgJobTrigger"/>
                 <ref bean="backupsDBJobTrigger"/>
+                <ref bean="updateVideoEncodeJobTrigger"/>
                 <!--<ref bean="courseJobTrigger"/>-->
                 <!--<ref bean="statJobTrigger"/>-->
                 <!--<ref bean="vipExpiredJobTrigger"/>-->
@@ -31,6 +32,7 @@
                 <ref bean="orderJobDetail"/>
                 <ref bean="cleanScanAllImgJobDetail"/>
                 <ref bean="backupsDBJobDetail"/>
+                <ref bean="updateVideoEncodeJobDetail"/>
                 <!--<ref bean="courseJobDetail"/>-->
                 <!--<ref bean="statJobDetail"/>-->
                 <!--<ref bean="vipExpiredJobDetail"/>-->
@@ -63,6 +65,11 @@
           class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="backupsDBJobDetail"/>
         <property name="cronExpression" value="${backupsDB_cronExpression}"/>
+    </bean>
+    <bean id="updateVideoEncodeJobTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="updateVideoEncodeJobDetail"/>
+        <property name="cronExpression" value="${updateVideoEncode_cronExpression}"/>
     </bean>
     <!--<bean id="vipExpiredJobTrigger"-->
           <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
@@ -158,6 +165,11 @@
         <property name="targetObject" ref="backupsDBJob"/>
         <property name="targetMethod" value="execute"/>
     </bean>
+    <bean id="updateVideoEncodeJobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="updateVideoEncodeJob"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
     <!--<bean id="cleanScanAllImgJobDetail"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="cleanScanAllImgJob"/>
@@ -244,6 +256,7 @@
     <bean id="orderJob" class="com.movision.job.CancelOrdersJob"/>
     <bean id="cleanScanAllImgJob" class="com.movision.job.CleanScanAllImgJob"/>
     <bean id="backupsDBJob" class="com.movision.job.BackupsDBJob"/>
+    <bean id="updateVideoEncodeJob" class="com.movision.job.UpdateVideoEncodeJob"/>
     <!--<bean id="vipExpiredJob" class="com.movision.job.VipExpiredJob"/>-->
     <!--<bean id="courseJob" class="com.movision.job.CourseJob"/>-->
     <!--<bean id="statJob" class="com.movision.job.StatQuartzJob"/>-->

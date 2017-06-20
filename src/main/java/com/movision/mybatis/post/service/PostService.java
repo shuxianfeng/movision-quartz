@@ -1,6 +1,7 @@
 package com.movision.mybatis.post.service;
 
 import com.movision.mybatis.mapper.PostMapper;
+import com.movision.mybatis.post.entity.Post;
 import com.movision.mybatis.post.entity.PostVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author shuxf
@@ -29,6 +31,26 @@ public class PostService {
             return postMapper.queryAllPost();
         } catch (Exception e) {
             log.error("查询所有帖子失败", e);
+            throw e;
+        }
+    }
+
+    public List<Post> queryEncodeVideo(){
+        try {
+            log.info("查询所有待确认状态的视频贴");
+            return postMapper.queryEncodeVideo();
+        }catch (Exception e){
+            log.error("查询所有待确认状态的视频贴失败", e);
+            throw e;
+        }
+    }
+
+    public void updatePostStatus(Map<String, Object> parammap){
+        try {
+            log.info("帖子视频检测后更新帖子状态");
+            postMapper.updatePostStatus(parammap);
+        }catch (Exception e){
+            log.error("帖子视频检测后更新帖子状态失败", e);
             throw e;
         }
     }
