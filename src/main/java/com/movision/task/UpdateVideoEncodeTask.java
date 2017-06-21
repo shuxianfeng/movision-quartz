@@ -58,7 +58,7 @@ public class UpdateVideoEncodeTask {
                     Integer type = (Integer) moduleobj.get("type");//帖子模块类型 0 文字 1 图片 2 视频
                     String value = (String) moduleobj.get("value");//模块value
                     Integer orderid = (Integer) moduleobj.get("orderid");//模块排序id
-
+                    logger.info("测试type>>>>>>>"+type);
                     if (type == 2){
                         logger.info("测试进入次数");
                         //如果当前模块是视频的话，检测当前视频状态
