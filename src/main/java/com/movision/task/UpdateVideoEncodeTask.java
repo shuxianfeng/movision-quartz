@@ -1,12 +1,10 @@
 package com.movision.task;
 
-import com.google.gson.Gson;
 import com.movision.mybatis.post.entity.Post;
 import com.movision.mybatis.post.service.PostService;
 import com.movision.utils.AliVideoFacade;
 import net.sf.json.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,17 +49,13 @@ public class UpdateVideoEncodeTask {
 
                 //解析json字符串
                 JSONArray moduleArray = JSONArray.fromObject(postcontent);
-                logger.info("测试模块数"+moduleArray.size());
                 for (int j = 0; j < moduleArray.size(); j++) {
-                    logger.info("测试是否进入循环");
                     //从img中获取type属性
                     JSONObject moduleobj = JSONObject.parseObject(moduleArray.get(j).toString());
                     Integer type = (Integer) moduleobj.get("type");//帖子模块类型 0 文字 1 图片 2 视频
                     String value = (String) moduleobj.get("value");//模块value
                     Integer orderid = (Integer) moduleobj.get("orderid");//模块排序id
-                    logger.info("测试type>>>>>>>"+type);
                     if (type == 2){
-                        logger.info("测试进入次数");
                         //如果当前模块是视频的话，检测当前视频状态
                         String vid = value;
 
@@ -71,8 +65,6 @@ public class UpdateVideoEncodeTask {
                         String result = "";
                         if (!reMap.isEmpty()) {
                             if ("200".equals(reMap.get("status"))) {
-//                                Gson gson = new Gson();
-//                                result = gson.fromJson(reMap.get("result"), Map.class);
                                 result = reMap.get("result").toString();
                             }
                         }
