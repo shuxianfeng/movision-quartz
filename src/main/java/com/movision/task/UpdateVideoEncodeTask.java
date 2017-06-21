@@ -51,7 +51,7 @@ public class UpdateVideoEncodeTask {
 
                 //解析json字符串
                 JSONArray moduleArray = JSONArray.fromObject(postcontent);
-
+                logger.info("测试模块数"+moduleArray.size());
                 for (int j = 0; j < moduleArray.size(); j++) {
                     logger.info("测试是否进入循环");
                     //从img中获取type属性
@@ -66,10 +66,10 @@ public class UpdateVideoEncodeTask {
                         String vid = value;
 
                         //生成请求的url，类似：GetVideoPlayAuth
-                        String url = aliVideoFacade.generateRequestUrl("GetVideoPlayAuth", vid);
-
-                        Map<String, String> reMap = aliVideoFacade.doGet(url);
-
+//                        String url = aliVideoFacade.generateRequestUrl("GetVideoPlayAuth", vid);
+                        String url = "";
+//                        Map<String, String> reMap = aliVideoFacade.doGet(url);
+                        Map<String, String> reMap = new HashMap<>();
                         String result = "";
                         if (!reMap.isEmpty()) {
                             if ("200".equals(reMap.get("status"))) {
