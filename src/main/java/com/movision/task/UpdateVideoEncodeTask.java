@@ -95,7 +95,7 @@ public class UpdateVideoEncodeTask {
                         if (status.equals("Normal")){
                             //视频转码成功，正常播放
                             //正常的视频不给flag赋1了
-//                            moduleArray.remove(j);//先移除
+                            moduleArray.remove(j);//先移除
                             Map<String, Object> map = new HashMap<>();
                             map.put("type", type);
                             map.put("value", vid);
