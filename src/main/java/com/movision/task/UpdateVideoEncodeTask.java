@@ -57,6 +57,7 @@ public class UpdateVideoEncodeTask {
                     JSONObject moduleobj = JSONObject.parseObject(moduleArray.get(i).toString());
                     Integer type = (Integer) moduleobj.get("type");//帖子模块类型 0 文字 1 图片 2 视频
                     String value = (String) moduleobj.get("value");//模块value
+                    Integer orderid = (Integer) moduleobj.get("orderid");//模块排序id
 
                     if (type == 2){
                         //如果当前模块是视频的话，检测当前视频状态
@@ -85,10 +86,19 @@ public class UpdateVideoEncodeTask {
 //                          }
                         JSONObject obj = JSONObject.parseObject(str);
                         String status = (String)obj.get("Status");
+                        String CoverURL = (String)obj.get("CoverURL");
 
                         if (status.equals("Normal")){
                             //视频转码成功，正常播放
                             //正常的视频不给flag赋1了
+                            moduleArray.remove(j);//先移除
+                            Map<String, Object> map = new HashMap<>();
+                            map.put("type", type);
+                            map.put("value", vid);
+                            map.put("wh", CoverURL);
+                            map.put("dir", "");
+                            map.put("orderid", orderid);
+                            moduleArray.add(j, map);//再加入
                         } else if (status.equals("Uploading")){//下面所有情况，只要有任意一个原因失败的，flag就赋值0
                             //上传中
                             flag = 0;
@@ -122,6 +132,7 @@ public class UpdateVideoEncodeTask {
 
                     //所有视频转码完成
                     parammap.put("isdel", 0);
+                    parammap.put("postcontent", moduleArray.toString());
                     postService.updatePostStatus(parammap);//定义为正常播放
 
                 }else if (flag==0){

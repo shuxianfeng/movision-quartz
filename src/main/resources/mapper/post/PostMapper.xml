@@ -355,7 +355,14 @@
     <!--帖子视频检测后更新帖子状态-->
     <update id="updatePostStatus" parameterType="java.util.Map" >
         UPDATE yw_post
-        SET isdel = #{isdel,jdbcType=INTEGER}
+        <set>
+            <if test="postcontent != null">
+                postcontent = #{postcontent,jdbcType=INTEGER},
+            </if>
+            <if test="isdel != null">
+                isdel = #{isdel,jdbcType=INTEGER},
+            </if>
+        </set>
         WHERE id = #{postid,jdbcType=INTEGER}
     </update>
 </mapper>
