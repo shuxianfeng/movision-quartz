@@ -68,15 +68,17 @@ public class UpdateVideoEncodeTask {
 
                         Map<String, String> reMap = aliVideoFacade.doGet(url);
 
-                        Map<String, String> result = new HashMap<>();
+                        String result = "";
                         if (!reMap.isEmpty()) {
                             if ("200".equals(reMap.get("status"))) {
-                                Gson gson = new Gson();
-                                result = gson.fromJson(reMap.get("result"), Map.class);
+//                                Gson gson = new Gson();
+//                                result = gson.fromJson(reMap.get("result"), Map.class);
+                                result = reMap.get("result").toString();
                             }
                         }
 
-                        String str = result.get("VideoMeta");// str如下：
+                        JSONObject res = JSONObject.parseObject(result);
+                        String str = (String)res.get("VideoMeta");// str如下：
 //                         {
 //                                "CoverURL": "http://video.mofo.shop/snapshot/bc684d646cce4d518b72a0f258fc1c2f00001.jpg?auth_key=1497875163-0-0-041a9b7df8d3a4db1db4e2897a85478d",
 //                                "Status": "Normal",
