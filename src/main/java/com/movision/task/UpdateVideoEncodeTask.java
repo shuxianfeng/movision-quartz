@@ -60,6 +60,7 @@ public class UpdateVideoEncodeTask {
                     Integer orderid = (Integer) moduleobj.get("orderid");//模块排序id
 
                     if (type == 2){
+                        logger.info("测试进入次数");
                         //如果当前模块是视频的话，检测当前视频状态
                         String vid = value;
 
@@ -93,7 +94,7 @@ public class UpdateVideoEncodeTask {
                         if (status.equals("Normal")){
                             //视频转码成功，正常播放
                             //正常的视频不给flag赋1了
-                            moduleArray.remove(j);//先移除
+//                            moduleArray.remove(j);//先移除
                             Map<String, Object> map = new HashMap<>();
                             map.put("type", type);
                             map.put("value", vid);
