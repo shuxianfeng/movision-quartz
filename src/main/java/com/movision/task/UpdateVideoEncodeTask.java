@@ -51,12 +51,11 @@ public class UpdateVideoEncodeTask {
 
                 //解析json字符串
                 JSONArray moduleArray = JSONArray.fromObject(postcontent);
-                logger.info("测试模块数组大小"+moduleArray.size());
 
                 for (int j = 0; j < moduleArray.size(); j++) {
                     logger.info("测试是否进入循环");
                     //从img中获取type属性
-                    JSONObject moduleobj = JSONObject.parseObject(moduleArray.get(i).toString());
+                    JSONObject moduleobj = JSONObject.parseObject(moduleArray.get(j).toString());
                     Integer type = (Integer) moduleobj.get("type");//帖子模块类型 0 文字 1 图片 2 视频
                     String value = (String) moduleobj.get("value");//模块value
                     Integer orderid = (Integer) moduleobj.get("orderid");//模块排序id
