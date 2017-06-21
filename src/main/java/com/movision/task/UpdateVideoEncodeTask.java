@@ -68,7 +68,7 @@ public class UpdateVideoEncodeTask {
 
                         Map<String, String> reMap = aliVideoFacade.doGet(url);
 
-                        Map<String, String> result = new HashedMap();
+                        Map<String, String> result = new HashMap<>();
                         if (!reMap.isEmpty()) {
                             if ("200".equals(reMap.get("status"))) {
                                 Gson gson = new Gson();
