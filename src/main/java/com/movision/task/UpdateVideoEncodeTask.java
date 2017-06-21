@@ -67,9 +67,7 @@ public class UpdateVideoEncodeTask {
 
                         //生成请求的url，类似：GetVideoPlayAuth
                         String url = aliVideoFacade.generateRequestUrl("GetVideoPlayAuth", vid);
-//                        String url = "";
                         Map<String, String> reMap = aliVideoFacade.doGet(url);
-//                        Map<String, String> reMap = new HashMap<>();
                         String result = "";
                         if (!reMap.isEmpty()) {
                             if ("200".equals(reMap.get("status"))) {
