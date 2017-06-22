@@ -60,7 +60,7 @@ public class UpdateVideoEncodeTask {
                         String vid = value;
 
                         //生成请求的url，类似：GetVideoPlayAuth
-                        String url = aliVideoFacade.generateRequestUrl("GetVideoPlayAuth", vid);
+                        String url = aliVideoFacade.generateRequestUrl("GetVideoInfo", vid);
                         Map<String, String> reMap = aliVideoFacade.doGet(url);
                         String result = "";
                         if (!reMap.isEmpty()) {
@@ -70,14 +70,22 @@ public class UpdateVideoEncodeTask {
                         }
 
                         JSONObject res = JSONObject.parseObject(result);
-                        String str = res.get("VideoMeta").toString();// str如下：
-//                         {
-//                                "CoverURL": "http://video.mofo.shop/snapshot/bc684d646cce4d518b72a0f258fc1c2f00001.jpg?auth_key=1497875163-0-0-041a9b7df8d3a4db1db4e2897a85478d",
+                        String str = res.get("Video").toString();// str如下：
+//                        {
+//                            "VideoId": "93ab850b4f6f44eab54b6e91d24d81d4",
+//                                "Title": "阿里云VOD视频标题",
+//                                "Description": "阿里云VOD视频描述",
+//                                "Duration": 135.6,
+//                                "CoverURL": "https://image.example.com/coversample.jpg",
 //                                "Status": "Normal",
-//                                "VideoId": "bc684d646cce4d518b72a0f258fc1c2f",
-//                                "Duration": 84.12000274658203,
-//                                "Title": "遇见你，美番啦！"
-//                          }
+//                                "CreateTime": "2017-03-10 12:45:56",
+//                                "ModifyTime": "2017-03-20 10:25:06",
+//                                "Size": 10897890,
+//                                "Snapshots": [{"https://image.example.com/snapshotsample1.jpg"}, {"https://image.example.com/snapshotsample2.jpg"}],
+//                                "CateId": 78,
+//                                "CateName": "分类名",
+//                                "Tags": ["标签1", "标签2"]
+//                        }
                         JSONObject obj = JSONObject.parseObject(str);
                         String status = obj.get("Status").toString();
                         String CoverURL = obj.get("CoverURL").toString();
