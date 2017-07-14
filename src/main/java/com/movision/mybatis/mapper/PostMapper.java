@@ -26,4 +26,10 @@ public interface PostMapper {
     int updateByPrimaryKeySelective(Post record);
 
     int updateByPrimaryKey(Post record);
+
+    List<Post> queryAllHeatValue();
+
+    int updateHeatValue(int id);
+
+    int queryByIdHeatValue(int id);
 }

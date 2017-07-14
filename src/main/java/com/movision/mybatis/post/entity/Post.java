@@ -56,6 +56,16 @@ public class Post implements Serializable {
 
     private Date oprtime;
 
+    private Integer heatvalue;
+
+    public Integer getHeatvalue() {
+        return heatvalue;
+    }
+
+    public void setHeatvalue(Integer heatvalue) {
+        this.heatvalue = heatvalue;
+    }
+
     public Integer getId() {
         return id;
     }

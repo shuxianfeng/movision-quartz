@@ -1,5 +1,5 @@
-package com.movision.mybatis.post.service;
 
+package com.movision.mybatis.post.service;
 import com.movision.mybatis.mapper.PostMapper;
 import com.movision.mybatis.post.entity.Post;
 import com.movision.mybatis.post.entity.PostVo;
@@ -51,6 +51,36 @@ public class PostService {
             postMapper.updatePostStatus(parammap);
         }catch (Exception e){
             log.error("帖子视频检测后更新帖子状态失败", e);
+            throw e;
+        }
+    }
+
+    public List<Post> queryAllHeatValue(){
+        try {
+            log.info("查询所有热度");
+            return postMapper.queryAllHeatValue();
+        }catch (Exception e){
+            log.error("查询所有热度失败");
+            throw e;
+        }
+    }
+
+    public int updateHeatValue(int id){
+        try {
+            log.info("减少热度");
+            return postMapper.updateHeatValue(id);
+        }catch (Exception e){
+            log.error("减少热度失败");
+            throw e;
+        }
+    }
+
+    public  int queryByIdHeatValue(int id){
+        try {
+            log.info("根据id查询热度");
+            return postMapper.queryByIdHeatValue(id);
+        }catch (Exception e){
+            log.error("根据id查询热度失败");
             throw e;
         }
     }
