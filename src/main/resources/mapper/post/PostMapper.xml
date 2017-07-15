@@ -385,6 +385,6 @@
         SELECT heat_value FROM  yw_post WHERE isdel=0 AND id=#{id,jdbcType=INTEGER}
     </select>
     <update id="updateHeatValue" parameterType="java.lang.Integer">
-        UPDATE  yw_post SET  heat_value=heat_value-5 WHERE isdel=0 AND id=#{id,jdbcType=INTEGER}
+        UPDATE  yw_post SET  heat_value=heat_value-5 WHERE id=#{id,jdbcType=INTEGER}
     </update>
 </mapper>
