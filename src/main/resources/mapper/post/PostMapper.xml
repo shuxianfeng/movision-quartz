@@ -379,12 +379,12 @@
         WHERE id = #{postid,jdbcType=INTEGER}
     </update>
     <select id="queryAllHeatValue" resultType="com.movision.mybatis.post.entity.Post">
-        select id,heat_value from yw_post
+        select id,heat_value from yw_post WHERE isdel=0
     </select>
     <select id="queryByIdHeatValue" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        SELECT heat_value FROM  yw_post WHERE  id=#{id,jdbcType=INTEGER}
+        SELECT heat_value FROM  yw_post WHERE isdel=0 AND id=#{id,jdbcType=INTEGER}
     </select>
     <update id="updateHeatValue" parameterType="java.lang.Integer">
-        UPDATE  yw_post SET  heat_value=heat_value-5 WHERE id=#{id,jdbcType=INTEGER}
+        UPDATE  yw_post SET  heat_value=heat_value-5 WHERE isdel=0 AND id=#{id,jdbcType=INTEGER}
     </update>
 </mapper>
