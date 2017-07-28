@@ -387,4 +387,9 @@
     <update id="updateHeatValue" parameterType="java.lang.Integer">
         UPDATE  yw_post SET  heat_value=heat_value-5 WHERE id=#{id,jdbcType=INTEGER}
     </update>
+
+    <update id="updateHaet" parameterType="java.lang.Integer">
+        UPDATE  yw_post SET  heat_value=0 WHERE id=#{id,jdbcType=INTEGER}
+    </update>
+
 </mapper>

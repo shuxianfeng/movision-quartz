@@ -28,8 +28,10 @@ public class PostHeatValueTask {
             int id=list.get(i).getId();
             //根据id查询热度
             int heatvalue=postService.queryByIdHeatValue(id);
-            if(heatvalue!=0){
+            if(heatvalue>=5){
                 postService.updateHeatValue(id);
+            }else {
+                postService.updateHaet(id);
             }
         }
         logger.info("减少热度处理结束");

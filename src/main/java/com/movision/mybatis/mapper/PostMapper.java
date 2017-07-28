@@ -32,4 +32,6 @@ public interface PostMapper {
     int updateHeatValue(int id);
 
     int queryByIdHeatValue(int id);
+
+    int updateHaet(int id);
 }

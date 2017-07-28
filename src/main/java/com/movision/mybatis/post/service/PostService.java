@@ -84,4 +84,15 @@ public class PostService {
             throw e;
         }
     }
+
+    public  int updateHaet(int id){
+        try {
+            log.info("根据id查询热度");
+            return postMapper.updateHaet(id);
+        }catch (Exception e){
+            log.error("根据id查询热度失败");
+            throw e;
+        }
+    }
+
 }
