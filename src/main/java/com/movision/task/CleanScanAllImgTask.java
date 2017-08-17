@@ -5,11 +5,10 @@ import com.movision.mybatis.circle.entity.CircleCategory;
 import com.movision.mybatis.circle.service.CircleService;
 import com.movision.mybatis.post.entity.PostVo;
 import com.movision.mybatis.post.service.PostService;
+import com.movision.utils.propertiesLoader.PropertiesLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.movision.utils.propertiesLoader.PropertiesLoader;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
