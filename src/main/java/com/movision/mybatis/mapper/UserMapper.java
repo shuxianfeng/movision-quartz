@@ -1,4 +1,4 @@
-package com.movision.mybatis.user.mapper;
+package com.movision.mybatis.mapper;
 
 import com.movision.mybatis.user.entity.User;
 import org.springframework.stereotype.Repository;

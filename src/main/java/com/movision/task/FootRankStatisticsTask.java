@@ -2,7 +2,7 @@ package com.movision.task;
 
 import com.movision.mybatis.footRank.entity.FootRank;
 import com.movision.mybatis.user.entity.User;
-import com.movision.service.UserService;
+import com.movision.mybatis.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

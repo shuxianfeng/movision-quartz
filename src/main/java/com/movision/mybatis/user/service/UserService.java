@@ -1,9 +1,9 @@
-package com.movision.service;
+package com.movision.mybatis.user.service;
 
 import com.movision.mybatis.footRank.entity.FootRank;
 import com.movision.mybatis.footRank.mapper.FootRankMapper;
 import com.movision.mybatis.user.entity.User;
-import com.movision.mybatis.user.mapper.UserMapper;
+import com.movision.mybatis.mapper.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
