@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movision.mybatis.user.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.movision.mybatis.user.entity.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="sina" property="sina" jdbcType="VARCHAR" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="invitecode" property="invitecode" jdbcType="VARCHAR" />
+    <result column="referrals" property="referrals" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="SIGN" property="sign" jdbcType="VARCHAR" />
+    <result column="attention" property="attention" jdbcType="INTEGER" />
+    <result column="fans" property="fans" jdbcType="INTEGER" />
+    <result column="points" property="points" jdbcType="INTEGER" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="intime" property="intime" jdbcType="TIMESTAMP" />
+    <result column="growth" property="growth" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="isdv" property="isdv" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="applydate" property="applydate" jdbcType="DATE" />
+    <result column="deviceno" property="deviceno" jdbcType="VARCHAR" />
+    <result column="login_time" property="loginTime" jdbcType="TIMESTAMP" />
+    <result column="isrecommend" property="isrecommend" jdbcType="INTEGER" />
+    <result column="heat_value" property="heatValue" jdbcType="INTEGER" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="ip_city" property="ipCity" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, qq, sina, openid, email, phone, token, invitecode, referrals, nickname, SIGN, 
+    attention, fans, points, photo, sex, birthday, province, city, intime, growth, level, 
+    isdv, status, applydate, deviceno, login_time, isrecommend, heat_value, longitude, 
+    latitude, ip, ip_city
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from yw_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <!--查询美番平台中所有用户id-->
+  <select id="queryUserid" resultType="com.movision.mybatis.user.entity.User" >
+    SELECT id FROM yw_user WHERE id != '-1'
+  </select>
+
+  <!--统计当前用户足迹点总数-->
+  <select id="getfootmap" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+    SELECT count(*) FROM yw_post_label
+    WHERE type = '0' AND isdel = '0'
+    AND id IN (
+    SELECT DISTINCT labelid FROM yw_post_label_relation WHERE postid IN (
+    SELECT id FROM yw_post WHERE userid = #{userid,jdbcType=INTEGER}
+    )
+    )
+  </select>
+
+  <!--判断当前用户在足迹统计表中是否存在记录-->
+  <select id="isFootmapSum" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+    SELECT count(*) FROM yw_foot_rank WHERE userid = #{userid,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from yw_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.movision.mybatis.user.entity.User" >
+    insert into yw_user (id, qq, sina, 
+      openid, email, phone, 
+      token, invitecode, referrals, 
+      nickname, SIGN, attention, 
+      fans, points, photo, 
+      sex, birthday, province, 
+      city, intime, growth, 
+      level, isdv, status, 
+      applydate, deviceno, login_time, 
+      isrecommend, heat_value, longitude, 
+      latitude, ip, ip_city
+      )
+    values (#{id,jdbcType=INTEGER}, #{qq,jdbcType=VARCHAR}, #{sina,jdbcType=VARCHAR}, 
+      #{openid,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{token,jdbcType=VARCHAR}, #{invitecode,jdbcType=VARCHAR}, #{referrals,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, #{attention,jdbcType=INTEGER}, 
+      #{fans,jdbcType=INTEGER}, #{points,jdbcType=INTEGER}, #{photo,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{intime,jdbcType=TIMESTAMP}, #{growth,jdbcType=INTEGER}, 
+      #{level,jdbcType=INTEGER}, #{isdv,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{applydate,jdbcType=DATE}, #{deviceno,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP}, 
+      #{isrecommend,jdbcType=INTEGER}, #{heatValue,jdbcType=INTEGER}, #{longitude,jdbcType=VARCHAR}, 
+      #{latitude,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{ipCity,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.movision.mybatis.user.entity.User" >
+    insert into yw_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="sina != null" >
+        sina,
+      </if>
+      <if test="openid != null" >
+        openid,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="invitecode != null" >
+        invitecode,
+      </if>
+      <if test="referrals != null" >
+        referrals,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="sign != null" >
+        SIGN,
+      </if>
+      <if test="attention != null" >
+        attention,
+      </if>
+      <if test="fans != null" >
+        fans,
+      </if>
+      <if test="points != null" >
+        points,
+      </if>
+      <if test="photo != null" >
+        photo,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="intime != null" >
+        intime,
+      </if>
+      <if test="growth != null" >
+        growth,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="isdv != null" >
+        isdv,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="applydate != null" >
+        applydate,
+      </if>
+      <if test="deviceno != null" >
+        deviceno,
+      </if>
+      <if test="loginTime != null" >
+        login_time,
+      </if>
+      <if test="isrecommend != null" >
+        isrecommend,
+      </if>
+      <if test="heatValue != null" >
+        heat_value,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="ipCity != null" >
+        ip_city,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="sina != null" >
+        #{sina,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="invitecode != null" >
+        #{invitecode,jdbcType=VARCHAR},
+      </if>
+      <if test="referrals != null" >
+        #{referrals,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="attention != null" >
+        #{attention,jdbcType=INTEGER},
+      </if>
+      <if test="fans != null" >
+        #{fans,jdbcType=INTEGER},
+      </if>
+      <if test="points != null" >
+        #{points,jdbcType=INTEGER},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="intime != null" >
+        #{intime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="growth != null" >
+        #{growth,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="isdv != null" >
+        #{isdv,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="applydate != null" >
+        #{applydate,jdbcType=DATE},
+      </if>
+      <if test="deviceno != null" >
+        #{deviceno,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null" >
+        #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isrecommend != null" >
+        #{isrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="heatValue != null" >
+        #{heatValue,jdbcType=INTEGER},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="ipCity != null" >
+        #{ipCity,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movision.mybatis.user.entity.User" >
+    update yw_user
+    <set >
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="sina != null" >
+        sina = #{sina,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="invitecode != null" >
+        invitecode = #{invitecode,jdbcType=VARCHAR},
+      </if>
+      <if test="referrals != null" >
+        referrals = #{referrals,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        SIGN = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="attention != null" >
+        attention = #{attention,jdbcType=INTEGER},
+      </if>
+      <if test="fans != null" >
+        fans = #{fans,jdbcType=INTEGER},
+      </if>
+      <if test="points != null" >
+        points = #{points,jdbcType=INTEGER},
+      </if>
+      <if test="photo != null" >
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="intime != null" >
+        intime = #{intime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="growth != null" >
+        growth = #{growth,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="isdv != null" >
+        isdv = #{isdv,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="applydate != null" >
+        applydate = #{applydate,jdbcType=DATE},
+      </if>
+      <if test="deviceno != null" >
+        deviceno = #{deviceno,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null" >
+        login_time = #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isrecommend != null" >
+        isrecommend = #{isrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="heatValue != null" >
+        heat_value = #{heatValue,jdbcType=INTEGER},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="ipCity != null" >
+        ip_city = #{ipCity,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movision.mybatis.user.entity.User" >
+    update yw_user
+    set qq = #{qq,jdbcType=VARCHAR},
+      sina = #{sina,jdbcType=VARCHAR},
+      openid = #{openid,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      invitecode = #{invitecode,jdbcType=VARCHAR},
+      referrals = #{referrals,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      SIGN = #{sign,jdbcType=VARCHAR},
+      attention = #{attention,jdbcType=INTEGER},
+      fans = #{fans,jdbcType=INTEGER},
+      points = #{points,jdbcType=INTEGER},
+      photo = #{photo,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=DATE},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      intime = #{intime,jdbcType=TIMESTAMP},
+      growth = #{growth,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      isdv = #{isdv,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      applydate = #{applydate,jdbcType=DATE},
+      deviceno = #{deviceno,jdbcType=VARCHAR},
+      login_time = #{loginTime,jdbcType=TIMESTAMP},
+      isrecommend = #{isrecommend,jdbcType=INTEGER},
+      heat_value = #{heatValue,jdbcType=INTEGER},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      ip_city = #{ipCity,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -26,6 +26,7 @@
                 <!--<ref bean="brandAnalysisRecordBatchAddTrigger"/>-->
                 <ref bean="testRedisTrigger"/>
                 <ref bean="postHeatValueJobTrigger"/>
+                <ref bean="footRankStatisticsJobTrigger"/>
             </list>
         </property>
         <property name="jobDetails">
@@ -47,6 +48,7 @@
                 <!--<ref bean="brandAnalysisRecordBatchAddDetail"/>-->
                 <ref bean="testRedisDetail"/>
                 <ref bean="postHeatValueJobDetail"/>
+                <ref bean="footRankStatisticsJobDetail"/>
             </list>
         </property>
 
@@ -77,6 +79,11 @@
           class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="postHeatValueJobDetail"/>
         <property name="cronExpression" value="${postHeatValue_cronExpression}"/>
+    </bean>
+    <bean id="footRankStatisticsJobTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="footRankStatisticsJobDetail"/>
+        <property name="cronExpression" value="${footRankStatistics_cronExpression}"/>
     </bean>
 
     <!--<bean id="vipExpiredJobTrigger"-->
@@ -183,6 +190,11 @@
         <property name="targetObject" ref="postHeatValueJob"/>
         <property name="targetMethod" value="execute"/>
     </bean>
+    <bean id="footRankStatisticsJobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="footRankStatisticsJob"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
 
     <!--<bean id="cleanScanAllImgJobDetail"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
@@ -286,4 +298,5 @@
 
     <bean id="testRedisJob" class="com.movision.job.TestRedisJob"/>
     <bean id="postHeatValueJob" class="com.movision.job.PostHeatValueJob"/>
+    <bean id="footRankStatisticsJob" class="com.movision.job.FootRankStatisticsJob"/>
 </beans>
