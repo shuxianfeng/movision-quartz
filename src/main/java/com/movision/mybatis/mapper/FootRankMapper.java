@@ -1,4 +1,4 @@
-package com.movision.mybatis.footRank.mapper;
+package com.movision.mybatis.mapper;
 
 import com.movision.mybatis.footRank.entity.FootRank;
 import org.springframework.stereotype.Repository;
