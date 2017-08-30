@@ -25,8 +25,8 @@
                 <!--<ref bean="resumeDownloadRecordTrigger"/>-->
                 <!--<ref bean="brandAnalysisRecordBatchAddTrigger"/>-->
                 <ref bean="testRedisTrigger"/>
-                <!--<ref bean="postHeatValueJobTrigger"/>-->
-                <!--<ref bean="footRankStatisticsJobTrigger"/>-->
+                <ref bean="postHeatValueJobTrigger"/>
+                <ref bean="footRankStatisticsJobTrigger"/>
             </list>
         </property>
         <property name="jobDetails">
@@ -47,8 +47,8 @@
                 <!--<ref bean="resumeDownloadRecordDetail"/>-->
                 <!--<ref bean="brandAnalysisRecordBatchAddDetail"/>-->
                 <ref bean="testRedisDetail"/>
-                <!--<ref bean="postHeatValueJobDetail"/>-->
-                <!--<ref bean="footRankStatisticsJobDetail"/>-->
+                <ref bean="postHeatValueJobDetail"/>
+                <ref bean="footRankStatisticsJobDetail"/>
             </list>
         </property>
 
@@ -75,16 +75,16 @@
         <property name="jobDetail" ref="updateVideoEncodeJobDetail"/>
         <property name="cronExpression" value="${updateVideoEncode_cronExpression}"/>
     </bean>
-    <!--<bean id="postHeatValueJobTrigger"-->
-          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
-        <!--<property name="jobDetail" ref="postHeatValueJobDetail"/>-->
-        <!--<property name="cronExpression" value="${postHeatValue_cronExpression}"/>-->
-    <!--</bean>-->
-    <!--<bean id="footRankStatisticsJobTrigger"-->
-          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
-        <!--<property name="jobDetail" ref="footRankStatisticsJobDetail"/>-->
-        <!--<property name="cronExpression" value="${footRankStatistics_cronExpression}"/>-->
-    <!--</bean>-->
+    <bean id="postHeatValueJobTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="postHeatValueJobDetail"/>
+        <property name="cronExpression" value="${postHeatValue_cronExpression}"/>
+    </bean>
+    <bean id="footRankStatisticsJobTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="footRankStatisticsJobDetail"/>
+        <property name="cronExpression" value="${footRankStatistics_cronExpression}"/>
+    </bean>
 
     <!--<bean id="vipExpiredJobTrigger"-->
           <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
@@ -185,16 +185,16 @@
         <property name="targetObject" ref="updateVideoEncodeJob"/>
         <property name="targetMethod" value="execute"/>
     </bean>
-    <!--<bean id="postHeatValueJobDetail"-->
-          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
-        <!--<property name="targetObject" ref="postHeatValueJob"/>-->
-        <!--<property name="targetMethod" value="execute"/>-->
-    <!--</bean>-->
-    <!--<bean id="footRankStatisticsJobDetail"-->
-          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
-        <!--<property name="targetObject" ref="footRankStatisticsJob"/>-->
-        <!--<property name="targetMethod" value="execute"/>-->
-    <!--</bean>-->
+    <bean id="postHeatValueJobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="postHeatValueJob"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
+    <bean id="footRankStatisticsJobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="footRankStatisticsJob"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
 
     <!--<bean id="cleanScanAllImgJobDetail"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
@@ -297,6 +297,6 @@
     <!--<bean id="brandAnalysisRecordBatchAddJob" class="com.movision.job.BrandAnalysisRecordBatchAddJob"/>-->
 
     <bean id="testRedisJob" class="com.movision.job.TestRedisJob"/>
-    <!--<bean id="postHeatValueJob" class="com.movision.job.PostHeatValueJob"/>-->
-    <!--<bean id="footRankStatisticsJob" class="com.movision.job.FootRankStatisticsJob"/>-->
+    <bean id="postHeatValueJob" class="com.movision.job.PostHeatValueJob"/>
+    <bean id="footRankStatisticsJob" class="com.movision.job.FootRankStatisticsJob"/>
 </beans>
