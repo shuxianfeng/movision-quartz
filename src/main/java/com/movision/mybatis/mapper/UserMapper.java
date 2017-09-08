@@ -24,4 +24,8 @@ public interface UserMapper {
     int getfootmap(int userid);
 
     int isFootmapSum(int userid);
+
+    int getAttentionSum(int userid);
+
+    int getFansSum(int userid);
 }

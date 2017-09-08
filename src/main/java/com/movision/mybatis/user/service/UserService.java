@@ -75,4 +75,34 @@ public class UserService {
             throw e;
         }
     }
+
+    public int getAttentionSum(int userid){
+        try {
+            log.info("统计当前用户总关注数");
+            return userMapper.getAttentionSum(userid);
+        }catch (Exception e){
+            log.error("统计当前用户总关注数失败", e);
+            throw e;
+        }
+    }
+
+    public int getFansSum(int userid){
+        try {
+            log.info("获取当前用户总粉丝数");
+            return userMapper.getFansSum(userid);
+        }catch (Exception e){
+            log.error("获取当前用户总粉丝数失败", e);
+            throw e;
+        }
+    }
+
+    public void updateAttentionFans(User user){
+        try {
+            log.info("更新用户表中用户的关注数和粉丝总数");
+            userMapper.updateByPrimaryKeySelective(user);
+        }catch (Exception e){
+            log.error("更新用户表中用户的关注数和粉丝总数失败");
+            throw e;
+        }
+    }
 }

@@ -29,9 +29,11 @@ public class FootRankStatisticsTask {
         //查询所有用户id
         List<User> useridList = userService.queryUserid();
 
-        //循环所有userid统计用户足迹点个数并实时更新到数据库
+        //循环所有userid
         for (int i=0; i<useridList.size(); i++){
             int userid = useridList.get(i).getId();
+
+            //统计用户足迹点个数并实时更新到数据库yw_foot_rank
             //根据userid查询足迹点个数
             int mapsum = userService.getfootmap(userid);
             //检查表中是否存在该用户的足迹总数记录
@@ -50,6 +52,15 @@ public class FootRankStatisticsTask {
                     userService.insert(footRank);
                 }
             }
+
+            //统计用户关注数和粉丝数并实时更新到数据库yw_user
+            int attention = userService.getAttentionSum(userid);
+            int fans = userService.getFansSum(userid);
+            User user = new User();
+            user.setId(userid);
+            user.setAttention(attention);
+            user.setFans(fans);
+            userService.updateAttentionFans(user);
         }
 
         log.info("统计更新所有用户足迹点总数task--end...");

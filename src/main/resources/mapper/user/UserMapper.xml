@@ -65,6 +65,24 @@
     )
   </select>
 
+  <!--统计单个用户的总关注数-->
+  <select id="queryCollectByUserid" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+    SELECT SUM(tt.sum)
+    FROM
+    (
+    (SELECT count(*) AS sum FROM (SELECT DISTINCT t.circleid FROM yw_follow_circle t WHERE userid = #{userid,jdbcType=INTEGER}) t1)
+    UNION ALL
+    (SELECT count(*) sum FROM (SELECT DISTINCT t2.labelid FROM yw_follow_label t2 WHERE userid = #{userid,jdbcType=INTEGER}) t2)
+    UNION ALL
+    (SELECT count(*) sum FROM (SELECT DISTINCT t3.interestedusers FROM yw_follow_user t3 WHERE userid = #{userid,jdbcType=INTEGER}) t4)
+    ) tt
+  </select>
+  
+  <!--根据userid统计当前用户的粉丝总数-->
+  <select id="getFansSum" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+    SELECT count(*) FROM (SELECT DISTINCT t3.userid FROM yw_follow_user t3 WHERE t3.interestedusers = #{userid,jdbcType=INTEGER}) t
+  </select>
+
   <!--判断当前用户在足迹统计表中是否存在记录-->
   <select id="isFootmapSum" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
     SELECT count(*) FROM yw_foot_rank WHERE userid = #{userid,jdbcType=INTEGER}
