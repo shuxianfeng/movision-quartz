@@ -50,27 +50,28 @@ public class UpdateVideoEncodeTask {
                 //解析json字符串
                 JSONArray moduleArray = JSONArray.fromObject(postcontent);
                 for (int j = 0; j < moduleArray.size(); j++) {
-                    //从img中获取type属性
-                    JSONObject moduleobj = JSONObject.parseObject(moduleArray.get(j).toString());
-                    Integer type = (Integer) moduleobj.get("type");//帖子模块类型 0 文字 1 图片 2 视频
-                    String value = (String) moduleobj.get("value");//模块value
-                    Integer orderid = (Integer) moduleobj.get("orderid");//模块排序id
-                    if (type == 2){
-                        //如果当前模块是视频的话，检测当前视频状态
-                        String vid = value;
+                    try {
+                        //从img中获取type属性
+                        JSONObject moduleobj = JSONObject.parseObject(moduleArray.get(j).toString());
+                        Integer type = (Integer) moduleobj.get("type");//帖子模块类型 0 文字 1 图片 2 视频
+                        String value = (String) moduleobj.get("value");//模块value
+                        Integer orderid = (Integer) moduleobj.get("orderid");//模块排序id
+                        if (type == 2) {
+                            //如果当前模块是视频的话，检测当前视频状态
+                            String vid = value;
 
-                        //生成请求的url，类似：GetVideoPlayAuth
-                        String url = aliVideoFacade.generateRequestUrl("GetVideoInfo", vid);
-                        Map<String, String> reMap = aliVideoFacade.doGet(url);
-                        String result = "";
-                        if (!reMap.isEmpty()) {
-                            if ("200".equals(reMap.get("status"))) {
-                                result = reMap.get("result").toString();
+                            //生成请求的url，类似：GetVideoPlayAuth
+                            String url = aliVideoFacade.generateRequestUrl("GetVideoInfo", vid);
+                            Map<String, String> reMap = aliVideoFacade.doGet(url);
+                            String result = "";
+                            if (!reMap.isEmpty()) {
+                                if ("200".equals(reMap.get("status"))) {
+                                    result = reMap.get("result").toString();
+                                }
                             }
-                        }
 
-                        JSONObject res = JSONObject.parseObject(result);
-                        String str = res.get("Video").toString();// str如下：
+                            JSONObject res = JSONObject.parseObject(result);
+                            String str = res.get("Video").toString();// str如下：
 //                        {
 //                            "VideoId": "93ab850b4f6f44eab54b6e91d24d81d4",
 //                                "Title": "阿里云VOD视频标题",
@@ -86,43 +87,48 @@ public class UpdateVideoEncodeTask {
 //                                "CateName": "分类名",
 //                                "Tags": ["标签1", "标签2"]
 //                        }
-                        JSONObject obj = JSONObject.parseObject(str);
-                        String status = obj.get("Status").toString();
-                        String CoverURL = obj.get("CoverURL").toString();
+                            JSONObject obj = JSONObject.parseObject(str);
+                            String status = obj.get("Status").toString();
+                            String CoverURL = obj.get("CoverURL").toString();
 
-                        if (status.equals("Normal")){
-                            //视频转码成功，正常播放
-                            //正常的视频不给flag赋1了
-                            moduleArray.remove(j);//先移除
-                            Map<String, Object> map = new HashMap<>();
-                            map.put("type", type);
-                            map.put("value", vid);
-                            map.put("wh", CoverURL);
-                            map.put("dir", "");
-                            map.put("orderid", orderid);
-                            moduleArray.add(j, map);//再加入
-                        } else if (status.equals("Uploading")){//下面所有情况，只要有任意一个原因失败的，flag就赋值0
-                            //上传中
-                            flag = 0;
-                        } else if (status.equals("UploadFail")){
-                            //上传失败
-                            flag = 0;
-                        } else if (status.equals("UploadSucc")){
-                            //上传成功
-                            flag = 0;
-                        } else if (status.equals("Transcoding")){
-                            //转码中
-                            flag = 0;
-                        } else if (status.equals("Checking")){
-                            //审核中
-                            flag = 0;
-                        } else if (status.equals("TranscodeFail")){
-                            //转码失败
-                            flag = 0;
-                        } else if (status.equals("Blocked")){
-                            //视频被屏蔽
-                            flag = 0;
+                            if (status.equals("Normal")) {
+                                //视频转码成功，正常播放
+                                //正常的视频不给flag赋1了
+                                moduleArray.remove(j);//先移除
+                                Map<String, Object> map = new HashMap<>();
+                                map.put("type", type);
+                                map.put("value", vid);
+                                map.put("wh", CoverURL);
+                                map.put("dir", "");
+                                map.put("orderid", orderid);
+                                moduleArray.add(j, map);//再加入
+                            } else if (status.equals("Uploading")) {//下面所有情况，只要有任意一个原因失败的，flag就赋值0
+                                //上传中
+                                flag = 0;
+                            } else if (status.equals("UploadFail")) {
+                                //上传失败
+                                flag = 0;
+                            } else if (status.equals("UploadSucc")) {
+                                //上传成功
+                                flag = 0;
+                            } else if (status.equals("Transcoding")) {
+                                //转码中
+                                flag = 0;
+                            } else if (status.equals("Checking")) {
+                                //审核中
+                                flag = 0;
+                            } else if (status.equals("TranscodeFail")) {
+                                //转码失败
+                                flag = 0;
+                            } else if (status.equals("Blocked")) {
+                                //视频被屏蔽
+                                flag = 0;
+                            }
                         }
+                    }catch (Exception e){
+                        logger.error("当前视频不存在或已被删除");
+                        flag = 0;
+                        continue;
                     }
                 }
 
