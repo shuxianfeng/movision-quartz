@@ -22,6 +22,6 @@ public class FootRankStatisticsJob {
 
         footRankStatisticsTask.run();
 
-        logger.info("统计更新所有用户足迹点总数完成和用户的总关注数及粉丝数失败");
+        logger.info("统计更新所有用户足迹点总数和用户的总关注数及粉丝数完成");
     }
 }
