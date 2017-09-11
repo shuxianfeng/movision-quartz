@@ -66,7 +66,7 @@
   </select>
 
   <!--统计单个用户的总关注数-->
-  <select id="queryCollectByUserid" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+  <select id="getAttentionSum" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
     SELECT SUM(tt.sum)
     FROM
     (
