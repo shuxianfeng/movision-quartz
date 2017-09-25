@@ -70,11 +70,26 @@
     SELECT SUM(tt.sum)
     FROM
     (
-    (SELECT count(*) AS sum FROM (SELECT DISTINCT t.circleid FROM yw_follow_circle t WHERE userid = #{userid,jdbcType=INTEGER}) t1)
-    UNION ALL
-    (SELECT count(*) sum FROM (SELECT DISTINCT t2.labelid FROM yw_follow_label t2 WHERE userid = #{userid,jdbcType=INTEGER}) t2)
-    UNION ALL
-    (SELECT count(*) sum FROM (SELECT DISTINCT t3.interestedusers FROM yw_follow_user t3 WHERE userid = #{userid,jdbcType=INTEGER}) t4)
+      (
+        SELECT count(*) AS sum FROM (
+        SELECT t1.*,tt.isdel FROM (
+            SELECT DISTINCT t.circleid FROM yw_follow_circle t WHERE t.userid = #{userid,jdbcType=INTEGER}
+        ) t1 LEFT JOIN (SELECT * FROM yw_circle WHERE isdel = '0') tt ON t1.circleid = tt.id) ttt WHERE ttt.isdel = '0'
+      )
+      UNION ALL
+      (
+          SELECT count(*) AS sum FROM (
+            SELECT t1.*,tt.isdel FROM (
+                SELECT DISTINCT t.labelid FROM yw_follow_label t WHERE t.userid = #{userid,jdbcType=INTEGER}
+            ) t1 LEFT JOIN (SELECT * FROM yw_post_label WHERE isdel = '0') tt ON t1.labelid = tt.id) ttt WHERE ttt.isdel = '0'
+      )
+      UNION ALL
+      (
+          SELECT count(*) AS sum FROM (
+            SELECT t1.*,tt.status FROM (
+                SELECT DISTINCT t.interestedusers FROM yw_follow_user t WHERE t.userid = #{userid,jdbcType=INTEGER}
+            ) t1 LEFT JOIN (SELECT * FROM yw_user WHERE status = '0') tt ON t1.interestedusers = tt.id) ttt WHERE ttt.status = '0'
+      )
     ) tt
   </select>
   
