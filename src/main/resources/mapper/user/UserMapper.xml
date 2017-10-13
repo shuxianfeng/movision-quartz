@@ -74,7 +74,7 @@
         SELECT count(*) AS sum FROM (
         SELECT t1.*,tt.isdel FROM (
             SELECT DISTINCT t.circleid FROM yw_follow_circle t WHERE t.userid = #{userid,jdbcType=INTEGER}
-        ) t1 LEFT JOIN (SELECT * FROM yw_circle WHERE isdel = '0') tt ON t1.circleid = tt.id) ttt WHERE ttt.isdel = '0'
+        ) t1 LEFT JOIN (SELECT * FROM yw_circle WHERE isdel = '0' AND status = '1') tt ON t1.circleid = tt.id) ttt WHERE ttt.isdel = '0'
       )
       UNION ALL
       (
