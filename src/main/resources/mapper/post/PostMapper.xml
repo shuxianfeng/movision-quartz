@@ -385,10 +385,10 @@
         SELECT heat_value FROM  yw_post WHERE isdel=0 AND id=#{id,jdbcType=INTEGER}
     </select>
     <update id="updateHeatValue" parameterType="java.lang.Integer">
-        UPDATE  yw_post SET  heat_value=heat_value-10 WHERE id=#{id,jdbcType=INTEGER} AND isdel=0
+        UPDATE  yw_post SET  heat_value=heat_value-40 WHERE id=#{id,jdbcType=INTEGER} AND isdel=0
     </update>
     <update id="updateHeatValueTwo" parameterType="java.lang.Integer">
-        UPDATE  yw_post SET  heat_value=heat_value-2 WHERE id=#{id,jdbcType=INTEGER} AND isdel=0
+        UPDATE  yw_post SET  heat_value=heat_value-23 WHERE id=#{id,jdbcType=INTEGER} AND isdel=0
     </update>
     <update id="updateHaet" parameterType="java.lang.Integer">
         UPDATE  yw_post SET  heat_value=0 WHERE id=#{id,jdbcType=INTEGER} AND isdel=0
