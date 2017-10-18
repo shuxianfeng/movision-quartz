@@ -26,7 +26,7 @@ public class FootRankStatisticsTask {
     private UserService userService;
 
     public void run() {
-        log.info("统计更新所有用户足迹点总数task--start...");
+        log.info("统计更新所有用户足迹点总数/关注数/粉丝数/邀请用户总数...start...");
 
         //查询所有用户id
         List<User> useridList = userService.queryUserid();
@@ -82,6 +82,6 @@ public class FootRankStatisticsTask {
             }
         }
 
-        log.info("统计更新所有用户足迹点总数task--end...");
+        log.info("统计更新所有用户足迹点总数/关注数/粉丝数/邀请用户总数...end...");
     }
 }
