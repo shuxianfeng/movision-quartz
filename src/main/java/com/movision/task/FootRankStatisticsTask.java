@@ -71,6 +71,8 @@ public class FootRankStatisticsTask {
             Map<String, Object> parammap = new HashMap<>();
             parammap.put("userid", userid);
             parammap.put("invitenum", invitenum);
+            Date intime = new Date();
+            parammap.put("intime", intime);
             if (invitenum > 0){
                 if (isum > 0){
                     //更新邀请总数记录

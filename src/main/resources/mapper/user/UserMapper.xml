@@ -490,17 +490,18 @@
   <!--更新用户邀请总人数到数据库中-->
   <update id="updateUserInviteNum" parameterType="java.util.Map" >
     UPDATE yw_user_invite_rank
-    SET invitenum = #{invitenum,jdbcType=INTEGER}
+    SET invitenum = #{invitenum,jdbcType=INTEGER},
+        intime = #{intime,jdbcType=TIMESTAMP}
     WHERE userid = #{userid,jdbcType=INTEGER}
   </update>
   
   <!--插入用户邀请总人数到数据库中-->
   <insert id="insertUserInviteNum" parameterType="java.util.Map" >
     INSERT INTO yw_user_invite_rank(
-       userid, invitenum
+       userid, invitenum, intime
     )
     VALUES (
-        #{userid,jdbcType=INTEGER}, #{invitenum,jdbcType=INTEGER}
+        #{userid,jdbcType=INTEGER}, #{invitenum,jdbcType=INTEGER}, #{intime,jdbcType=TIMESTAMP}
     )
   </insert>
 </mapper>
