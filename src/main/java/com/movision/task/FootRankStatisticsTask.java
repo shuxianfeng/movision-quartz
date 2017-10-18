@@ -31,8 +31,6 @@ public class FootRankStatisticsTask {
         //查询所有用户id
         List<User> useridList = userService.queryUserid();
 
-        //
-
         //循环所有userid
         for (int i=0; i<useridList.size(); i++){
             int userid = useridList.get(i).getId();
@@ -43,7 +41,6 @@ public class FootRankStatisticsTask {
             int mapsum = userService.getfootmap(userid);
             //检查表中是否存在该用户的足迹总数记录
             int sum = userService.isFootmapSum(userid);
-
             FootRank footRank = new FootRank();
             footRank.setUserid(userid);
             footRank.setFootsum(mapsum);
@@ -71,7 +68,6 @@ public class FootRankStatisticsTask {
             int invitenum = userService.getInviteNum(invitecode);
             //检查表中是否存在该用户的邀请总数记录
             int isum = userService.isInviteSum(userid);
-
             Map<String, Object> parammap = new HashMap<>();
             parammap.put("userid", userid);
             parammap.put("invitenum", invitenum);
