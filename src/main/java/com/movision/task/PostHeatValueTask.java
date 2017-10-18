@@ -97,33 +97,4 @@ public class PostHeatValueTask {
         return  out;
 
     }
-
-
-    public static void main(String[] args){
-        /**   SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟
-            Date date=null;
-            try {
-                  date=sdf.parse("2017-10-18");
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            String res=getFetureDate(7,date);
-            logger.info(res);*/
-        // 时间表示格式可以改变，yyyyMMdd需要写例如20160523这种形式的时间
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String str = "2017-2-25";
-        // 将字符串的日期转为Date类型，ParsePosition(0)表示从第一个字符开始解析
-        Date date = sdf.parse(str, new ParsePosition(0));
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        // add方法中的第二个参数n中，正数表示该日期后n天，负数表示该日期的前n天
-        calendar.add(Calendar.DATE,7);
-        Date date1 = calendar.getTime();
-        String out = sdf.format(date1);
-        System.out.println(out);
-
-    }
-
-
-
-    }
+}
