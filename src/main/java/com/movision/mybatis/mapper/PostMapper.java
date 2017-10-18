@@ -30,8 +30,10 @@ public interface PostMapper {
     List<Post> queryAllHeatValue();
 
     int updateHeatValue(int id);
-
+    int updateHeatValueTwo(int id);
     int queryByIdHeatValue(int id);
+
+    String postDate(int id);
 
     int updateHaet(int id);
 }
