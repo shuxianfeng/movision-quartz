@@ -51,7 +51,17 @@
 
   <!--查询美番平台中所有用户id-->
   <select id="queryUserid" resultType="com.movision.mybatis.user.entity.User" >
-    SELECT id FROM yw_user WHERE id != '-1'
+    SELECT id, invitecode FROM yw_user WHERE id != '-1'
+  </select>
+
+  <!--根据用户id查询该用户邀请的好友总数-->
+  <select id="getInviteNum" parameterType="java.lang.String" resultType="java.lang.Integer" >
+    SELECT count(*) FROM yw_user WHERE referrals = #{invitecode,jdbcType=VARCHAR}
+  </select>
+
+  <!--判断当前用户是否存在邀请总数排行记录-->
+  <select id="isInviteSum" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+    SELECT count(*) FROM yw_user_invite_rank WHERE userid = #{userid,jdbcType=INTEGER}
   </select>
 
   <!--统计当前用户足迹点总数-->
@@ -476,4 +486,21 @@
       ip_city = #{ipCity,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--更新用户邀请总人数到数据库中-->
+  <update id="updateUserInviteNum" parameterType="java.util.Map" >
+    UPDATE yw_user_invite_rank
+    SET invitenum = #{invitenum,jdbcType=INTEGER}
+    WHERE userid = #{userid,jdbcType=INTEGER}
+  </update>
+  
+  <!--插入用户邀请总人数到数据库中-->
+  <insert id="insertUserInviteNum" parameterType="java.util.Map" >
+    INSERT INTO yw_user_invite_rank(
+       userid, invitenum
+    )
+    VALUES (
+        #{userid,jdbcType=INTEGER}, #{invitenum,jdbcType=INTEGER}
+    )
+  </insert>
 </mapper>

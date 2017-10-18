@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author shuxf
@@ -102,6 +103,46 @@ public class UserService {
             userMapper.updateByPrimaryKeySelective(user);
         }catch (Exception e){
             log.error("更新用户表中用户的关注数和粉丝总数失败");
+            throw e;
+        }
+    }
+
+    public int getInviteNum(String invitecode){
+        try {
+            log.info("根据用户id查询该用户的邀请总数");
+            return userMapper.getInviteNum(invitecode);
+        }catch (Exception e){
+            log.error("根据用户id查询该用户的邀请总数失败", e);
+            throw e;
+        }
+    }
+
+    public int isInviteSum(int userid){
+        try {
+            log.info("判断表中是否存在该用户的邀请排行记录");
+            return userMapper.isInviteSum(userid);
+        }catch (Exception e){
+            log.error("判断表中是否存在该用户的邀请排行记录失败", e);
+            throw e;
+        }
+    }
+
+    public void updateUserInviteNum(Map<String, Object> parammap){
+        try {
+            log.info("更新该用户的总邀请数");
+            userMapper.updateUserInviteNum(parammap);
+        }catch (Exception e){
+            log.error("更新该用户的总邀请数失败", e);
+            throw e;
+        }
+    }
+
+    public void insertUserInviteNum(Map<String, Object> parammap){
+        try {
+            log.info("更新该用户的总邀请人数");
+            userMapper.insertUserInviteNum(parammap);
+        }catch (Exception e){
+            log.error("更新该用户的总邀请人数失败", e);
             throw e;
         }
     }

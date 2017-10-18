@@ -4,6 +4,7 @@ import com.movision.mybatis.user.entity.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface UserMapper {
@@ -16,6 +17,14 @@ public interface UserMapper {
     User selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(User record);
+
+    void updateUserInviteNum(Map<String, Object> parammap);
+
+    void insertUserInviteNum(Map<String, Object> parammap);
+
+    int getInviteNum(String invitecode);
+
+    int isInviteSum(int userid);
 
     int updateByPrimaryKey(User record);
 

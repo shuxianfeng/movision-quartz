@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author shuxf
@@ -29,9 +31,12 @@ public class FootRankStatisticsTask {
         //查询所有用户id
         List<User> useridList = userService.queryUserid();
 
+        //
+
         //循环所有userid
         for (int i=0; i<useridList.size(); i++){
             int userid = useridList.get(i).getId();
+            String invitecode = useridList.get(i).getInvitecode();
 
             //统计用户足迹点个数并实时更新到数据库yw_foot_rank
             //根据userid查询足迹点个数
@@ -61,6 +66,24 @@ public class FootRankStatisticsTask {
             user.setAttention(attention);
             user.setFans(fans);
             userService.updateAttentionFans(user);
+
+            //统计用户邀请好友数并实时更新到数据库yw_user_invite_rank
+            int invitenum = userService.getInviteNum(invitecode);
+            //检查表中是否存在该用户的邀请总数记录
+            int isum = userService.isInviteSum(userid);
+
+            Map<String, Object> parammap = new HashMap<>();
+            parammap.put("userid", userid);
+            parammap.put("invitenum", invitenum);
+            if (invitenum > 0){
+                if (isum > 0){
+                    //更新邀请总数记录
+                    userService.updateUserInviteNum(parammap);
+                }else {
+                    //插入邀请总数记录
+                    userService.insertUserInviteNum(parammap);
+                }
+            }
         }
 
         log.info("统计更新所有用户足迹点总数task--end...");
