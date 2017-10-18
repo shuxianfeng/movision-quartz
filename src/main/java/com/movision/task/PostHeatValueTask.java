@@ -44,7 +44,7 @@ public class PostHeatValueTask {
             long pd=post.getTime();
             long sd=sevenDate.getTime();
             if(pd<=sd) {//1-7天热度-10
-                if (heatvalue >= 10) {
+                if (heatvalue >= 40) {
                     postService.updateHeatValue(id);
                 } else {
                     postService.updateHaet(id);
@@ -54,7 +54,7 @@ public class PostHeatValueTask {
                 Date lossD=parse(loss,"yyyy-MM-dd");
                 long ld=lossD.getTime();
                 if(sd<=ld){
-                    if (heatvalue >= 2) {
+                    if (heatvalue >= 23) {
                         postService.updateHeatValueTwo(id);
                     } else {
                         postService.updateHaet(id);
