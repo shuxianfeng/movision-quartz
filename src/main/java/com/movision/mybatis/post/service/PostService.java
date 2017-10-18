@@ -75,12 +75,34 @@ public class PostService {
         }
     }
 
+    public int updateHeatValueTwo(int id){
+        try {
+            log.info("减少热度");
+            return postMapper.updateHeatValueTwo(id);
+        }catch (Exception e){
+            log.error("减少热度失败");
+            throw e;
+        }
+    }
+
     public  int queryByIdHeatValue(int id){
         try {
             log.info("根据id查询热度");
             return postMapper.queryByIdHeatValue(id);
         }catch (Exception e){
             log.error("根据id查询热度失败");
+            throw e;
+        }
+    }
+
+
+
+    public  String postDate(int id){
+        try {
+            log.info("查询帖子发帖日期");
+            return postMapper.postDate(id);
+        }catch (Exception e){
+            log.error("查询帖子发帖日期失败");
             throw e;
         }
     }
