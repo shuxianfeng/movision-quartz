@@ -29,10 +29,18 @@ public interface PostMapper {
 
     List<Post> queryAllHeatValue();
 
+    Integer queryIsHeatOperate();
+
     List<Post> queryAllTodayPost();
 
+    void updateIsHeatOperate();
+
     int updateHeatValue(int id);
+
     int updateHeatValueTwo(int id);
+
+    int updateOldPostHeatValueTwo(Map map);
+
     int queryByIdHeatValue(int id);
 
     String postDate(int id);

@@ -29,11 +29,12 @@
         <result column="userid" property="userid" jdbcType="VARCHAR"/>
         <result column="oprtime" property="oprtime" jdbcType="TIMESTAMP"/>
         <result column="heat_value" property="heatvalue" jdbcType="INTEGER"/>
+        <result column="isheatoperate" property="isheatoperate" javaType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, circleid, title, subtitle, postcontent, zansum, commentsum, forwardsum, collectsum, 
     isactive, type, ishot, isessence, orderid, coverimg, hotimgurl, intime, totalpoint, 
-    isdel, isessencepool, activetype, activefee, iscontribute, essencedate, userid, oprtime,heat_value
+    isdel, isessencepool, activetype, activefee, iscontribute, essencedate, userid, oprtime,heat_value ,isheatoperate
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -379,17 +380,27 @@
         WHERE id = #{postid,jdbcType=INTEGER}
     </update>
     <select id="queryAllHeatValue" resultType="com.movision.mybatis.post.entity.Post">
-        select * from yw_post WHERE isdel=0
+        select *
+        from yw_post
+        WHERE isdel=0 AND isheatoperate = 0
+        <![CDATA[AND timestamp(intime, '72:00:00') <= DATE(NOW()) ]]>
+        ORDER BY intime DESC
     </select>
     <select id="queryByIdHeatValue" parameterType="java.lang.Integer" resultType="java.lang.Integer">
         SELECT heat_value FROM  yw_post WHERE isdel=0 AND id=#{id,jdbcType=INTEGER}
     </select>
     <update id="updateHeatValue" parameterType="java.lang.Integer">
-        UPDATE  yw_post SET  heat_value=heat_value-50 WHERE id=#{id,jdbcType=INTEGER} AND isdel=0
+        UPDATE  yw_post SET  heat_value=heat_value-50,isheatoperate = 1 WHERE id=#{id,jdbcType=INTEGER} AND isdel=0
     </update>
     <update id="updateHeatValueTwo" parameterType="java.lang.Integer">
-        UPDATE  yw_post SET  heat_value=heat_value-20 WHERE id=#{id,jdbcType=INTEGER} AND isdel=0
+        UPDATE  yw_post SET  heat_value=heat_value-100,isheatoperate = 1 WHERE id=#{id,jdbcType=INTEGER} AND isdel=0
     </update>
+
+    <!-- 减少热度值 -->
+    <update id="updateOldPostHeatValueTwo" parameterType="java.util.Map">
+        UPDATE yw_post SET heat_value=heat_value-#{heat,jdbcType=INTEGER},isheatoperate = 1 WHERE id = #{id,jdbcType=INTEGER} AND isdel = 0
+    </update>
+
     <update id="updateHaet" parameterType="java.lang.Integer">
         UPDATE  yw_post SET  heat_value=0 WHERE id=#{id,jdbcType=INTEGER} AND isdel=0
     </update>
@@ -397,6 +408,17 @@
         SELECT  intime FROM  yw_post WHERE  id=#{id,jdbcType=INTEGER} AND isdel=0
     </select>
     <select id="queryAllTodayPost" resultType="com.movision.mybatis.post.entity.Post">
-        SELECT * FROM yw_post WHERE TO_DAYS( NOW( ) ) - TO_DAYS( intime) <= 1 AND isdel=0
+      SELECT * FROM yw_post WHERE DATE(intime) = date_sub(curdate(),interval 1 day)
+      AND isheatoperate = 0
+      AND TIMESTAMP(intime,'24:00:00')>= NOW()
+      AND TIMESTAMP(NOW(),'01:00:00')> TIMESTAMP(intime,'24:00:00')
     </select>
+
+    <select id="queryIsHeatOperate" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM yw_post WHERE isdel = 0 AND isheatoperate = 0
+    </select>
+
+    <update id="updateIsHeatOperate" >
+        UPDATE yw_post SET isheatoperate = 0 WHERE isdel = 0
+    </update>
 </mapper>

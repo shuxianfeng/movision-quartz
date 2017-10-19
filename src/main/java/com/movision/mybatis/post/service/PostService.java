@@ -65,6 +65,33 @@ public class PostService {
         }
     }
 
+    /**
+     * 查询所有帖子当天是否已经被操作过热度值
+     * @return
+     */
+    public Integer queryIsHeatOperate(){
+        try {
+            log.info("查询所有帖子当天是否已经被操作过热度值");
+            return postMapper.queryIsHeatOperate();
+        } catch (Exception e) {
+            log.error("查询所有帖子当天是否已经被操作过热度值异常",e);
+            throw e;
+        }
+    }
+
+    /**
+     * 查询帖子是否被操作过热度值标志位
+     */
+    public void updateIsHeatOperate(){
+        try {
+            log.info("更新帖子是否被操作过热度值标志位");
+            postMapper.updateIsHeatOperate();
+        } catch (Exception e) {
+            log.error("更新帖子是否被操作过热度值标志位异常",e);
+            throw e;
+        }
+    }
+
     public List<Post> queryAllTodayPost(){
         try {
             log.info("查询今天的帖子");
@@ -91,6 +118,21 @@ public class PostService {
             return postMapper.updateHeatValueTwo(id);
         }catch (Exception e){
             log.error("减少热度失败");
+            throw e;
+        }
+    }
+
+    /**
+     * 减少旧帖的热度值
+     * @param map
+     * @return
+     */
+    public int updateOldPostHeatValueTwo(Map map){
+        try {
+            log.info("减少旧帖的热度值");
+            return postMapper.updateOldPostHeatValueTwo(map);
+        } catch (Exception e) {
+            log.error("减少旧帖的热度值异常",e);
             throw e;
         }
     }

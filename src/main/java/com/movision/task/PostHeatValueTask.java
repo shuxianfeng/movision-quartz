@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Author zhanglei
@@ -27,58 +25,104 @@ public class PostHeatValueTask {
 
     private static final Logger logger = LoggerFactory.getLogger(PostHeatValueTask.class);
 
+    /**
+     * 定时任务机制
+     *
+     * 1.每个帖子的初始值是3000
+     * 2.对每个新帖，在1-7天，每天减50。在8天以后，每天减 100
+     * 3.对于每个新帖，
+     *      1).在24小时内，热度值上涨到180（3次点赞，1次评论，10浏览），不进行2操作
+     *      2).在24小时内，热度值上涨不足180，按照2操作
+     *
+     * 4.对于旧帖子（发帖时间超过72小时）执行以下方法
+     * 1).热度《5000，不操作
+     * 2).热度》5000《10000每天递减 250
+     * 3).热度》10000《500000每天递减2000
+     * 4).热度5W》每天递减10000
+     *
+     * @throws Exception
+     */
     public void run() throws Exception {
-        logger.info("减少热度处理开始");
-        List<Post> list= postService.queryAllHeatValue();//所有帖子
-        //昨天发的帖子
-        List<Post> today =postService.queryAllTodayPost();
-        for (int i=0;i<today.size();i++){
-            //新帖子的发帖日期
-           Date intime= today.get(i).getIntime();
-          //对于每个新帖子，在24小时内，若其热度值上涨了180（3次点赞+1次评论+10次浏览），则不再进行递减
-          //在24小时内，若其热度值上涨不足180，则按照第二条进行递减，直至0
-          //对于每个新帖子，在1-7天，每天减50；
-          //在第8天之后，每天减100；
-          SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-          String str=sdf.format(intime);//发帖时间
-          String hour=passDate(str,1);//24小时后的日期
-          long potime=intime.getTime();//发帖时间
-          Date oneposttime=parse(hour,"yyyy-MM-dd HH:mm:ss");
-          long onepotime=oneposttime.getTime();//24小时后的日期
-
-          if(potime<=onepotime){//如果发帖时间小于24小时
-              //查询该帖子的热度值
-              if(list.get(i).getHeatvalue()-3000<150){//24小时内热度值上涨不足180
-
-
-              }
-          }
+        //查询所有帖子当天是否已经被操作过热度值
+        Integer count = postService.queryIsHeatOperate();
+        if (count > 0) {
+            logger.info("减少热度处理开始");
+            List<Post> list = postService.queryAllHeatValue();//所有旧帖子
+            //昨天发的帖子
+            List<Post> today = postService.queryAllTodayPost();
+            //新帖
+            newPostHeatOperate(list, today);
+            //旧帖
+            orderPostHeatOperate(list);
+            logger.info("减少热度处理结束");
         }
-        for (int i=0;i<list.size();i++){
-            int id=list.get(i).getId();
-            //根据id查询热度
-            int heatvalue=postService.queryByIdHeatValue(id);
-            //查询帖子发帖日期
-            String postDate=postService.postDate(id);
-            //从发帖后的一天开始算
-            String one=passDate(postDate,1);
-            String out=passDate(one,7);//7天后日期
-            Date post=parse(postDate,"yyyy-MM-dd");//发帖日期
-            Date sevenDate=parse(out,"yyyy-MM-dd");//7天后日期
-            long pd=post.getTime();
-            long sd=sevenDate.getTime();
-            if(pd<=sd) {//1-7天热度-10
-                if (heatvalue >= 50) {
-                    postService.updateHeatValue(id);
-                } else {
-                    postService.updateHaet(id);
-                }
-            }else {
-                String loss=passDate(out,23);//后面的日期
-                Date lossD=parse(loss,"yyyy-MM-dd");
-                long ld=lossD.getTime();
-                if(sd<=ld){
-                    if (heatvalue >= 20) {
+        Date date = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");//设置日期格式
+        Date now =null;
+        Date beginTime = null;
+        Date endTime = null;
+        try {
+            now = df.parse(df.format(new Date()));
+            beginTime = df.parse("00:00");
+            endTime = df.parse("01:00");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Boolean flag = belongCalendar(now, beginTime, endTime);
+        if (flag){
+            //更新所有帖子标志位（isheatoperate）是否操作过热度值 0否1是
+            postService.updateIsHeatOperate();
+        }
+     }
+
+    public static boolean belongCalendar(Date nowTime, Date beginTime, Date endTime) {
+        Calendar date = Calendar.getInstance();
+        date.setTime(nowTime);
+
+        Calendar begin = Calendar.getInstance();
+        begin.setTime(beginTime);
+
+        Calendar end = Calendar.getInstance();
+        end.setTime(endTime);
+
+        if (date.after(begin) && date.before(end)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 新帖热度操作
+     * @param list
+     * @param today
+     * @throws ParseException
+     */
+    private void newPostHeatOperate(List<Post> list, List<Post> today) throws ParseException {
+        for (int i=0;i<today.size();i++){
+            //对满24小时帖子热度值不满180的操作
+            if (today.get(i).getHeatvalue()-3000<180){
+                int id=list.get(i).getId();
+                //热度
+                int heatvalue=today.get(i).getHeatvalue();
+                //发帖日期
+                String postDate=today.get(i).getIntime().toString();
+                //从发帖后的一天开始算
+                String one=passDate(postDate,1);
+                String out=passDate(one,7);//7天后日期
+                Date post=parse(postDate,"yyyy-MM-dd");//发帖日期
+                Date sevenDate=parse(out,"yyyy-MM-dd");//7天后日期
+                long pd=post.getTime();
+                long sd=sevenDate.getTime();
+                if(pd<=sd) {//1-7天热度-50
+                    if (heatvalue >= 50) {
+                        postService.updateHeatValue(id);
+                    } else {
+                        postService.updateHaet(id);
+                    }
+                }else {
+                    if (heatvalue >= 100) {
                         postService.updateHeatValueTwo(id);
                     } else {
                         postService.updateHaet(id);
@@ -86,9 +130,32 @@ public class PostHeatValueTask {
                 }
             }
         }
-        logger.info("减少热度处理结束");
-     }
+    }
 
+    /**
+     * 旧帖热度操作
+     * @param list
+     */
+    private void orderPostHeatOperate(List<Post> list) {
+        for (int i = 0;i<list.size();i++){
+            //获取id
+            Integer id = list.get(i).getId();
+            //获取热度值
+            Integer heat = list.get(i).getHeatvalue();
+            Map map = new HashMap();
+            map.put("id",id);
+            if (heat> 5000 && heat < 10000) {
+                map.put("heat",250);
+                postService.updateOldPostHeatValueTwo(map);
+            } else if (heat <= 10000 && heat < 50000){
+                map.put("heat",2000);
+                postService.updateOldPostHeatValueTwo(map);
+            } else if (heat >= 50000){
+                map.put("heat",10000);
+                postService.updateOldPostHeatValueTwo(map);
+            }
+        }
+    }
 
 
     /**
