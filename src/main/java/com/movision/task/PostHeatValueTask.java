@@ -29,7 +29,31 @@ public class PostHeatValueTask {
 
     public void run() throws Exception {
         logger.info("减少热度处理开始");
-        List<Post> list= postService.queryAllHeatValue();
+        List<Post> list= postService.queryAllHeatValue();//所有帖子
+        //昨天发的帖子
+        List<Post> today =postService.queryAllTodayPost();
+        for (int i=0;i<today.size();i++){
+            //新帖子的发帖日期
+           Date intime= today.get(i).getIntime();
+          //对于每个新帖子，在24小时内，若其热度值上涨了180（3次点赞+1次评论+10次浏览），则不再进行递减
+          //在24小时内，若其热度值上涨不足180，则按照第二条进行递减，直至0
+          //对于每个新帖子，在1-7天，每天减50；
+          //在第8天之后，每天减100；
+          SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+          String str=sdf.format(intime);//发帖时间
+          String hour=passDate(str,1);//24小时后的日期
+          long potime=intime.getTime();//发帖时间
+          Date oneposttime=parse(hour,"yyyy-MM-dd HH:mm:ss");
+          long onepotime=oneposttime.getTime();//24小时后的日期
+
+          if(potime<=onepotime){//如果发帖时间小于24小时
+              //查询该帖子的热度值
+              if(list.get(i).getHeatvalue()-3000<150){//24小时内热度值上涨不足180
+
+
+              }
+          }
+        }
         for (int i=0;i<list.size();i++){
             int id=list.get(i).getId();
             //根据id查询热度
@@ -85,7 +109,7 @@ public class PostHeatValueTask {
      * @return
      */
     public static String passDate(String postDate,int pase){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         // 将字符串的日期转为Date类型，ParsePosition(0)表示从第一个字符开始解析
         Date date = sdf.parse(postDate, new ParsePosition(0));
         Calendar calendar = Calendar.getInstance();

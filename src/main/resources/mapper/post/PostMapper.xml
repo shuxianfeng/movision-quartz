@@ -379,7 +379,7 @@
         WHERE id = #{postid,jdbcType=INTEGER}
     </update>
     <select id="queryAllHeatValue" resultType="com.movision.mybatis.post.entity.Post">
-        select id,heat_value from yw_post WHERE isdel=0
+        select * from yw_post WHERE isdel=0
     </select>
     <select id="queryByIdHeatValue" parameterType="java.lang.Integer" resultType="java.lang.Integer">
         SELECT heat_value FROM  yw_post WHERE isdel=0 AND id=#{id,jdbcType=INTEGER}
@@ -395,5 +395,8 @@
     </update>
     <select id="postDate" parameterType="java.lang.Integer" resultType="java.lang.String">
         SELECT  intime FROM  yw_post WHERE  id=#{id,jdbcType=INTEGER} AND isdel=0
+    </select>
+    <select id="queryAllTodayPost" resultType="com.movision.mybatis.post.entity.Post">
+        SELECT * FROM yw_post WHERE TO_DAYS( NOW( ) ) - TO_DAYS( intime) <= 1 AND isdel=0
     </select>
 </mapper>

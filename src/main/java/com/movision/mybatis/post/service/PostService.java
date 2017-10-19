@@ -65,6 +65,16 @@ public class PostService {
         }
     }
 
+    public List<Post> queryAllTodayPost(){
+        try {
+            log.info("查询今天的帖子");
+            return postMapper.queryAllTodayPost();
+        }catch (Exception e){
+            log.error("查询今天的帖子失败");
+            throw e;
+        }
+    }
+
     public int updateHeatValue(int id){
         try {
             log.info("减少热度");

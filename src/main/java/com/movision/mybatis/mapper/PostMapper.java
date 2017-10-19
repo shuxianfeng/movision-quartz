@@ -29,6 +29,8 @@ public interface PostMapper {
 
     List<Post> queryAllHeatValue();
 
+    List<Post> queryAllTodayPost();
+
     int updateHeatValue(int id);
     int updateHeatValueTwo(int id);
     int queryByIdHeatValue(int id);
