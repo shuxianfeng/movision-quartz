@@ -147,7 +147,7 @@ public class PostHeatValueTask {
             if (heat> 5000 && heat < 10000) {
                 map.put("heat",250);
                 postService.updateOldPostHeatValueTwo(map);
-            } else if (heat <= 10000 && heat < 50000){
+            } else if (heat >= 10000 && heat < 50000){
                 map.put("heat",2000);
                 postService.updateOldPostHeatValueTwo(map);
             } else if (heat >= 50000){
