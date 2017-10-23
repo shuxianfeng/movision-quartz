@@ -13,7 +13,7 @@ public class ImgCompressConstants {
     public static final String TEST = "zhb_test"; // 测试环境
     public static final String ALIOSS = "alioss"; // 正式环境
 
-    public static final String IMAGE_ZHUHUI8_COM = "image.zhuhui8.com";
+    public static final String IMAGE_ZHUHUI8_COM = "image.mofo.pics.com";
     public static final String TEST_ZHB_IP = "139.196.189.100";
     public static final String DEFAULT = "default";
     // alioss上的图片频道

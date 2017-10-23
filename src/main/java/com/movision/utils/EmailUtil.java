@@ -19,7 +19,7 @@ public class EmailUtil {
 	public static final String HOST = "smtp.exmail.qq.com";
 	public static final String PROTOCOL = "smtp";
 	public static final int PORT = 465;
-	public static final String FROM = "movision@zhuhui8.com";// 发件人的email
+	public static final String FROM = "movision@mofo.pics.com";// 发件人的email
 	public static final String PWD = "Zhb@D503";// 发件人密码
 
 	
