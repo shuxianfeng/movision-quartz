@@ -45,19 +45,29 @@ public class PostHeatValueTask {
     public void run() throws Exception {
 
         logger.info("=========================查询当前日期是否在0点到1点之间");
-        SimpleDateFormat df = new SimpleDateFormat("HH:mm");//设置日期格式
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");//设置日期格式
         Date now =null;
         Date beginTime = null;
         Date endTime = null;
         try {
             now = df.parse(df.format(new Date()));
-            beginTime = df.parse("12:00");
-            endTime = df.parse("13:00");
+            beginTime = df.parse("00:59:59");
+            endTime = df.parse("1:59:59");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        logger.info("减少热度处理开始");
         Boolean flag = belongCalendar(now, beginTime, endTime);
+        updateHeatValue(flag);
+        logger.info("减少热度处理结束");
+
+     }
+
+    /**
+     * 更新帖子热度值操作
+     */
+    private void updateHeatValue(Boolean flag) throws ParseException {
         if (flag){
             logger.info("=========================当前日期在零点到一点之间，更新帖子热度标志位");
             //更新所有帖子标志位（isheatoperate）是否操作过热度值 0否1是
@@ -67,7 +77,6 @@ public class PostHeatValueTask {
         //查询当天没有被操作过热度值的帖子
         Integer count = postService.queryIsHeatOperate();
         if (count > 0) {
-            logger.info("减少热度处理开始");
             List<Post> list = postService.queryAllHeatValue();//所有旧帖子
             //昨天发的帖子
             List<Post> today = postService.queryAllTodayPost();
@@ -75,10 +84,8 @@ public class PostHeatValueTask {
             newPostHeatOperate(list, today);
             //旧帖
             orderPostHeatOperate(list);
-            logger.info("减少热度处理结束");
         }
-
-     }
+    }
 
     /**
      * 返回当前时间是否在指定时间内，是返回true否返回false
