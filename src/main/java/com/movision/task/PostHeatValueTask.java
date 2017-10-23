@@ -43,7 +43,28 @@ public class PostHeatValueTask {
      * @throws Exception
      */
     public void run() throws Exception {
-        //查询所有帖子当天是否已经被操作过热度值
+
+        logger.info("=========================查询当前日期是否在0点到1点之间");
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");//设置日期格式
+        Date now =null;
+        Date beginTime = null;
+        Date endTime = null;
+        try {
+            now = df.parse(df.format(new Date()));
+            beginTime = df.parse("12:00");
+            endTime = df.parse("13:00");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Boolean flag = belongCalendar(now, beginTime, endTime);
+        if (flag){
+            logger.info("=========================当前日期在零点到一点之间，更新帖子热度标志位");
+            //更新所有帖子标志位（isheatoperate）是否操作过热度值 0否1是
+            postService.updateIsHeatOperate();
+        }
+
+        //查询当天没有被操作过热度值的帖子
         Integer count = postService.queryIsHeatOperate();
         if (count > 0) {
             logger.info("减少热度处理开始");
@@ -56,26 +77,16 @@ public class PostHeatValueTask {
             orderPostHeatOperate(list);
             logger.info("减少热度处理结束");
         }
-        Date date = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("HH:mm");//设置日期格式
-        Date now =null;
-        Date beginTime = null;
-        Date endTime = null;
-        try {
-            now = df.parse(df.format(new Date()));
-            beginTime = df.parse("00:00");
-            endTime = df.parse("01:00");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        Boolean flag = belongCalendar(now, beginTime, endTime);
-        if (flag){
-            //更新所有帖子标志位（isheatoperate）是否操作过热度值 0否1是
-            postService.updateIsHeatOperate();
-        }
      }
 
+    /**
+     * 返回当前时间是否在指定时间内，是返回true否返回false
+     * @param nowTime
+     * @param beginTime
+     * @param endTime
+     * @return
+     */
     public static boolean belongCalendar(Date nowTime, Date beginTime, Date endTime) {
         Calendar date = Calendar.getInstance();
         date.setTime(nowTime);
@@ -137,6 +148,7 @@ public class PostHeatValueTask {
      * @param list
      */
     private void orderPostHeatOperate(List<Post> list) {
+        logger.info("=========================更新旧帖热度操作");
         for (int i = 0;i<list.size();i++){
             //获取id
             Integer id = list.get(i).getId();

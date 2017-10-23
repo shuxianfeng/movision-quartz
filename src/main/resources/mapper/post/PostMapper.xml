@@ -419,6 +419,6 @@
     </select>
 
     <update id="updateIsHeatOperate" >
-        UPDATE yw_post SET isheatoperate = 0 WHERE isdel = 0
+        UPDATE yw_post SET isheatoperate = 0 WHERE isdel = 0 AND isheatoperate = 1
     </update>
 </mapper>

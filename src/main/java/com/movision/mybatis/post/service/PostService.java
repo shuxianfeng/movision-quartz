@@ -66,15 +66,15 @@ public class PostService {
     }
 
     /**
-     * 查询所有帖子当天是否已经被操作过热度值
+     * 查询当天没有被操作过热度值的帖子
      * @return
      */
     public Integer queryIsHeatOperate(){
         try {
-            log.info("查询所有帖子当天是否已经被操作过热度值");
+            log.info("查询当天没有被操作过热度值的帖子");
             return postMapper.queryIsHeatOperate();
         } catch (Exception e) {
-            log.error("查询所有帖子当天是否已经被操作过热度值异常",e);
+            log.error("查询当天没有被操作过热度值的帖子异常",e);
             throw e;
         }
     }
@@ -94,10 +94,10 @@ public class PostService {
 
     public List<Post> queryAllTodayPost(){
         try {
-            log.info("查询今天的帖子");
+            log.info("查询昨天新帖");
             return postMapper.queryAllTodayPost();
         }catch (Exception e){
-            log.error("查询今天的帖子失败");
+            log.error("查询昨天新帖失败");
             throw e;
         }
     }
