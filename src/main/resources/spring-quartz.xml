@@ -27,6 +27,7 @@
                 <ref bean="testRedisTrigger"/>
                 <ref bean="postHeatValueJobTrigger"/>
                 <ref bean="footRankStatisticsJobTrigger"/>
+                <ref bean="everydayPostHeatvalueTrigger"/>
             </list>
         </property>
         <property name="jobDetails">
@@ -49,6 +50,7 @@
                 <ref bean="testRedisDetail"/>
                 <ref bean="postHeatValueJobDetail"/>
                 <ref bean="footRankStatisticsJobDetail"/>
+                <ref bean="everydayPostHeatvalueDetail"/>
             </list>
         </property>
 
@@ -164,6 +166,12 @@
     </bean>
 
 
+    <bean id="everydayPostHeatvalueTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="everydayPostHeatvalueDetail"/>
+        <property name="cronExpression" value="${everydayPostHeatvalue_cronExpression}"/>
+    </bean>
+
     <!-- **************************************job的配置******************************************************* -->
     <bean id="orderJobDetail"
     class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
@@ -276,6 +284,12 @@
         <property name="targetMethod" value="execute"/>
     </bean>
 
+    <bean id="everydayPostHeatvalueDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="everydayPostHeatvalueJob"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
+
 
     <!-- ********************************************工作的bean**************************************************** -->
     <!-- 工作的bean -->
@@ -299,4 +313,6 @@
     <bean id="testRedisJob" class="com.movision.job.TestRedisJob"/>
     <bean id="postHeatValueJob" class="com.movision.job.PostHeatValueJob"/>
     <bean id="footRankStatisticsJob" class="com.movision.job.FootRankStatisticsJob"/>
+    <bean id="everydayPostHeatvalueJob" class="com.movision.job.EverydayPostHeatvalueJob"/>
+
 </beans>

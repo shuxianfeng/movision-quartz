@@ -1,7 +1,9 @@
 
 package com.movision.mybatis.post.service;
+
 import com.movision.mybatis.mapper.PostMapper;
 import com.movision.mybatis.post.entity.Post;
+import com.movision.mybatis.post.entity.PostAuthor;
 import com.movision.mybatis.post.entity.PostVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -169,4 +171,13 @@ public class PostService {
         }
     }
 
+    public List<PostAuthor> queryAllPostInDB() {
+        try {
+            log.info("查询数据库中的所有帖子（包括活动）");
+            return postMapper.queryAllPostInDB();
+        } catch (Exception e) {
+            log.error("查询数据库中的所有帖子（包括活动）失败", e);
+            throw e;
+        }
+    }
 }

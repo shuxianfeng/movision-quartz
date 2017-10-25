@@ -1,6 +1,7 @@
 package com.movision.mybatis.mapper;
 
 import com.movision.mybatis.post.entity.Post;
+import com.movision.mybatis.post.entity.PostAuthor;
 import com.movision.mybatis.post.entity.PostVo;
 import org.springframework.stereotype.Repository;
 
@@ -46,4 +47,6 @@ public interface PostMapper {
     String postDate(int id);
 
     int updateHaet(int id);
+
+    List<PostAuthor> queryAllPostInDB();
 }

@@ -421,4 +421,10 @@
     <update id="updateIsHeatOperate" >
         UPDATE yw_post SET isheatoperate = 0 WHERE isdel = 0 AND isheatoperate = 1
     </update>
+
+    <select id="queryAllPostInDB" resultType="com.movision.mybatis.post.entity.PostAuthor">
+        SELECT u.nickname,p.* from yw_post p
+        LEFT JOIN yw_user u on p.userid = u.id
+        where p.isdel = 0
+    </select>
 </mapper>
