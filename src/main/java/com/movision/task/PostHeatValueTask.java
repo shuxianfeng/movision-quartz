@@ -2,6 +2,8 @@ package com.movision.task;
 
 import com.movision.mybatis.post.entity.Post;
 import com.movision.mybatis.post.service.PostService;
+import com.movision.mybatis.postHeatvalueRecord.entity.PostHeatvalueRecord;
+import com.movision.mybatis.postHeatvalueRecord.service.PostHeatvalueRecordService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +24,9 @@ public class PostHeatValueTask {
 
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private PostHeatvalueRecordService postHeatvalueRecordService;
 
     private static final Logger logger = LoggerFactory.getLogger(PostHeatValueTask.class);
 
@@ -136,18 +141,39 @@ public class PostHeatValueTask {
                 if(pd<=sd) {//1-7天热度-50
                     if (heatvalue >= 50) {
                         postService.updateHeatValue(id);
+                        addPostHeatvalueRecord(id, 50);
+
                     } else {
                         postService.updateHaet(id);
+                        addPostHeatvalueRecord(id, heatvalue);
                     }
                 }else {
                     if (heatvalue >= 100) {
                         postService.updateHeatValueTwo(id);
+                        addPostHeatvalueRecord(id, 100);
                     } else {
                         postService.updateHaet(id);
+                        addPostHeatvalueRecord(id, heatvalue);
                     }
                 }
             }
         }
+    }
+
+    /**
+     * @param id
+     * @param heatvalue
+     */
+    private void addPostHeatvalueRecord(int id, int heatvalue) {
+        PostHeatvalueRecord record = new PostHeatvalueRecord();
+        record.setPostid(id);
+        record.setType(15); //每日衰减
+        record.setUserid(999999);   //表示定时任务
+        record.setIsdel(0);
+        record.setIsadd(1);
+        record.setHeatValue(heatvalue);
+        record.setIntime(new Date());
+        postHeatvalueRecordService.add(record);
     }
 
     /**
@@ -156,7 +182,7 @@ public class PostHeatValueTask {
      */
     private void orderPostHeatOperate(List<Post> list) {
         logger.info("=========================更新旧帖热度操作");
-        for (int i = 0;i<list.size();i++){
+        for (int i = 0; i<list.size(); i++){
             //获取id
             Integer id = list.get(i).getId();
             //获取热度值
@@ -166,12 +192,15 @@ public class PostHeatValueTask {
             if (heat> 5000 && heat < 10000) {
                 map.put("heat",250);
                 postService.updateOldPostHeatValueTwo(map);
+                addPostHeatvalueRecord(id, 250);
             } else if (heat >= 10000 && heat < 50000){
                 map.put("heat",2000);
                 postService.updateOldPostHeatValueTwo(map);
+                addPostHeatvalueRecord(id, 2000);
             } else if (heat >= 50000){
                 map.put("heat",10000);
                 postService.updateOldPostHeatValueTwo(map);
+                addPostHeatvalueRecord(id, 10000);
             }
         }
     }

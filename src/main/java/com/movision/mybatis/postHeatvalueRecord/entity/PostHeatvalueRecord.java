@@ -11,12 +11,17 @@ public class PostHeatvalueRecord {
 
     private Integer heatValue;
 
+    /**
+     * 加减（0增加 1减少）
+     */
     private Integer isadd;
 
     private Integer type;
 
     private Date intime;
-
+    /**
+     * 是否被逻辑删除：0否 1是
+     */
     private Integer isdel;
 
     public Integer getId() {
