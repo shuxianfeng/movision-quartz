@@ -164,7 +164,7 @@ public class PostHeatValueTask {
      * @param id
      * @param heatvalue
      */
-    private void addPostHeatvalueRecord(int id, int heatvalue) {
+    public void addPostHeatvalueRecord(int id, int heatvalue) {
         PostHeatvalueRecord record = new PostHeatvalueRecord();
         record.setPostid(id);
         record.setType(15); //每日衰减

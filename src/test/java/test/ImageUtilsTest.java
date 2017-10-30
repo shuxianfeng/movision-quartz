@@ -1,4 +1,4 @@
-
+package test;
 
 import java.io.File;
 
@@ -11,9 +11,9 @@ public class ImageUtilsTest extends TestCase {
 
 	public void test() {
 		try {
-			/*String str = ImageUtilsTest.class.getResource("/images/org.jpg").getPath();
+			/*String str = test.ImageUtilsTest.class.getResource("/images/org.jpg").getPath();
 			File orgJpg = new File(str);
-			str = ImageUtilsTest.class.getResource("/images/org.png").getPath();*/
+			str = test.ImageUtilsTest.class.getResource("/images/org.png").getPath();*/
 			
 			/*
 			ImageUtils.fromFile(orgJpg)
@@ -66,7 +66,7 @@ public class ImageUtilsTest extends TestCase {
 			System.out.println(flag);
 			
 			/*
-			str = ImageUtilsTest.class.getResource("/images/watermarkater.png").getPath();
+			str = test.ImageUtilsTest.class.getResource("/images/watermarkater.png").getPath();
 			BufferedImage watermarkImage = ImageIO.read(new File(str));
 			Watermark watermark = new Watermark(Positions.CENTER,
 					watermarkImage, 0.6f);
