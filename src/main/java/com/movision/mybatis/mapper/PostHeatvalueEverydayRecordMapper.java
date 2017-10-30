@@ -3,6 +3,7 @@ package com.movision.mybatis.mapper;
 import com.movision.mybatis.postHeatvalueEverydayRecord.entity.PostHeatvalueEverydayRecord;
 import org.springframework.stereotype.Repository;
 
+
 public interface PostHeatvalueEverydayRecordMapper {
     int deleteByPrimaryKey(Integer id);
 
