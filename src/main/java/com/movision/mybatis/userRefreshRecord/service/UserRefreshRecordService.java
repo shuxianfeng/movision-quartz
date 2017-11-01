@@ -2,6 +2,7 @@ package com.movision.mybatis.userRefreshRecord.service;
 
 import com.mongodb.*;
 import com.movision.mybatis.user.service.UserService;
+import com.movision.mybatis.userRefreshRecord.entity.UserRefreshRecord;
 import com.movision.mybatis.userRefreshRecord.entity.UserRefreshRecordCount;
 import com.movision.utils.MongoDbPropertiesLoader;
 import org.slf4j.Logger;
@@ -26,6 +27,11 @@ public class UserRefreshRecordService {
 
     @Autowired
     private MongoTemplate mongoTemplate;
+
+    public void insert(UserRefreshRecord userRefreshRecord) {
+
+        mongoTemplate.insert(userRefreshRecord);
+    }
 
     /**
      * 查询用户刷新记录表的总记录数
