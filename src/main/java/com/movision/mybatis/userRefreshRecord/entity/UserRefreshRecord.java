@@ -2,10 +2,9 @@ package com.movision.mybatis.userRefreshRecord.entity;
 
 /**
  * @Author zhanglei
- * @Date 2017/6/14 16:02
+ * @Date 2017/10/26 16:25
  */
 public class UserRefreshRecord {
-
     private String id;
 
     private int userid;
@@ -20,38 +19,6 @@ public class UserRefreshRecord {
     private String device;
 
     private int labelid;
-
-    public int getLabelid() {
-        return labelid;
-    }
-
-    public void setLabelid(int labelid) {
-        this.labelid = labelid;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public String getDevice() {
-        return device;
-    }
-
-    public void setDevice(String device) {
-        this.device = device;
-    }
-
-    public String getIntime() {
-        return intime;
-    }
-
-    public void setIntime(String intime) {
-        this.intime = intime;
-    }
 
     public String getId() {
         return id;
@@ -83,5 +50,37 @@ public class UserRefreshRecord {
 
     public void setCrileid(String crileid) {
         this.crileid = crileid;
+    }
+
+    public String getIntime() {
+        return intime;
+    }
+
+    public void setIntime(String intime) {
+        this.intime = intime;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
+    }
+
+    public int getLabelid() {
+        return labelid;
+    }
+
+    public void setLabelid(int labelid) {
+        this.labelid = labelid;
     }
 }

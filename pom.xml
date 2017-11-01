@@ -178,6 +178,17 @@
             <artifactId>ccp-sms-sdk</artifactId>
             <version>2.6.3r</version>
         </dependency>
+        <!--mongodb-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>1.8.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>2.11.1</version>
+        </dependency>
 
         <dependency>
             <groupId>taobao.sdk</groupId>

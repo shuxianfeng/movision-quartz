@@ -29,6 +29,7 @@
                 <ref bean="footRankStatisticsJobTrigger"/>
                 <ref bean="everydayPostHeatvalueTrigger"/>
                 <ref bean="robotOperationTrigger"/>
+                <ref bean="InsertUserBehaviorTrigger"/>
             </list>
         </property>
         <property name="jobDetails">
@@ -53,6 +54,7 @@
                 <ref bean="footRankStatisticsJobDetail"/>
                 <ref bean="everydayPostHeatvalueDetail"/>
                 <ref bean="robotOperationDetail"/>
+                <ref bean="InsertUserBehaviorJobDetail"/>
             </list>
         </property>
 
@@ -173,6 +175,13 @@
         <property name="jobDetail" ref="everydayPostHeatvalueDetail"/>
         <property name="cronExpression" value="${everydayPostHeatvalue_cronExpression}"/>
     </bean>
+    <bean id="InsertUserBehaviorTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="InsertUserBehaviorJobDetail"/>
+        <property name="cronExpression" value="${insertUserBehavior_cronExpression}"/>
+    </bean>
+
+
 
     <bean id="robotOperationTrigger"
           class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
@@ -298,6 +307,11 @@
         <property name="targetObject" ref="everydayPostHeatvalueJob"/>
         <property name="targetMethod" value="execute"/>
     </bean>
+    <bean id="InsertUserBehaviorJobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="InsertUserBehaviorJob"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
 
     <bean id="robotOperationDetail"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
@@ -329,5 +343,6 @@
     <bean id="footRankStatisticsJob" class="com.movision.job.FootRankStatisticsJob"/>
     <bean id="everydayPostHeatvalueJob" class="com.movision.job.EverydayPostHeatvalueJob"/>
     <bean id="robotOperationJob" class="com.movision.job.RobotJob"/>
+    <bean id="InsertUserBehaviorJob" class="com.movision.job.InsertUserBehaviorJob"/>
 
 </beans>
