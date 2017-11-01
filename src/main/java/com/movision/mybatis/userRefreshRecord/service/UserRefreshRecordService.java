@@ -4,7 +4,7 @@ import com.mongodb.*;
 import com.movision.mybatis.user.service.UserService;
 import com.movision.mybatis.userRefreshRecord.entity.UserRefreshRecord;
 import com.movision.mybatis.userRefreshRecord.entity.UserRefreshRecordCount;
-import com.movision.utils.MongoDbPropertiesLoader;
+import com.movision.utils.propertiesLoader.MongoDbPropertiesLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
