@@ -6,6 +6,7 @@ import com.movision.mybatis.user.entity.User;
 import com.movision.mybatis.user.service.UserService;
 import com.movision.mybatis.userBehavior.entity.UserBehavior;
 import com.movision.mybatis.userBehavior.service.UserBehaviorService;
+import com.movision.mybatis.userRefreshRecord.entity.UserRefreshRecordCount;
 import com.movision.mybatis.userRefreshRecord.service.UserRefreshRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +48,7 @@ public class InsertUserBehaviorTask {
         for (int i=0;i<users.size();i++){
             int id=users.get(i).getId();
             int count=userRefreshRecordService.mongodbCount(id);
-            List<DBObject> dbCursors=userRefreshRecordService.userFlush(users.get(i).getId());
+            List<UserRefreshRecordCount> dbCursors=userRefreshRecordService.userFlush(users.get(i).getId());
             //插入分析表
             int ishave=userBehaviorService.IsHave(id);
             List<Integer> iList = new ArrayList<>();
@@ -64,9 +65,9 @@ public class InsertUserBehaviorTask {
         }
     }
 
-    private void updateBehavior(List<User> users, int i, List<DBObject> dbCursors, List<Integer> iList, UserBehavior userBehavior) {
+    private void updateBehavior(List<User> users, int i, List<UserRefreshRecordCount> dbCursors, List<Integer> iList, UserBehavior userBehavior) {
         for (int j = 0; j < dbCursors.size(); j++) {
-            int circle = Integer.parseInt(dbCursors.get(j).get("crileid").toString());
+            int circle =dbCursors.get(j).getCrileid();
             iList.add(circle);
         }
         if(iList.size()==3){
