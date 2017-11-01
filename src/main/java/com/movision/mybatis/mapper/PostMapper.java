@@ -5,11 +5,27 @@ import com.movision.mybatis.post.entity.PostAuthor;
 import com.movision.mybatis.post.entity.PostVo;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @Repository
 public interface PostMapper {
+    Date queryPostIdByDate(Integer id);
+
+    int updatePostBycommentsum(int postid);
+
+    Integer queryCrileid(int postid);
+
+    int updatePostByZanSum(int id);
+
+    void insertZanRecord(Map<String, Object> parammap);
+
+    int queryPostHotHeat(int postid);
+
+    int updatePostHeatValue(Map map);//修改热度
+
+    int queryPostIsessenceHeat(int postid);
     int deleteByPrimaryKey(Integer id);
 
     int insert(Post record);
@@ -49,4 +65,6 @@ public interface PostMapper {
     int updateHaet(int id);
 
     List<PostAuthor> queryAllPostInDB();
+
+    int queryIsZanPost(Map<String, Object> parammap);
 }

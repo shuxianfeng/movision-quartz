@@ -1,4 +1,4 @@
-package com.movision.utils;
+package com.movision.utils.propertiesLoader;
 
 import java.io.IOException;
 import java.util.Properties;

@@ -20,7 +20,7 @@ import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.OSSException;
 import com.movision.constants.MsgCodeConstant;
 import com.movision.exception.BusinessException;
-import com.movision.utils.ApplicationPropertiesUtils;
+import com.movision.utils.propertiesLoader.ApplicationPropertiesUtils;
 import com.movision.utils.FileUtils;
 
 import javax.imageio.ImageIO;

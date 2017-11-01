@@ -4,7 +4,7 @@ import com.movision.mybatis.post.entity.PostAuthor;
 import com.movision.mybatis.post.service.PostService;
 import com.movision.mybatis.postHeatvalueEverydayRecord.entity.PostHeatvalueEverydayRecord;
 import com.movision.mybatis.postHeatvalueEverydayRecord.service.PostHeatvalueEverydayRecordService;
-import com.movision.utils.ApplicationPropertiesUtils;
+import com.movision.utils.propertiesLoader.ApplicationPropertiesUtils;
 import com.movision.utils.DateUtil;
 import com.movision.utils.EmailUtil;
 import org.slf4j.Logger;

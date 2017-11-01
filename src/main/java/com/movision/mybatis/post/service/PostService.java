@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,82 @@ public class PostService {
 
     @Autowired
     private PostMapper postMapper;
+
+    public Date queryPostIdByDate(Integer id) {
+        return postMapper.queryPostIdByDate(id);
+    }
+
+    public int updatePostBycommentsum(int postid) {
+        try {
+            log.info("更新帖子的评论数量 postid=" + postid);
+            return postMapper.updatePostBycommentsum(postid);
+        } catch (Exception e) {
+            log.error("帖子更新评论数量异常 postid=" + postid, e);
+            throw e;
+        }
+    }
+
+    public Integer queryCrileid(int postid) {
+        try {
+            log.info("查询帖子属于哪个圈子");
+            return postMapper.queryCrileid(postid);
+        } catch (Exception e) {
+            log.error("查询帖子属于哪个圈子失败");
+            throw e;
+        }
+    }
+
+    //跟新帖子点赞次数
+    public int updatePostByZanSum(int id) {
+        try {
+            log.info("更新帖子点赞次数 id=" + id);
+            return postMapper.updatePostByZanSum(id);
+        } catch (Exception e) {
+            log.error("帖子点赞次数更新异常 id=" + id, e);
+            throw e;
+        }
+    }
+
+    //插入一条用户点赞帖子的记录
+    public void insertZanRecord(Map<String, Object> parammap) {
+        try {
+            log.info("插入一条用户点赞帖子的记录");
+            postMapper.insertZanRecord(parammap);
+        } catch (Exception e) {
+            log.error("插入一条用户点赞帖子的记录失败", e);
+            throw e;
+        }
+    }
+
+    public Integer queryPostHotHeat(int postid) {
+        try {
+            log.info("根据id查询是否为精选");
+            return postMapper.queryPostHotHeat(postid);
+        } catch (Exception e) {
+            log.error("根据id查询是否为精选失败", e);
+            throw e;
+        }
+    }
+
+    public int updatePostHeatValue(Map map) {
+        try {
+            log.info("修改热度");
+            return postMapper.updatePostHeatValue(map);
+        } catch (Exception e) {
+            log.error("修改热度失败", e);
+            throw e;
+        }
+    }
+
+    public Integer queryPostIsessenceHeat(int postid) {
+        try {
+            log.info("根据id查询是否为精选");
+            return postMapper.queryPostIsessenceHeat(postid);
+        } catch (Exception e) {
+            log.error("根据id查询是否为精选失败", e);
+            throw e;
+        }
+    }
 
     @CacheEvict(value = "indexData", key = "'index_data'")
     public List<PostVo> queryAllPost() {
@@ -177,6 +254,17 @@ public class PostService {
             return postMapper.queryAllPostInDB();
         } catch (Exception e) {
             log.error("查询数据库中的所有帖子（包括活动）失败", e);
+            throw e;
+        }
+    }
+
+    //查询当前用户有没有点赞过该帖子
+    public int queryIsZanPost(Map<String, Object> parammap) {
+        try {
+            log.info("查询当前用户有没有点赞过该帖子");
+            return postMapper.queryIsZanPost(parammap);
+        } catch (Exception e) {
+            log.error("查询当前用户有没有点赞过该帖子失败", e);
             throw e;
         }
     }

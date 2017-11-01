@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.mysql.jdbc.StringUtils;
 import com.movision.mybatis.dao.MemberDao;
 import com.movision.mybatis.dao.PriceDao;
-import com.movision.utils.ApplicationPropertiesUtils;
+import com.movision.utils.propertiesLoader.ApplicationPropertiesUtils;
 import com.movision.utils.sms.SDKSendSms;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

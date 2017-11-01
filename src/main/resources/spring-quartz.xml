@@ -28,6 +28,7 @@
                 <ref bean="postHeatValueJobTrigger"/>
                 <ref bean="footRankStatisticsJobTrigger"/>
                 <ref bean="everydayPostHeatvalueTrigger"/>
+                <ref bean="robotOperationTrigger"/>
             </list>
         </property>
         <property name="jobDetails">
@@ -51,6 +52,7 @@
                 <ref bean="postHeatValueJobDetail"/>
                 <ref bean="footRankStatisticsJobDetail"/>
                 <ref bean="everydayPostHeatvalueDetail"/>
+                <ref bean="robotOperationDetail"/>
             </list>
         </property>
 
@@ -172,6 +174,13 @@
         <property name="cronExpression" value="${everydayPostHeatvalue_cronExpression}"/>
     </bean>
 
+    <bean id="robotOperationTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="robotOperationDetail"/>
+        <property name="cronExpression" value="${robotOperation_cronExpression}"/>
+    </bean>
+
+
     <!-- **************************************job的配置******************************************************* -->
     <bean id="orderJobDetail"
     class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
@@ -290,6 +299,11 @@
         <property name="targetMethod" value="execute"/>
     </bean>
 
+    <bean id="robotOperationDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="robotOperationJob"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
 
     <!-- ********************************************工作的bean**************************************************** -->
     <!-- 工作的bean -->
@@ -314,5 +328,6 @@
     <bean id="postHeatValueJob" class="com.movision.job.PostHeatValueJob"/>
     <bean id="footRankStatisticsJob" class="com.movision.job.FootRankStatisticsJob"/>
     <bean id="everydayPostHeatvalueJob" class="com.movision.job.EverydayPostHeatvalueJob"/>
+    <bean id="robotOperationJob" class="com.movision.job.RobotJob"/>
 
 </beans>

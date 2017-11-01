@@ -27,6 +27,72 @@ public class UserService {
     @Autowired
     FootRankMapper footRankMapper;
 
+    public Integer updateUserHeatValue(Map map) {
+        try {
+            log.info("修改用户热度");
+            return userMapper.updateUserHeatValue(map);
+        } catch (Exception e) {
+            log.error("修改用户热度失败", e);
+            throw e;
+        }
+    }
+
+    public void updateUserAttention(Integer userid) {
+        try {
+            log.info("增加用户关注总数");
+            userMapper.updateUserAttention(userid);
+        } catch (Exception e) {
+            log.error("增加用户关注总数失败");
+            throw e;
+        }
+    }
+
+    public List<User> queryNotRepeatFollowRandomRobots(Map map) {
+        try {
+            log.info("查询不重复关注的用户机器人用户");
+            return userMapper.queryNotRepeatRandomRobots(map);
+        } catch (Exception e) {
+            log.error("查询不重复关注的用户机器人用户", e);
+            throw e;
+        }
+    }
+
+    /**
+     * 查询随机用户
+     *
+     * @param number
+     * @return
+     */
+    public List<User> queryRandomUser(Integer number) {
+        try {
+            log.info("随机查询机器人");
+            return userMapper.queryRandomUser(number);
+        } catch (Exception e) {
+            log.error("随机查询机器人异常", e);
+            throw e;
+        }
+    }
+
+    public List<User> queryNotRepeatCollectRobots(Map map) {
+        try {
+            log.info("查询不重复收藏帖子的机器人用户");
+            return userMapper.queryNotRepeatCollectRobots(map);
+        } catch (Exception e) {
+            log.error("查询不重复收藏帖子的机器人用户", e);
+            throw e;
+        }
+    }
+
+    public int queryUserLevel(int userid) {
+        try {
+            log.info("查询用户等级");
+            return userMapper.queryUserLevel(userid);
+        } catch (Exception e) {
+            log.error("查询用户等级失败", e);
+            throw e;
+        }
+    }
+
     public List<User> queryUserid(){
         try {
             log.info("查询所有用户id");
@@ -146,4 +212,18 @@ public class UserService {
             throw e;
         }
     }
+
+    public List<User> queryNotRepeatZanRobots(Map map) {
+        try {
+            log.info("查询不重复点赞帖子的机器人用户");
+            return userMapper.queryNotRepeatZanRobots(map);
+        } catch (Exception e) {
+            log.error("查询不重复点赞帖子的机器人用户", e);
+            throw e;
+        }
+    }
+
+
+
+
 }

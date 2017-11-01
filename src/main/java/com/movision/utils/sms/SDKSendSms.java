@@ -1,7 +1,7 @@
 package com.movision.utils.sms;
 
 import com.google.gson.Gson;
-import com.movision.utils.ApplicationPropertiesUtils;
+import com.movision.utils.propertiesLoader.ApplicationPropertiesUtils;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;

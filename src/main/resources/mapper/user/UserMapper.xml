@@ -504,4 +504,61 @@
         #{userid,jdbcType=INTEGER}, #{invitenum,jdbcType=INTEGER}, #{intime,jdbcType=TIMESTAMP}
     )
   </insert>
+
+  <!-- 查询不重复点赞帖子的机器人用户 -->
+  <select id="queryNotRepeatZanRobots" resultType="com.movision.mybatis.user.entity.User"
+          parameterType="java.util.Map">
+    SELECT u.* FROM yw_user u
+    where <![CDATA[ u.id <= 20000 AND u.id >= 10000 ]]>
+    and not EXISTS
+    (SELECT 1 FROM yw_post_zan_record r
+    where r.userid = u.id and r.postid = #{postid})
+    ORDER BY RAND() LIMIT 0, #{number,jdbcType=INTEGER}
+  </select>
+
+  <select id="queryUserLevel" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT points FROM yw_user WHERE id=#{userid,jdbcType=INTEGER} AND status=0
+  </select>
+
+  <!-- 查询不重复收藏帖子的机器人用户 -->
+  <select id="queryNotRepeatCollectRobots" resultType="com.movision.mybatis.user.entity.User"
+          parameterType="java.util.Map">
+    SELECT u.* FROM yw_user u
+    where <![CDATA[ u.id <=20000 AND u.id >= 10000 ]]>
+    and not EXISTS
+    (SELECT 1 FROM yw_collection c
+    where c.userid = u.id and c.postid = #{postid})
+    ORDER BY RAND() LIMIT 0,#{number}
+  </select>
+
+  <!-- 随机查询机器人 -->
+  <select id="queryRandomUser" resultType="com.movision.mybatis.user.entity.User" parameterType="java.lang.Integer">
+    <![CDATA[
+
+        SELECT * FROM yw_user u where u.id<=20000 AND u.id >= 10000 ORDER BY RAND() LIMIT 0,#{number,jdbcType=INTEGER}
+
+    ]]>
+  </select>
+
+  <!-- 查询不重复关注的用户机器人用户 -->
+  <select id="queryNotRepeatRandomRobots" resultType="com.movision.mybatis.user.entity.User"
+          parameterType="java.util.Map">
+    SELECT u.* FROM yw_user u
+    where <![CDATA[ u.id <= 20000 AND u.id >= 10000 ]]>
+    and not EXISTS (SELECT 1 FROM yw_follow_user f
+    where f.userid = u.id
+    and f.interestedusers = #{userid})
+    ORDER BY RAND() LIMIT 0,#{number}
+  </select>
+
+  <update id="updateUserAttention" parameterType="java.lang.Integer">
+    UPDATE yw_user
+    SET attention = attention + 1
+    WHERE id = #{userid,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateUserHeatValue" parameterType="java.util.Map">
+    UPDATE yw_user SET heat_value=heat_value+#{points,jdbcType=INTEGER} WHERE id=#{userid,jdbcType=INTEGER}
+  </update>
+
 </mapper>

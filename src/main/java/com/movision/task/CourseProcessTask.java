@@ -10,7 +10,7 @@ import com.movision.mybatis.entity.OrderSms;
 import com.movision.mybatis.entity.PublishCourse;
 import com.movision.service.OrderService;
 import com.movision.service.PwdticketService;
-import com.movision.utils.ApplicationPropertiesUtils;
+import com.movision.utils.propertiesLoader.ApplicationPropertiesUtils;
 import com.movision.utils.sms.SDKSendSms;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

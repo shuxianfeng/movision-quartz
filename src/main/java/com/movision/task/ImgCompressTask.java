@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.movision.constants.ImgCompressConstants;
 import com.movision.service.ImgCompressService;
-import com.movision.utils.ApplicationPropertiesUtils;
+import com.movision.utils.propertiesLoader.ApplicationPropertiesUtils;
 import com.movision.utils.DateUtil;
 import com.movision.utils.EmailUtil;
 

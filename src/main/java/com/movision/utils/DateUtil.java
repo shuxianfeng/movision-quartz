@@ -10,6 +10,20 @@ import java.util.Date;
  * 时间工具类
  */
 public class DateUtil {
+
+    public static String date2Str(Date target, SimpleDateFormat pattern) {
+        if (null == target || null == pattern) {
+            return "";
+        }
+        String targetStr = "";
+        try {
+            targetStr = pattern.format(target);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return targetStr;
+    }
+
 	/**
 	 * 获取间隔时间
 	 * @param str1 开始时间
@@ -196,6 +210,7 @@ public class DateUtil {
         returnStr = f.format(date);
         return returnStr;
     }
+
 
     public static void main(String[] args) {
 

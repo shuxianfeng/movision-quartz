@@ -8,6 +8,17 @@ import java.util.Map;
 
 @Repository
 public interface UserMapper {
+    Integer updateUserHeatValue(Map map);
+
+    void updateUserAttention(Integer userid);
+
+    List<User> queryNotRepeatRandomRobots(Map map);
+
+    List<User> queryRandomUser(Integer number);
+
+    List<User> queryNotRepeatCollectRobots(Map map);
+
+    int queryUserLevel(int userid);
     int deleteByPrimaryKey(Integer id);
 
     int insert(User record);
@@ -37,4 +48,6 @@ public interface UserMapper {
     int getAttentionSum(int userid);
 
     int getFansSum(int userid);
+
+    List<User> queryNotRepeatZanRobots(Map map);
 }

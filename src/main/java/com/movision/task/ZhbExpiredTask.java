@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.movision.service.ZhbService;
-import com.movision.utils.ApplicationPropertiesUtils;
+import com.movision.utils.propertiesLoader.ApplicationPropertiesUtils;
 import com.movision.utils.DateUtil;
 import com.movision.utils.EmailUtil;
 import org.springframework.stereotype.Service;

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.movision.mybatis.entity.ZhbRecord;
 import com.movision.service.ZhbService;
-import com.movision.utils.ApplicationPropertiesUtils;
+import com.movision.utils.propertiesLoader.ApplicationPropertiesUtils;
 import com.movision.utils.DateUtil;
 import com.movision.utils.EmailUtil;
 

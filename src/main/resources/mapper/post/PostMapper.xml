@@ -427,4 +427,54 @@
         LEFT JOIN yw_user u on p.userid = u.id
         where p.isdel = 0
     </select>
+
+    <!--查询当前用户是否点赞过该帖子-->
+    <select id="queryIsZanPost" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) FROM yw_post_zan_record
+        WHERE userid = #{userid,jdbcType=INTEGER}
+        AND postid = #{postid,jdbcType=INTEGER}
+    </select>
+
+    <select id="queryPostIsessenceHeat" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        SELECT isessence FROM yw_post WHERE id=#{postid,jdbcType=INTEGER}
+    </select>
+
+    <update id="updatePostHeatValue" parameterType="java.util.Map">
+        UPDATE yw_post SET heat_value=heat_value+#{points,jdbcType=INTEGER} WHERE id=#{postid,jdbcType=INTEGER}
+    </update>
+
+    <select id="queryPostHotHeat" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT ishot FROM yw_post WHERE id=#{postid,jdbcType=INTEGER}
+    </select>
+
+    <!--插入一条用户点赞帖子的记录-->
+    <insert id="insertZanRecord" parameterType="java.util.Map">
+        INSERT INTO yw_post_zan_record (
+        userid, postid, intime
+        )
+        VALUES (
+        #{userid,jdbcType=INTEGER}, #{postid,jdbcType=INTEGER}, #{intime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <update id="updatePostByZanSum" parameterType="java.lang.Integer">
+        UPDATE yw_post
+        SET zansum = zansum+1
+        WHERE id=#{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="queryCrileid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT circleid FROM yw_post WHERE id=#{postid,jdbcType=INTEGER}
+    </select>
+
+    <update id="updatePostBycommentsum" parameterType="java.lang.Integer">
+        UPDATE yw_post
+        SET commentsum=commentsum+1,
+        oprtime = now()
+        WHERE id=#{postid,jdbcType=INTEGER}
+    </update>
+
+    <select id="queryPostIdByDate" parameterType="java.lang.Integer" resultType="java.util.Date">
+        SELECT p.intime FROM yw_post p WHERE p.isactive=0 AND id =#{id,jdbcType=INTEGER} AND isdel = 0
+    </select>
 </mapper>

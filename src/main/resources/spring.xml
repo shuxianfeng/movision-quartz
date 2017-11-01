@@ -127,4 +127,7 @@
     <!--***********************************************分割线*********************************************************-->
 
     <import resource="spring-quartz.xml"/>
+    <!--<import resource="classpath*:mongodb/mongodb.xml"/>-->
+    <import resource="mongodb/mongodb.xml"/>
+
 </beans>

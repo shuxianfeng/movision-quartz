@@ -26,7 +26,7 @@
         <mybatis.spring.version>1.2.2</mybatis.spring.version>
         <alibaba.fastjson.version>1.1.40</alibaba.fastjson.version>
         <mybatis.version>3.2.7</mybatis.version>
-        <spring.version>3.2.4.RELEASE</spring.version>
+        <spring.version>4.2.4.RELEASE</spring.version>
         <commons.lang3.version>3.1</commons.lang3.version>
         <restlet-version>2.3.1</restlet-version>
         <druid.version>0.2.23</druid.version>
@@ -209,6 +209,19 @@
             <version>${alibaba.fastjson.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>2.11.1</version>
+        </dependency>
+
+        <!--mongodb-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>1.8.0.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -288,6 +301,18 @@
                             <directory>${basedir}/target/movision-quartz</directory>
                         </fileset>
                     </filesets>
+                </configuration>
+            </plugin>
+
+            <!--mongodb-->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.0-beta-1</version>
+                <configuration>
+                    <uriEncoding>utf-8</uriEncoding>
+                    <port>8070</port>
+                    <path>/</path>
                 </configuration>
             </plugin>
 
