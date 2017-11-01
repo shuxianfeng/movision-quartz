@@ -1,7 +1,6 @@
 package com.movision.mybatis.userRefreshRecord.service;
 
 import com.mongodb.*;
-import com.movision.mybatis.user.service.UserService;
 import com.movision.mybatis.userRefreshRecord.entity.UserRefreshRecord;
 import com.movision.mybatis.userRefreshRecord.entity.UserRefreshRecordCount;
 import com.movision.utils.propertiesLoader.MongoDbPropertiesLoader;
@@ -23,7 +22,7 @@ import java.util.List;
  */
 @Service
 public class UserRefreshRecordService {
-    private static final Logger log = LoggerFactory.getLogger(UserService.class);
+    private static final Logger log = LoggerFactory.getLogger(UserRefreshRecordService.class);
 
     @Autowired
     private MongoTemplate mongoTemplate;

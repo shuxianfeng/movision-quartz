@@ -45,10 +45,11 @@ public class InsertUserBehaviorTask {
         //查询用户表
         List<User> users = userService.queryUserid();
         for (int i=0;i<users.size();i++){
-            int count=userRefreshRecordService.mongodbCount(users.get(i).getId());
+            int id=users.get(i).getId();
+            int count=userRefreshRecordService.mongodbCount(id);
             List<DBObject> dbCursors=userRefreshRecordService.userFlush(users.get(i).getId());
             //插入分析表
-            int ishave=userBehaviorService.IsHave(users.get(i).getId());
+            int ishave=userBehaviorService.IsHave(id);
             List<Integer> iList = new ArrayList<>();
             UserBehavior userBehavior = new UserBehavior();
             if(count>=100) {//历史记录》100
