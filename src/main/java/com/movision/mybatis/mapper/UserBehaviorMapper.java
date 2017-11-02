@@ -2,6 +2,8 @@ package com.movision.mybatis.mapper;
 
 import com.movision.mybatis.userBehavior.entity.UserBehavior;
 
+import java.util.Map;
+
 public interface UserBehaviorMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -11,7 +13,7 @@ public interface UserBehaviorMapper {
 
     UserBehavior selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(UserBehavior record);
+    int updateByPrimaryKeySelective(Map map);
 
     int updateByPrimaryKey(UserBehavior record);
 

@@ -8,14 +8,13 @@ import com.movision.mybatis.userBehavior.entity.UserBehavior;
 import com.movision.mybatis.userBehavior.service.UserBehaviorService;
 import com.movision.mybatis.userRefreshRecord.entity.UserRefreshRecordCount;
 import com.movision.mybatis.userRefreshRecord.service.UserRefreshRecordService;
+import com.movision.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Author zhanglei
@@ -58,11 +57,59 @@ public class InsertUserBehaviorTask {
                       insertBehavior(users, i, dbCursors, iList, userBehavior);
                       userBehaviorService.insertSelective(userBehavior);
                 }else {//有的话就更新
-                    insertBehavior(users, i, dbCursors, iList, userBehavior);
-                    userBehaviorService.insertSelective(userBehavior);
+                    Map map = updateBe(users, i, dbCursors, iList);
+                    userBehaviorService.updateByPrimaryKeySelective(map);
                 }
             }
         }
+    }
+
+    private Map updateBe(List<User> users, int i, List<UserRefreshRecordCount> dbCursors, List<Integer> iList) {
+        Map map = new HashMap();
+        for (int j = 0; j < dbCursors.size(); j++) {
+            int circle = dbCursors.get(j).getCrileid();
+            iList.add(circle);
+        }
+        if (iList.size() == 3) {
+            if (StringUtil.isNotEmpty(users.get(i).getId().toString())) {
+                map.put("id", users.get(i).getId());
+            }
+            if (StringUtil.isNotEmpty(iList.get(0).toString())) {
+                map.put("circle1", iList.get(0));
+            }
+            if (StringUtil.isNotEmpty(iList.get(1).toString())) {
+                map.put("circle2", iList.get(1));
+            }
+
+            if (StringUtil.isNotEmpty(iList.get(2).toString())) {
+                map.put("circle3", iList.get(2));
+            }
+            map.put("intime", new Date());
+        } else if (iList.size() == 2) {
+            if (StringUtil.isNotEmpty(users.get(i).getId().toString())) {
+                map.put("id", users.get(i).getId());
+            }
+            if (StringUtil.isNotEmpty(iList.get(0).toString())) {
+                map.put("circle1", iList.get(0));
+            }
+            if (StringUtil.isNotEmpty(iList.get(1).toString())) {
+                map.put("circle2", iList.get(1));
+            }
+            map.put("circle3", 0);
+            map.put("intime", new Date());
+        } else if (iList.size() == 1) {
+            if (StringUtil.isNotEmpty(users.get(i).getId().toString())) {
+                map.put("id", users.get(i).getId());
+            }
+            if (StringUtil.isNotEmpty(iList.get(0).toString())) {
+                map.put("circle1", iList.get(0));
+            }
+            map.put("circle2", 0);
+
+            map.put("circle3", 0);
+            map.put("intime", new Date());
+        }
+        return map;
     }
 
     /**
@@ -98,7 +145,6 @@ public class InsertUserBehaviorTask {
             userBehavior.setCircle3(0);
         }
     }
-
 
 
 }

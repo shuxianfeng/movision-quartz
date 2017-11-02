@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class UserBehaviorService {
 
@@ -39,10 +41,10 @@ public class UserBehaviorService {
     }
 
 
-    public int updateByPrimaryKeySelective(UserBehavior userBehavior){
+    public int updateByPrimaryKeySelective(Map map){
         try {
             log.info("修改成功");
-            return  userBehaviorMapper.updateByPrimaryKeySelective(userBehavior);
+            return  userBehaviorMapper.updateByPrimaryKeySelective(map);
         }catch (Exception e){
             log.error("修改失败");
             throw e;
