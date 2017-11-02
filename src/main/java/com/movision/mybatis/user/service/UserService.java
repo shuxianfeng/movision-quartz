@@ -223,6 +223,10 @@ public class UserService {
         }
     }
 
+    public List<User> queryNotRepeatCommentRobots(Integer postid) {
+        return userMapper.queryNotRepeatCommentRobots(postid);
+    }
+
 
 
 

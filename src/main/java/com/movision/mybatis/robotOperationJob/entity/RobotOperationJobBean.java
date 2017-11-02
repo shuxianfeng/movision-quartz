@@ -25,6 +25,17 @@ public class RobotOperationJobBean {
 
     private Integer theme;
 
+    private Integer commentType;
+
+    public void setCommentType(Integer commentType) {
+        this.commentType = commentType;
+    }
+
+    public Integer getCommentType() {
+
+        return commentType;
+    }
+
     public void setTheme(Integer theme) {
         this.theme = theme;
     }

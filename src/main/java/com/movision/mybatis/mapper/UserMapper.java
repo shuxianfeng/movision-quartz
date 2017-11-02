@@ -50,4 +50,6 @@ public interface UserMapper {
     int getFansSum(int userid);
 
     List<User> queryNotRepeatZanRobots(Map map);
+
+    List<User> queryNotRepeatCommentRobots(Integer postid);
 }

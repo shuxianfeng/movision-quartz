@@ -111,11 +111,10 @@ public class RobotService {
 
     private void zanBusiProcess(RobotOperationJobBean jobBean) {
         int postid = jobBean.getPostid();
-        int num = jobBean.getNumber();
-        //1 集合机器人大军， 注：一个机器人只能点赞同一个帖子一次
+        //1 每次任务只有一个机器人进行操作
         Map map = new HashMap();
         map.put("postid", postid);
-        map.put("number", num);
+        map.put("number", 1);
         List<User> robotArmy = userService.queryNotRepeatZanRobots(map);
 
         //2 循环进行帖子点赞操作
@@ -124,7 +123,7 @@ public class RobotService {
             processRobotZanPost(postid, userid);
         }
         //3 进行5倍的机器人数量的浏览帖子操作
-        viewPost5Times(postid, num, map);
+        viewPost5Times(postid, 1, map);
     }
 
     /**
@@ -208,11 +207,10 @@ public class RobotService {
      */
     public void robotCollectPost(RobotOperationJobBean jobBean) {
         int postid = jobBean.getPostid();
-        int num = jobBean.getNumber();
-        //1 集合机器人大军, 注：一个机器人只能对同一个帖子收藏一次
+        //1 每次任务只有一个机器人操作
         Map map = new HashMap();
         map.put("postid", postid);
-        map.put("number", num);
+        map.put("number", 1);
         List<User> robotArmy = userService.queryNotRepeatCollectRobots(map);
 
         //2 循环进行收藏帖子操作
@@ -222,7 +220,7 @@ public class RobotService {
         }
 
         //3 进行5倍的机器人数量的浏览帖子操作
-        viewPost5Times(postid, num, map);
+        viewPost5Times(postid, 1, map);
     }
 
     /**
@@ -239,15 +237,10 @@ public class RobotService {
 
     public void robotCommentPostProcess(RobotOperationJobBean jobBean) {
         int postid = jobBean.getPostid();
-        int num = jobBean.getNumber();
-        int theme = jobBean.getTheme();
+        int num = 1;
+        int commentType = jobBean.getCommentType();
         //1 新增评论
-        if (num > 1) {//2:40% 4:30% 5:30% --2
-            insertPostCommentByRobolt(postid, num, 2, theme);
-
-        } else if (num == 1) {//随机100% --1
-            insertPostCommentByRobolt(postid, num, 1, theme);
-        }
+        insertPostCommentByRobolt(postid, num, commentType);
         //2 新增机器人5倍的浏览帖子
         Map map = new HashMap();
         map.put("postid", postid);
@@ -260,12 +253,12 @@ public class RobotService {
      * @param postid 帖子id
      * @param num    机器人的数量
      */
-    public void insertPostCommentByRobolt(Integer postid, Integer num, Integer type, Integer theme) {
+    public void insertPostCommentByRobolt(Integer postid, Integer num, Integer commentType) {
 
-        //1 集合num个机器人大军
-        List<User> users = userService.queryRandomUser(num);
+        //1 集合num个机器人大军, 不重复
+        List<User> users = userService.queryNotRepeatCommentRobots(num);
         //2 随机查询num条评论内容
-        List<RobotComment> content = randomRobotComment(type, users.size(), theme);
+        List<RobotComment> content = queryRobotComment(users.size(), commentType, postid);
         //3 获取帖子发表时间
         Date date = postService.queryPostIdByDate(postid);
 
@@ -303,6 +296,20 @@ public class RobotService {
         commentService.insertComment(vo);
     }
 
+    public List<RobotComment> queryRobotComment(Integer num, Integer commentType, Integer postid) {
+        List<RobotComment> content;
+        List<RobotComment> contens = new ArrayList();
+
+        Map map = new HashMap();
+        map.put("number", num);
+        map.put("type", commentType);
+        map.put("postid", postid);
+        //随机查询num条评论内容
+        content = robotCommentService.queryRoboltComment(map);
+        contens.addAll(content);
+        return contens;
+    }
+
     /**
      * 随机查询num条评论内容
      *
@@ -311,7 +318,7 @@ public class RobotService {
      * @param theme 帖子主题，1：人像， 2：风光
      * @return
      */
-    public List<RobotComment> randomRobotComment(Integer type, Integer num, Integer theme) {
+    /*public List<RobotComment> randomRobotComment(Integer type, Integer num, Integer theme) {
         List<RobotComment> content = new ArrayList<>();
         List<RobotComment> contens = new ArrayList();
 
@@ -344,7 +351,7 @@ public class RobotService {
             querySelectedComment(num, contens, map, number2, 5);
         }
         return contens;
-    }
+    }*/
 
     /**
      * 查询指定类型的评论字典
@@ -355,7 +362,7 @@ public class RobotService {
      * @param number2
      * @param commentType 评论类型 ：0：普通 1：专业摄影 2：风光 3：人像 4：诗词 5：段子
      */
-    private void querySelectedComment(Integer num, List<RobotComment> contens, Map map, Double number2, int commentType) {
+    /*private void querySelectedComment(Integer num, List<RobotComment> contens, Map map, Double number2, int commentType) {
         int mm;
         List<RobotComment> content;
         mm = (int) (Math.ceil(num * number2));
@@ -363,7 +370,7 @@ public class RobotService {
         map.put("type", commentType);
         content = robotCommentService.queryRoboltComment(map);
         contens.addAll(content);
-    }
+    }*/
 
     /**
      * 机器人关注用户任务流程
