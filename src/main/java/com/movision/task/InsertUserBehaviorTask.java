@@ -55,17 +55,25 @@ public class InsertUserBehaviorTask {
             UserBehavior userBehavior = new UserBehavior();
             if(count>=100) {//历史记录》100
                 if (ishave <= 0) {//分析表中没有该用户就插入到分析表中
-                      updateBehavior(users, i, dbCursors, iList, userBehavior);
+                      insertBehavior(users, i, dbCursors, iList, userBehavior);
                       userBehaviorService.insertSelective(userBehavior);
                 }else {//有的话就更新
-                    updateBehavior(users, i, dbCursors, iList, userBehavior);
-                    userBehaviorService.updateByPrimaryKeySelective(userBehavior);
+                    insertBehavior(users, i, dbCursors, iList, userBehavior);
+                    userBehaviorService.insertSelective(userBehavior);
                 }
             }
         }
     }
 
-    private void updateBehavior(List<User> users, int i, List<UserRefreshRecordCount> dbCursors, List<Integer> iList, UserBehavior userBehavior) {
+    /**
+     * 新增
+     * @param users
+     * @param i
+     * @param dbCursors
+     * @param iList
+     * @param userBehavior
+     */
+    private void insertBehavior(List<User> users, int i, List<UserRefreshRecordCount> dbCursors, List<Integer> iList, UserBehavior userBehavior) {
         for (int j = 0; j < dbCursors.size(); j++) {
             int circle =dbCursors.get(j).getCrileid();
             iList.add(circle);
@@ -90,5 +98,7 @@ public class InsertUserBehaviorTask {
             userBehavior.setCircle3(0);
         }
     }
+
+
 
 }
