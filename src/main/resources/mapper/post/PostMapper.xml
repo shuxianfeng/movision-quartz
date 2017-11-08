@@ -474,6 +474,15 @@
         WHERE id=#{postid,jdbcType=INTEGER}
     </update>
 
+    <!--定时任务模拟人为定时发布帖子(isdel为9的待发布帖子)-->
+    <update id="releasePost" >
+        UPDATE yw_post
+        SET isdel = '0',
+            intime = now()
+        WHERE isdel = '9'
+        limit 1
+    </update>
+
     <select id="queryPostIdByDate" parameterType="java.lang.Integer" resultType="java.util.Date">
         SELECT p.intime FROM yw_post p WHERE p.isactive=0 AND id =#{id,jdbcType=INTEGER} AND isdel = 0
     </select>

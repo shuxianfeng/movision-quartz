@@ -67,4 +67,6 @@ public interface PostMapper {
     List<PostAuthor> queryAllPostInDB();
 
     int queryIsZanPost(Map<String, Object> parammap);
+
+    void releasePost();
 }

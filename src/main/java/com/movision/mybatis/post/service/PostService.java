@@ -268,4 +268,14 @@ public class PostService {
             throw e;
         }
     }
+
+    public void releasePost(){
+        try {
+            log.info("定时任务发布帖子");
+            postMapper.releasePost();
+        }catch (Exception e){
+            log.error("定时任务发布帖子失败");
+            throw e;
+        }
+    }
 }
