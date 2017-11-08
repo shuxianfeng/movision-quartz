@@ -389,7 +389,7 @@ public class RobotService {
      */
     public void robotFollowUserBusiProcess(RobotOperationJobBean jobBean) {
         int userid = jobBean.getUserid();
-        int num = jobBean.getNumber();
+        int num = 1;
         //1 集合机器人大军
         Map map = new HashMap();
         map.put("number", num);
