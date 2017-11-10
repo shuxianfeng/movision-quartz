@@ -278,4 +278,33 @@ public class PostService {
             throw e;
         }
     }
+
+    /**
+     * 查询所有帖子
+     * @return
+     */
+    public List<Post> findAllPost(){
+        try {
+            log.info("查询所有帖子");
+            return postMapper.findAllPost();
+        }catch (Exception e){
+            log.error("查询所有帖子失败",e);
+            throw e;
+        }
+    }
+
+    /**
+     * 修改帖子浏览量
+     * @param
+     * @return
+     */
+    public  int updatePostCountView(Map map){
+        try {
+            log.info("修改帖子浏览量");
+            return postMapper.updatePostCountView(map);
+        }catch (Exception e){
+            log.error("修改帖子浏览量失败",e);
+            throw e;
+        }
+    }
 }

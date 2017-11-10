@@ -31,6 +31,7 @@
                 <ref bean="robotOperationTrigger"/>
                 <ref bean="InsertUserBehaviorTrigger"/>
                 <ref bean="quartzPostJobTrigger"/>
+                <ref bean="queryPostCountViewJobTrigger"/>
             </list>
         </property>
         <property name="jobDetails">
@@ -57,6 +58,7 @@
                 <ref bean="robotOperationDetail"/>
                 <ref bean="InsertUserBehaviorJobDetail"/>
                 <ref bean="quartzPostJobDetail"/>
+                <ref bean="queryPostCountViewJobDetail"/>
             </list>
         </property>
 
@@ -196,6 +198,11 @@
         <property name="jobDetail" ref="quartzPostJobDetail"/>
         <property name="cronExpression" value="${quartzPostJob_cronExpression}"/>
     </bean>
+    <bean id="queryPostCountViewJobTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="queryPostCountViewJobDetail"/>
+        <property name="cronExpression" value="${queryPostCountViewJob_cronExpression}"/>
+    </bean>
 
 
     <!-- **************************************job的配置******************************************************* -->
@@ -331,6 +338,12 @@
         <property name="targetObject" ref="quartzPostJob"/>
         <property name="targetMethod" value="execute"/>
     </bean>
+    <bean id="queryPostCountViewJobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="queryPostCountViewJob"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
+
 
     <!-- ********************************************工作的bean**************************************************** -->
     <!-- 工作的bean -->
@@ -358,5 +371,6 @@
     <bean id="robotOperationJob" class="com.movision.job.RobotJob"/>
     <bean id="InsertUserBehaviorJob" class="com.movision.job.InsertUserBehaviorJob"/>
     <bean id="quartzPostJob" class="com.movision.job.QuartzPostJob"/>
+    <bean id="queryPostCountViewJob" class="com.movision.job.QueryPostCountViewJob"/>
 
 </beans>

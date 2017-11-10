@@ -30,11 +30,12 @@
         <result column="oprtime" property="oprtime" jdbcType="TIMESTAMP"/>
         <result column="heat_value" property="heatvalue" jdbcType="INTEGER"/>
         <result column="isheatoperate" property="isheatoperate" javaType="INTEGER"/>
+        <result column="countview" property="countview" javaType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, circleid, title, subtitle, postcontent, zansum, commentsum, forwardsum, collectsum, 
     isactive, type, ishot, isessence, orderid, coverimg, hotimgurl, intime, totalpoint, 
-    isdel, isessencepool, activetype, activefee, iscontribute, essencedate, userid, oprtime,heat_value ,isheatoperate
+    isdel, isessencepool, activetype, activefee, iscontribute, essencedate, userid, oprtime,heat_value ,isheatoperate,countview
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -486,4 +487,10 @@
     <select id="queryPostIdByDate" parameterType="java.lang.Integer" resultType="java.util.Date">
         SELECT p.intime FROM yw_post p WHERE p.isactive=0 AND id =#{id,jdbcType=INTEGER} AND isdel = 0
     </select>
+    <select id="findAllPost" resultType="com.movision.mybatis.post.entity.Post">
+        SELECT * FROM  yw_post WHERE isdel=0
+    </select>
+    <update id="updatePostCountView" parameterType="java.util.Map">
+        UPDATE yw_post SET  countview=#{count,jdbcType=INTEGER} WHERE id=#{postid,jdbcType=INTEGER}
+    </update>
 </mapper>
