@@ -64,6 +64,16 @@ public class PostVo implements Serializable {
 
     private String videocoverurl;//视频封面图片
 
+    private Integer countview;//浏览量
+
+    public Integer getCountview() {
+        return countview;
+    }
+
+    public void setCountview(Integer countview) {
+        this.countview = countview;
+    }
+
     public Integer getId() {
         return id;
     }
