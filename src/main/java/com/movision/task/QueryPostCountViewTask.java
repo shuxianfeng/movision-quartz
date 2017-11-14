@@ -29,7 +29,7 @@ public class QueryPostCountViewTask {
     public void run() throws Exception {
         logger.info("查询帖子浏览量开始");
         queryPostCountView();
-        logger.info("查询帖子浏览量失败");
+        logger.info("查询帖子浏览量完成");
 
     }
 
