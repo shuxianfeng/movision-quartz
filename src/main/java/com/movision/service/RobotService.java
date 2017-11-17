@@ -74,7 +74,14 @@ public class RobotService {
      */
     public void zanProcess(RobotOperationJobBean jobBean) {
         //1 点赞的业务处理
-        zanBusiProcess(jobBean);
+        int immediate = jobBean.getImmediate();
+        if (immediate == 1) {
+            //需要立即执行，机器人数量为剩余的执行次数
+            zanBusiProcess(jobBean, jobBean.getCount());
+        } else {
+            //正常执行，机器人数量为1
+            zanBusiProcess(jobBean, 1);
+        }
         //2 机器人处理任务的公共流程
         commonProcess(jobBean);
     }
@@ -87,35 +94,78 @@ public class RobotService {
      * @param jobBean
      */
     private void commonProcess(RobotOperationJobBean jobBean) {
-        //1 更新指定次数，即count-1
         int jobid = jobBean.getId();
+        int immediate = jobBean.getImmediate();
+        if (immediate == 1) {
+            //立即执行处理
+            updateImmediateJob(jobid);
+            //记录任务执行流水
+            addJobExecuteRecord(jobid, 1);
+        } else {
+            //正常处理
+            updateNormalJob(jobBean, jobid);
+            //记录任务执行流水
+            addJobExecuteRecord(jobid, 0);
+        }
+    }
+
+    /**
+     * 修改立即执行的机器人任务
+     *
+     * @param jobid
+     */
+    private void updateImmediateJob(int jobid) {
+        //需要立即执行的处理
+        RobotOperationJobBean newJob = new RobotOperationJobBean();
+        newJob.setId(jobid);
+        newJob.setStatus(1);    //已处理
+        newJob.setEndtime(new Date());  //执行完时间
+        newJob.setCount(0); //剩余次数
+        robotOperationJobService.updateByPrimaryKeySelective(newJob);
+    }
+
+    /**
+     * 修改正常的任务的状态
+     *
+     * @param jobBean
+     * @param jobid
+     */
+    private void updateNormalJob(RobotOperationJobBean jobBean, int jobid) {
         //剩余执行次数
         int execCount = jobBean.getCount();
         int leftExecCount = execCount - 1;
         RobotOperationJobBean newJob = new RobotOperationJobBean();
         //若下次执行次数为0 ，则设置该任务状态：已执行。--下次定时任务不会再执行
         if (leftExecCount == 0) {
-            newJob.setStatus(1);
-            newJob.setEndtime(new Date());
+            newJob.setStatus(1);    //已处理
+            newJob.setEndtime(new Date());  //执行完时间
         }
         newJob.setId(jobid);
-        newJob.setCount(leftExecCount);
+        newJob.setCount(leftExecCount); //剩余次数
         robotOperationJobService.updateByPrimaryKeySelective(newJob);
+    }
 
-        //2 记录任务执行流水
+    /**
+     * 增加机器人任务执行流水记录
+     *
+     * @param jobid
+     * @param immediate
+     */
+    private void addJobExecuteRecord(int jobid, int immediate) {
         RobotJobRecord record = new RobotJobRecord();
         record.setJobid(jobid);
         record.setIntime(new Date());
+        record.setImmediate(immediate);
         robotJobRecordService.insertSelective(record);
     }
 
-    private void zanBusiProcess(RobotOperationJobBean jobBean) {
+    private void zanBusiProcess(RobotOperationJobBean jobBean, int robotNum) {
         int postid = jobBean.getPostid();
         //1 每次任务只有一个机器人进行操作
         Map map = new HashMap();
         map.put("postid", postid);
-        map.put("number", 1);
-        List<User> robotArmy = userService.queryNotRepeatZanRobots(map);
+        map.put("number", robotNum);
+        List<User> robotArmy = userService.queryNotRepeatZanRobots(map);    //这里只有一个机器人
 
         //2 循环进行帖子点赞操作
         for (int i = 0; i < robotArmy.size(); i++) {
@@ -123,7 +173,7 @@ public class RobotService {
             processRobotZanPost(postid, userid);
         }
         //3 进行5倍的机器人数量的浏览帖子操作
-        viewPost5Times(postid, 1, map);
+        viewPost5Times(postid, robotNum, map);
     }
 
     /**
@@ -194,8 +244,14 @@ public class RobotService {
      * @param jobBean
      */
     public void collectPostProcess(RobotOperationJobBean jobBean) {
-        //1 收藏的业务处理
-        robotCollectPost(jobBean);
+        int immediate = jobBean.getImmediate();
+        if (immediate == 1) {
+            //需要立即执行，机器人数量为剩余的执行次数
+            robotCollectPost(jobBean, jobBean.getCount());
+        } else {
+            //正常执行，机器人数量为1
+            robotCollectPost(jobBean, 1);
+        }
         //2 机器人处理任务的公共流程
         commonProcess(jobBean);
     }
@@ -205,12 +261,12 @@ public class RobotService {
      *
      * @param jobBean
      */
-    public void robotCollectPost(RobotOperationJobBean jobBean) {
+    public void robotCollectPost(RobotOperationJobBean jobBean, int robotNum) {
         int postid = jobBean.getPostid();
         //1 每次任务只有一个机器人操作
         Map map = new HashMap();
         map.put("postid", postid);
-        map.put("number", 1);
+        map.put("number", robotNum);
         List<User> robotArmy = userService.queryNotRepeatCollectRobots(map);
 
         //2 循环进行收藏帖子操作
@@ -220,7 +276,7 @@ public class RobotService {
         }
 
         //3 进行5倍的机器人数量的浏览帖子操作
-        viewPost5Times(postid, 1, map);
+        viewPost5Times(postid, robotNum, map);
     }
 
     /**
@@ -230,21 +286,26 @@ public class RobotService {
      */
     public void commentPostProcess(RobotOperationJobBean jobBean) {
         //1 收藏的业务处理
-        robotCommentPostProcess(jobBean);
+        int immediate = jobBean.getImmediate();
+        if (immediate == 1) {
+            robotCommentPostProcess(jobBean, jobBean.getCount());
+        } else {
+            robotCommentPostProcess(jobBean, 1);
+        }
         //2 机器人处理任务的公共流程
         commonProcess(jobBean);
     }
 
-    public void robotCommentPostProcess(RobotOperationJobBean jobBean) {
+    public void robotCommentPostProcess(RobotOperationJobBean jobBean, int robotNum) {
         int postid = jobBean.getPostid();
-        int num = 1;
+
         int commentType = jobBean.getCommentType();
         //1 新增评论
-        insertPostCommentByRobolt(postid, num, commentType);
+        insertPostCommentByRobolt(postid, robotNum, commentType);
         //2 新增机器人5倍的浏览帖子
         Map map = new HashMap();
         map.put("postid", postid);
-        viewPost5Times(postid, num, map);
+        viewPost5Times(postid, robotNum, map);
     }
 
     /**
@@ -379,7 +440,12 @@ public class RobotService {
      */
     public void followUserProcess(RobotOperationJobBean jobBean) {
         //1 关注用户业务流程
-        robotFollowUserBusiProcess(jobBean);
+        int immediate = jobBean.getImmediate();
+        if (immediate == 1) {
+            robotFollowUserBusiProcess(jobBean, jobBean.getCount());
+        } else {
+            robotFollowUserBusiProcess(jobBean, 1);
+        }
         //2 通用流程
         commonProcess(jobBean);
     }
@@ -387,12 +453,11 @@ public class RobotService {
     /**
      * 机器人关注用户操作
      */
-    public void robotFollowUserBusiProcess(RobotOperationJobBean jobBean) {
+    public void robotFollowUserBusiProcess(RobotOperationJobBean jobBean, int robotNum) {
         int userid = jobBean.getUserid();
-        int num = 1;
         //1 集合机器人大军
         Map map = new HashMap();
-        map.put("number", num);
+        map.put("number", robotNum);
         map.put("userid", userid);
         List<User> robotArmy = userService.queryNotRepeatFollowRandomRobots(map);
 

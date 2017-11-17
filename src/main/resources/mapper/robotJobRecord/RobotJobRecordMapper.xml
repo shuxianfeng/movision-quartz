@@ -5,9 +5,10 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="jobid" property="jobid" jdbcType="INTEGER"/>
         <result column="intime" property="intime" jdbcType="TIMESTAMP"/>
+        <result column="immediate" property="immediate" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, jobid, intime
+        id, jobid, intime, immediate
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -20,9 +21,10 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.movision.mybatis.robotJobRecord.entity.RobotJobRecord">
-        insert into yw_robot_job_record (id, jobid, intime
+        insert into yw_robot_job_record (id, jobid, intime, immediate
         )
-        values (#{id,jdbcType=INTEGER}, #{jobid,jdbcType=INTEGER}, #{intime,jdbcType=TIMESTAMP}
+        values (#{id,jdbcType=INTEGER}, #{jobid,jdbcType=INTEGER}, #{intime,jdbcType=TIMESTAMP},
+        #{immediate}
         )
     </insert>
     <insert id="insertSelective" parameterType="com.movision.mybatis.robotJobRecord.entity.RobotJobRecord">
@@ -37,6 +39,9 @@
             <if test="intime != null">
                 intime,
             </if>
+            <if test="immediate != null">
+                immediate,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -47,6 +52,9 @@
             </if>
             <if test="intime != null">
                 #{intime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="immediate != null">
+                #{immediate},
             </if>
         </trim>
     </insert>
@@ -59,13 +67,17 @@
             <if test="intime != null">
                 intime = #{intime,jdbcType=TIMESTAMP},
             </if>
+            <if test="immediate != null">
+                immediate = #{immediate},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.movision.mybatis.robotJobRecord.entity.RobotJobRecord">
         update yw_robot_job_record
         set jobid = #{jobid,jdbcType=INTEGER},
-        intime = #{intime,jdbcType=TIMESTAMP}
+        intime = #{intime,jdbcType=TIMESTAMP},
+        immediate = #{immediate}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

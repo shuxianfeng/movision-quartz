@@ -9,6 +9,17 @@ public class RobotJobRecord {
 
     private Date intime;
 
+    private Integer immediate;
+
+    public void setImmediate(Integer immediate) {
+        this.immediate = immediate;
+    }
+
+    public Integer getImmediate() {
+
+        return immediate;
+    }
+
     public Integer getId() {
         return id;
     }
