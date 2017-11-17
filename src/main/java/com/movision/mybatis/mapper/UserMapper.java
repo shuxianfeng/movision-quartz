@@ -51,5 +51,5 @@ public interface UserMapper {
 
     List<User> queryNotRepeatZanRobots(Map map);
 
-    List<User> queryNotRepeatCommentRobots(Integer postid);
+    List<User> queryNotRepeatCommentRobots(Map map);
 }

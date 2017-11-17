@@ -296,6 +296,10 @@ public class RobotService {
         commonProcess(jobBean);
     }
 
+    /**
+     * @param jobBean
+     * @param robotNum
+     */
     public void robotCommentPostProcess(RobotOperationJobBean jobBean, int robotNum) {
         int postid = jobBean.getPostid();
 
@@ -316,18 +320,19 @@ public class RobotService {
      */
     public void insertPostCommentByRobolt(Integer postid, Integer num, Integer commentType) {
 
-        //1 集合num个机器人大军, 不重复
-        List<User> users = userService.queryNotRepeatCommentRobots(num);
+        //1 查出没有重复评论过指定帖子的机器人
+        Map paramMap = new HashMap();
+        paramMap.put("postid", postid);
+        paramMap.put("num", num);
+        List<User> users = userService.queryNotRepeatCommentRobots(paramMap);
         //2 随机查询num条评论内容
         List<RobotComment> content = queryRobotComment(users.size(), commentType, postid);
-        //3 获取帖子发表时间
-        Date date = postService.queryPostIdByDate(postid);
 
         for (int i = 0; i < users.size(); i++) {
             //机器人的id
             Integer userid = users.get(i).getId();
             //1 插入评论表
-            insertPostComment(postid, content, date, i, userid);
+            insertPostComment(postid, content, i, userid);
             //2 更新帖子表的评论次数字段
             postService.updatePostBycommentsum(postid);
             //3 增加被评论的帖子热度
@@ -340,11 +345,10 @@ public class RobotService {
      *
      * @param postid
      * @param content
-     * @param date
      * @param i
      * @param userid
      */
-    private void insertPostComment(Integer postid, List<RobotComment> content, Date date, int i, Integer userid) {
+    private void insertPostComment(Integer postid, List<RobotComment> content, int i, Integer userid) {
         CommentVo vo = new CommentVo();
         vo.setPostid(postid);
         vo.setContent(content.get(i).getContent());

@@ -562,13 +562,13 @@
   </update>
 
   <select id="queryNotRepeatCommentRobots" resultType="com.movision.mybatis.user.entity.User"
-          parameterType="java.lang.Integer">
+          parameterType="java.util.Map">
     SELECT u.* FROM yw_user u
     where <![CDATA[ u.id <= 20000 AND u.id >= 10000 ]]>
     and not EXISTS
     (SELECT 1 FROM yw_post_comment c
-    where c.userid = u.id and c.postid = #{postid})
-    ORDER BY RAND() LIMIT 0, 1
+    where c.userid = u.id and c.postid = #{postid} and c.isdel = 0)
+    ORDER BY RAND() LIMIT 0, #{num}
   </select>
 
 </mapper>
