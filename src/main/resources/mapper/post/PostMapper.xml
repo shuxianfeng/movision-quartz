@@ -475,13 +475,28 @@
         WHERE id=#{postid,jdbcType=INTEGER}
     </update>
 
-    <!--定时任务模拟人为定时发布帖子(isdel为9的待发布帖子)-->
+    <!--定时任务模拟人为定时发布帖子(随机发布一个isdel为9的帖子)-->
     <update id="releasePost" >
         UPDATE yw_post
         SET isdel = '0',
             intime = now()
-        WHERE isdel = '9'
-        limit 1
+        WHERE id = (
+            SELECT t1.id FROM yw_post t1
+            JOIN (
+                SELECT
+                    ROUND(
+                        RAND() * (
+                            (SELECT MAX(id) FROM yw_post) - (SELECT MIN(id) FROM yw_post)
+                        ) + (SELECT MIN(id) FROM yw_post)
+                    ) AS id
+            ) t2
+            WHERE
+                t1.id >= t2.id
+                AND t1.isdel = '9'
+            ORDER BY
+                t1.id
+            LIMIT 1
+        )
     </update>
 
     <select id="queryPostIdByDate" parameterType="java.lang.Integer" resultType="java.util.Date">
