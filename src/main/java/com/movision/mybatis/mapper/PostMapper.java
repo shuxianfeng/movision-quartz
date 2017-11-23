@@ -68,7 +68,9 @@ public interface PostMapper {
 
     int queryIsZanPost(Map<String, Object> parammap);
 
-    void releasePost();
+    int queryRandPostid();
+
+    void releasePost(int postid);
 
     List<Post> findAllPost();
 

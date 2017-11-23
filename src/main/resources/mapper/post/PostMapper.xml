@@ -474,14 +474,9 @@
         oprtime = now()
         WHERE id=#{postid,jdbcType=INTEGER}
     </update>
-
-    <!--定时任务模拟人为定时发布帖子(随机发布一个isdel为9的帖子)-->
-    <update id="releasePost" >
-        UPDATE yw_post
-        SET isdel = '0',
-            intime = now()
-        WHERE id = (
-            SELECT t1.id FROM yw_post t1
+    
+    <select id="queryRandPostid" resultType="java.lang.Integer" >
+        SELECT t1.id FROM yw_post t1
             JOIN (
                 SELECT
                     ROUND(
@@ -496,7 +491,14 @@
             ORDER BY
                 t1.id
             LIMIT 1
-        )
+    </select>
+
+    <!--定时任务模拟人为定时发布帖子(随机发布一个isdel为9的帖子)-->
+    <update id="releasePost" parameterType="java.lang.Integer">
+        UPDATE yw_post
+        SET isdel = '0',
+            intime = now()
+        WHERE id = #{postid,jdbcType=INTEGER}
     </update>
 
     <select id="queryPostIdByDate" parameterType="java.lang.Integer" resultType="java.util.Date">

@@ -269,10 +269,20 @@ public class PostService {
         }
     }
 
-    public void releasePost(){
+    public Integer queryRandPostid(){
+        try {
+            log.info("随机查询一个isdel为9的帖子id");
+            return postMapper.queryRandPostid();
+        }catch (Exception e){
+            log.error("随机查询一个isdel为9的帖子id失败");
+            throw e;
+        }
+    }
+
+    public void releasePost(int postid){
         try {
             log.info("定时任务发布帖子");
-            postMapper.releasePost();
+            postMapper.releasePost(postid);
         }catch (Exception e){
             log.error("定时任务发布帖子失败");
             throw e;
