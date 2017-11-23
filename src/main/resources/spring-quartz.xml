@@ -32,6 +32,7 @@
                 <ref bean="InsertUserBehaviorTrigger"/>
                 <ref bean="quartzPostJobTrigger"/>
                 <ref bean="queryPostCountViewJobTrigger"/>
+                <ref bean="dauStatisticJobTrigger"/>
             </list>
         </property>
         <property name="jobDetails">
@@ -59,6 +60,7 @@
                 <ref bean="InsertUserBehaviorJobDetail"/>
                 <ref bean="quartzPostJobDetail"/>
                 <ref bean="queryPostCountViewJobDetail"/>
+                <ref bean="dauStatisticJobDetail"/>
             </list>
         </property>
 
@@ -203,6 +205,11 @@
         <property name="jobDetail" ref="queryPostCountViewJobDetail"/>
         <property name="cronExpression" value="${queryPostCountViewJob_cronExpression}"/>
     </bean>
+    <bean id="dauStatisticJobTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="dauStatisticJobDetail"/>
+        <property name="cronExpression" value="${dauStatisticJob_cronExpression}"/>
+    </bean>
 
 
     <!-- **************************************job的配置******************************************************* -->
@@ -343,6 +350,11 @@
         <property name="targetObject" ref="queryPostCountViewJob"/>
         <property name="targetMethod" value="execute"/>
     </bean>
+    <bean id="dauStatisticJobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="dauStatisticJob"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
 
 
     <!-- ********************************************工作的bean**************************************************** -->
@@ -372,5 +384,6 @@
     <bean id="InsertUserBehaviorJob" class="com.movision.job.InsertUserBehaviorJob"/>
     <bean id="quartzPostJob" class="com.movision.job.QuartzPostJob"/>
     <bean id="queryPostCountViewJob" class="com.movision.job.QueryPostCountViewJob"/>
+    <bean id="dauStatisticJob" class="com.movision.job.DauStatisticJob"/>
 
 </beans>

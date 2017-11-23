@@ -505,6 +505,16 @@
     )
   </insert>
 
+  <!--插入一条日活数据到数据库-->
+  <insert id="updateDauStatistic" parameterType="java.util.Map" >
+    INSERT INTO yw_user_dau_statistics(
+        date, usersum, intime
+    )
+    VALUES (
+        #{date,jdbcType=TIMESTAMP}, #{usersum,jdbcType=INTEGER}, #{intime,jdbcType=TIMESTAMP}
+    )
+  </insert>
+
   <!-- 查询不重复点赞帖子的机器人用户 -->
   <select id="queryNotRepeatZanRobots" resultType="com.movision.mybatis.user.entity.User"
           parameterType="java.util.Map">
@@ -549,6 +559,11 @@
     where f.userid = u.id
     and f.interestedusers = #{userid})
     ORDER BY RAND() LIMIT 0,#{number}
+  </select>
+
+  <!--查询用户记录中当天的日活总数-->
+  <select id="dauStatistic" resultType="java.lang.Integer" >
+    SELECT count(*) FROM yw_user WHERE login_time between curdate()-INTERVAL 1 day  and CURDATE()
   </select>
 
   <update id="updateUserAttention" parameterType="java.lang.Integer">

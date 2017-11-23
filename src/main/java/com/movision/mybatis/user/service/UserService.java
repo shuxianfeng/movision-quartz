@@ -227,7 +227,25 @@ public class UserService {
         return userMapper.queryNotRepeatCommentRobots(map);
     }
 
+    public int dauStatistic(){
+        try {
+            log.info("统计用户表中的前一天日活用户数");
+            return userMapper.dauStatistic();
+        }catch (Exception e){
+            log.error("统计用户表中的前一天日活用户数失败", e);
+            throw e;
+        }
+    }
 
+    public void updateDauStatistic(Map<String, Object> parammap){
+        try {
+            log.info("更新日活用户统计数据到数据库");
+            userMapper.updateDauStatistic(parammap);
+        }catch (Exception e) {
+            log.error("更新日活用户统计数据到数据库失败", e);
+            throw e;
+        }
+    }
 
 
 }
