@@ -227,12 +227,82 @@ public class UserService {
         return userMapper.queryNotRepeatCommentRobots(map);
     }
 
-    public int dauStatistic(){
+    public List<User> dauStatistic(){
         try {
             log.info("统计用户表中的前一天日活用户数");
             return userMapper.dauStatistic();
         }catch (Exception e){
             log.error("统计用户表中的前一天日活用户数失败", e);
+            throw e;
+        }
+    }
+
+    public int registeNumStatistic(){
+        try {
+            log.info("统计用户表中的以前一天注册用户总数");
+            return userMapper.registeNumStatistic();
+        }catch (Exception e){
+            log.error("统计用户表中的以前一天注册用户总数失败", e);
+            throw e;
+        }
+    }
+
+    public int queryFollow(int id){
+        try {
+            log.info("查询该使用是否关注过圈子标签或作者");
+            return userMapper.queryFollow(id);
+        }catch (Exception e){
+            log.error("查询该使用是否关注过圈子标签或作者失败", e);
+            throw e;
+        }
+    }
+
+    public int queryPost(int id){
+        try {
+            log.info("查询该用户前一天是否发过帖子");
+            return userMapper.queryPost(id);
+        }catch (Exception e){
+            log.error("查询该用户前一天是否发过帖子失败", e);
+            throw e;
+        }
+    }
+
+    public int queryZan(int id){
+        try {
+            log.info("查询该用户前一天中是否点赞过评论或帖子");
+            return userMapper.queryZan(id);
+        }catch (Exception e) {
+            log.error("查询该用户前一天中是否点赞过评论或帖子", e);
+            throw e;
+        }
+    }
+
+    public int queryCollect(int id){
+        try {
+            log.info("查询该用户前一天中是否收藏过帖子");
+            return userMapper.queryCollect(id);
+        }catch (Exception e){
+            log.error("查询该用户前一天中是否收藏过帖子失败", e);
+            throw e;
+        }
+    }
+
+    public int queryComment(int id) {
+        try {
+            log.info("查询该用户前一天中是否评论过帖子或回复过评论");
+            return userMapper.queryComment(id);
+        }catch (Exception e){
+            log.error("查询该用户前一天中是否评论过帖子或回复过评论失败", e);
+            throw e;
+        }
+    }
+
+    public int queryForward(int id){
+        try {
+            log.info("查询该用户前一天中是否转发过帖子");
+            return userMapper.queryForward(id);
+        }catch (Exception e){
+            log.error("查询该用户前一天中是否转发过帖子失败", e);
             throw e;
         }
     }

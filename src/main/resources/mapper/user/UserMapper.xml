@@ -561,9 +561,58 @@
     ORDER BY RAND() LIMIT 0,#{number}
   </select>
 
-  <!--查询用户记录中当天的日活总数-->
-  <select id="dauStatistic" resultType="java.lang.Integer" >
-    SELECT count(*) FROM yw_user WHERE login_time between curdate()-INTERVAL 1 day  and CURDATE()
+  <!--查询用户记录中前一天的日活总数-->
+  <select id="dauStatistic" resultType="com.movision.mybatis.user.entity.User" >
+    SELECT * FROM yw_user
+    WHERE login_time between curdate()-INTERVAL 1 day  and CURDATE()
+      AND (phone NOT LIKE '%000000' OR phone IS NULL)
+  </select>
+
+  <!--查询前一天的注册用户总数(不包含机器人)-->
+  <select id="registeNumStatistic" resultType="java.lang.Integer" >
+    SELECT count(*) FROM yw_user
+    WHERE intime between curdate()-INTERVAL 1 day  and CURDATE()
+      AND (phone IS NULL OR phone NOT LIKE '%000000')
+  </select>
+
+  <!--查询该用户前一天是否关注过圈子或标签或作者-->
+  <select id="queryFollow" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+    SELECT count(*) FROM (
+        SELECT id, userid FROM yw_follow_circle WHERE userid = #{id,jdbcType=INTEGER} AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+        UNION ALL
+        SELECT id, userid FROM yw_follow_label WHERE userid = #{id,jdbcType=INTEGER} AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+        UNION ALL
+        SELECT id, userid FROM yw_follow_user WHERE userid = #{id,jdbcType=INTEGER} AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+    ) t
+  </select>
+
+  <!--查询当前用户前一天中是否发过帖子-->
+  <select id="queryPost" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+    SELECT count(*) FROM yw_post WHERE userid = #{id,jdbcType=INTEGER} AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+  </select>
+
+  <!--查询该用户前一天中是否点赞过帖子或评论-->
+  <select id="queryZan" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+    SELECT count(*) FROM (
+        SELECT id, userid FROM yw_post_zan_record WHERE userid = #{id,jdbcType=INTEGER} AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+        UNION ALL
+        SELECT id, userid FROM yw_post_comment_zan_record WHERE userid = #{id,jdbcType=INTEGER} AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+    ) t
+  </select>
+
+  <!--查询该用户前一天中是否收藏过帖子-->
+  <select id="queryCollect" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+    SELECT count(*) FROM yw_collection WHERE userid = #{id,jdbcType=INTEGER} AND collect_time between curdate()-INTERVAL 1 day  and CURDATE()
+  </select>
+
+  <!--查询该用户前一天中是否评论过帖子或回复过评论-->
+  <select id="queryComment" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+    SELECT count(*) FROM yw_post_comment WHERE userid = #{id,jdbcType=INTEGER} AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+  </select>
+
+  <!--查询该用户前一天中是否转发过帖子-->
+  <select id="queryForward" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+    SELECT count(*) FROM yw_post_share WHERE userid = #{id,jdbcType=INTEGER} AND intime between curdate()-INTERVAL 1 day  and CURDATE()
   </select>
 
   <update id="updateUserAttention" parameterType="java.lang.Integer">

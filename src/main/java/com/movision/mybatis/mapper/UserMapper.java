@@ -53,7 +53,21 @@ public interface UserMapper {
 
     List<User> queryNotRepeatCommentRobots(Map map);
 
-    int dauStatistic();
+    List<User> dauStatistic();
+
+    int registeNumStatistic();
+
+    int queryFollow(int id);
+
+    int queryPost(int id);
+
+    int queryZan(int id);
+
+    int queryCollect(int id);
+
+    int queryComment(int id);
+
+    int queryForward(int id);
 
     void updateDauStatistic(Map<String, Object> parammap);
 }
