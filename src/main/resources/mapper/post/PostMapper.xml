@@ -476,7 +476,8 @@
     </update>
     
     <select id="queryRandPostid" resultType="java.lang.Integer" >
-        SELECT t1.id FROM yw_post t1
+        SELECT IF(AVG(t1.id) IS NULL, 0, t1.id) as id
+		FROM yw_post t1
             JOIN (
                 SELECT
                     ROUND(

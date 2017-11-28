@@ -25,7 +25,9 @@ public class QuartzPostTask {
         //首先随机查询一个isdel为9的帖子id-------------鉴于MYSQL报[Err] 1093 - You can't specify target table 'yw_post' for update in FROM clause.建议拆开执行
         int postid = postService.queryRandPostid();
         //发布这个帖子
-        postService.releasePost(postid);
+        if (postid != 0) {//0表示不存在isdel为9的帖子
+            postService.releasePost(postid);
+        }
 
         log.info("定时任务开始帖子发布完成");
 
