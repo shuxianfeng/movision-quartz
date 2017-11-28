@@ -1,5 +1,6 @@
 package com.movision.mybatis.mapper;
 
+import com.movision.mybatis.followUser.entity.FollowUser;
 import com.movision.mybatis.user.entity.User;
 import org.springframework.stereotype.Repository;
 
@@ -70,4 +71,12 @@ public interface UserMapper {
     int queryForward(int id);
 
     void updateDauStatistic(Map<String, Object> parammap);
+
+    int queryFollowNum();
+
+    int queryIsFollow(Map<String, Object> parammap);
+
+    void insertUserParticipate(Map<String, Object> parammap);
+
+    List<FollowUser> queryFollowdNum();
 }

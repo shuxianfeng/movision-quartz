@@ -317,4 +317,68 @@ public class PostService {
             throw e;
         }
     }
+
+    public List<Post> queryPostNumYesterday(){
+        try {
+            log.info("统计前一天的新增帖子总数");
+            return postMapper.queryPostNumYesterday();
+        }catch (Exception e){
+            log.error("统计前一天的新增帖子总数失败", e);
+            throw e;
+        }
+    }
+
+    public int queryActivePostNum(List<Post> postIdList){
+        try {
+            log.info("统计前一天的活跃帖数量");
+            int count = 0;//活跃帖子数
+            for (int i = 0; i < postIdList.size(); i++){
+                int id = postIdList.get(i).getId();
+                //通过帖子id查询该帖是否活跃
+                int replynum = postMapper.queryReplyNum(id);//被回复过的帖子数
+                int forwardnum = postMapper.queryForwardNum(id);//被转发过的帖子数
+                int zannum = postMapper.queryZanNum(id);//被点赞过的帖子数
+                int collectsum = postMapper.queryCollectSum(id);//被收藏过的帖子数
+                if (replynum > 0 || forwardnum > 0 || zannum > 0 || collectsum > 0){
+                    count = count + 1;
+                }
+            }
+            return count;
+        }catch (Exception e){
+            log.error("统计前一天的活跃帖数量失败", e);
+            throw e;
+        }
+    }
+
+    public int queryReply(){
+        try {
+            log.info("统计前一天的产生回复的评论总数");
+            return postMapper.queryReply();
+        }catch (Exception e){
+            log.error("统计前一天的产生回复的评论总数失败", e);
+            throw e;
+        }
+    }
+
+    public int queryZan(){
+        try {
+            log.info("统计前一天的点赞总数");
+            return postMapper.queryZan();
+        }catch (Exception e){
+            log.error("统计前一天的点赞总数失败", e);
+            throw e;
+        }
+    }
+
+    public int queryForward(){
+        try {
+            log.info("统计前一天的转发总数");
+            return postMapper.queryForward();
+        }catch (Exception e){
+            log.error("统计前一天的转发总数失败", e);
+            throw e;
+        }
+    }
+
+
 }

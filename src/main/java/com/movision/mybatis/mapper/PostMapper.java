@@ -75,4 +75,20 @@ public interface PostMapper {
     List<Post> findAllPost();
 
     int updatePostCountView(Map map);
+
+    List<Post> queryPostNumYesterday();
+
+    int queryReplyNum(int id);
+
+    int queryForwardNum(int id);
+
+    int queryZanNum(int id);
+
+    int queryCollectSum(int id);
+
+    int queryReply();
+
+    int queryZan();
+
+    int queryForward();
 }

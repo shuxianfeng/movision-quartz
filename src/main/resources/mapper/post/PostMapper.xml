@@ -507,6 +507,51 @@
     <select id="findAllPost" resultType="com.movision.mybatis.post.entity.Post">
         SELECT * FROM  yw_post WHERE isdel=0
     </select>
+    
+    <!--统计前一天的新增帖子总数-->
+    <select id="queryPostNumYesterday" resultType="com.movision.mybatis.post.entity.Post" >
+        SELECT id FROM yw_post WHERE isdel = '0' AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+    </select>
+
+    <!--判断前一天中该帖是否被回复过-->
+    <select id="queryReplyNum" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+        SELECT count(*) FROM yw_post_comment WHERE postid = #{id,jdbcType=INTEGER} AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+    </select>
+
+    <!--判断前一天中该帖是否被回复过转发过-->
+    <select id="queryForwardNum" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+        SELECT count(*) FROM yw_post_share WHERE postid = #{id,jdbcType=INTEGER} AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+    </select>
+
+    <!--判断前一天中该帖是否被点赞过-->
+    <select id="queryZanNum" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+        SELECT count(*) FROM yw_post_zan_record WHERE postid = #{id,jdbcType=INTEGER} AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+    </select>
+
+    <!--判断前一天中该帖是否被收藏过-->
+    <select id="queryCollectSum" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+        SELECT count(*) FROM yw_collection WHERE postid = #{id,jdbcType=INTEGER} AND type = '0' AND collect_time between curdate()-INTERVAL 1 day  and CURDATE()
+    </select>
+
+    <!--统计前一天产生回复的总数-->
+    <select id="queryReply" resultType="java.lang.Integer" >
+        SELECT count(*) FROM yw_post_comment WHERE ('10000' > userid OR userid > '20000') AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+    </select>
+
+    <!--统计前一天产生的所有点赞总数-->
+    <select id="queryZan" resultType="java.lang.Integer" >
+        SELECT count(*) FROM (
+            SELECT id, userid FROM yw_post_zan_record WHERE ('10000' > userid OR userid > '20000') AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+            UNION ALL
+            SELECT id, userid FROM yw_post_comment_zan_record WHERE ('10000' > userid OR userid > '20000') AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+        ) t
+    </select>
+
+    <!--统计前一天的产生的转发总数-->
+    <select id="queryForward" resultType="java.lang.Integer" >
+        SELECT count(*) FROM yw_post_share WHERE intime between curdate()-INTERVAL 1 day  and CURDATE()
+    </select>
+    
     <update id="updatePostCountView" parameterType="java.util.Map">
         UPDATE yw_post SET  countview=#{count,jdbcType=INTEGER} WHERE id=#{postid,jdbcType=INTEGER}
     </update>

@@ -515,6 +515,17 @@
     )
   </insert>
 
+  <!--将统计完的用户互动活跃数据更新到数据库-->
+  <insert id="insertUserParticipate" parameterType="java.util.Map" >
+    INSERT INTO yw_user_participate(
+        date, newpost, activepost, replynum, zannum, forwardnum, follownum, followdnum, intime
+    )
+    VALUES (
+       #{date,jdbcType=TIMESTAMP}, #{newpost,jdbcType=INTEGER}, #{activepost,jdbcType=INTEGER}, #{replynum,jdbcType=INTEGER}, #{zannum,jdbcType=INTEGER}, #{forwardnum,jdbcType=INTEGER},
+       #{follownum,jdbcType=INTEGER}, #{followdnum,jdbcType=INTEGER}, #{intime,jdbcType=TIMESTAMP}
+    )
+  </insert>
+
   <!-- 查询不重复点赞帖子的机器人用户 -->
   <select id="queryNotRepeatZanRobots" resultType="com.movision.mybatis.user.entity.User"
           parameterType="java.util.Map">
@@ -613,6 +624,30 @@
   <!--查询该用户前一天中是否转发过帖子-->
   <select id="queryForward" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
     SELECT count(*) FROM yw_post_share WHERE userid = #{id,jdbcType=INTEGER} AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+  </select>
+
+  <!--统计前一天中产生的关注总数(含关注作者圈子和标签)-->
+  <select id="queryFollowNum" resultType="java.lang.Integer" >
+    SELECT count(*) FROM (
+        SELECT id, userid FROM yw_follow_user WHERE ('10000' > userid OR userid > '20000') AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+        UNION ALL
+        SELECT id, userid FROM yw_follow_circle WHERE ('10000' > userid OR userid > '20000') AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+        UNION ALL
+        SELECT id, userid FROM yw_follow_label WHERE ('10000' > userid OR userid > '20000') AND intime between curdate()-INTERVAL 1 day  and CURDATE()
+    ) t
+  </select>
+
+  <!--查询前一天中产生的所有关注记录-->
+  <select id="queryFollowdNum" resultType="com.movision.mybatis.followUser.entity.FollowUser" >
+    SELECT * FROM yw_follow_user WHERE intime between curdate()-INTERVAL 1 day  and CURDATE()
+  </select>
+
+  <!--查询该用户在昨天之前有没有被对方关注过-->
+  <select id="queryIsFollow" parameterType="java.util.Map" resultType="java.lang.Integer" >
+    SELECT count(*) FROM yw_follow_user
+    WHERE userid = #{userid,jdbcType=INTEGER}
+      AND interestedusers = #{interestedusers,jdbcType=INTEGER}
+      AND (curdate()-INTERVAL 0 day) > intime
   </select>
 
   <update id="updateUserAttention" parameterType="java.lang.Integer">

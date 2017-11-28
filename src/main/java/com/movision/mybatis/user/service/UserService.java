@@ -1,5 +1,6 @@
 package com.movision.mybatis.user.service;
 
+import com.movision.mybatis.followUser.entity.FollowUser;
 import com.movision.mybatis.footRank.entity.FootRank;
 import com.movision.mybatis.mapper.FootRankMapper;
 import com.movision.mybatis.user.entity.User;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -317,5 +319,48 @@ public class UserService {
         }
     }
 
+    public int queryFollowNum(){
+        try {
+            log.info("统计前一天产生的关注总数(含关注作者圈子和标签)");
+            return userMapper.queryFollowNum();
+        }catch (Exception e){
+            log.error("统计前一天产生的关注总数(含关注作者圈子和标签)失败", e);
+            throw e;
+        }
+    }
 
+    public int queryFollowdNum(){
+        try {
+            log.info("统计前一天产生的互相关注的总数");
+
+            int count = 0;//互关数
+            //首先查询前一天的单向关注的所有记录
+            List<FollowUser>  followUserList = userMapper.queryFollowdNum();
+            for (int i = 0; i < followUserList.size(); i++){
+                //检查前一天的所有关注记录中，在昨天24点之前的所有记录比对，如果对方也关注了自己，则count+1
+                Map<String, Object> parammap = new HashMap<>();
+                parammap.put("userid", followUserList.get(i).getInterestedusers());//这里查互关，所以userid和interestedusers正好相反
+                parammap.put("interestedusers", followUserList.get(i).getUserid());
+                int flag = userMapper.queryIsFollow(parammap);//判断在昨晚24点前有没有被对方关注过，如果有，那就算在昨日互关里count+1
+                if (flag > 0) {
+                    count = count + 1;
+                }
+            }
+
+            return count;
+        }catch (Exception e){
+            log.error("统计前一天产生的互相关注的总数失败", e);
+            throw e;
+        }
+    }
+
+    public void insertUserParticipate(Map<String, Object> parammap) {
+        try {
+            log.info("将统计完的用户互动活跃数据更新到数据库");
+            userMapper.insertUserParticipate(parammap);
+        }catch (Exception e){
+            log.error("将统计完的用户互动活跃数据更新到数据库失败", e);
+            throw e;
+        }
+    }
 }
