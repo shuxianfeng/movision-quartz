@@ -249,6 +249,16 @@ public class UserService {
         }
     }
 
+    public List<User> queryQtRegisteUser(){
+        try {
+            log.info("查询前天注册的所有用户列表");
+            return userMapper.queryQtRegisteUser();
+        }catch (Exception e){
+            log.error("查询前天注册的所有用户列表失败");
+            throw e;
+        }
+    }
+
     public int queryFollow(int id){
         try {
             log.info("查询该使用是否关注过圈子标签或作者");

@@ -58,6 +58,8 @@ public interface UserMapper {
 
     int registeNumStatistic();
 
+    List<User> queryQtRegisteUser();
+
     int queryFollow(int id);
 
     int queryPost(int id);

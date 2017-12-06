@@ -56,11 +56,30 @@ public class DauStatisticTask {
             }
         }
 
+        //统计前一天的用户单日留存率（前天注册完成的用户里在昨天还登录过app的用户数/前天注册的用户总数 百分比）
+        //1、先查询前天注册的所有用户列表
+        List<User> qtRegisteUserList = userService.queryQtRegisteUser();
+        //定义一个变量，存储前天注册的在昨天里依然登录过的用户数
+        int ztloginnum = 0;
+        for (int i = 0; i < activeUserList.size(); i++){
+            for (int j = 0; j < qtRegisteUserList.size(); j++){
+                if (activeUserList.get(i).getId() == qtRegisteUserList.get(j).getId()){
+                    ztloginnum = ztloginnum + 1;
+                }
+            }
+        }
+        float keeprate = 0.00f;
+        System.out.println("测试ztloginnum>>>>>>" + ztloginnum);
+        if (qtRegisteUserList.size() > 0){
+            keeprate = ztloginnum/qtRegisteUserList.size();
+        }
+
         parammap.put("date", date);
         parammap.put("registenum", registenum);
         parammap.put("usersum", activeUserList.size());
         parammap.put("validsum", validsum);
 //        parammap.put("channel", channel);//渠道需要APP端集成了不同平台的包时才能进行统计
+        parammap.put("keeprate", keeprate);
         parammap.put("intime", intime);
         userService.updateDauStatistic(parammap);
 

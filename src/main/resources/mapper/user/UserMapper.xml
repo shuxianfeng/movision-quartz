@@ -508,10 +508,10 @@
   <!--插入一条日活数据到数据库-->
   <insert id="updateDauStatistic" parameterType="java.util.Map" >
     INSERT INTO yw_user_dau_statistics(
-        date, registenum, usersum, validsum, intime
+        date, registenum, usersum, validsum, keeprate, intime
     )
     VALUES (
-        #{date,jdbcType=TIMESTAMP}, #{registenum,jdbcType=INTEGER}, #{usersum,jdbcType=INTEGER}, #{validsum,jdbcType=INTEGER}, #{intime,jdbcType=TIMESTAMP}
+        #{date,jdbcType=TIMESTAMP}, #{registenum,jdbcType=INTEGER}, #{usersum,jdbcType=INTEGER}, #{validsum,jdbcType=INTEGER}, #{keeprate,jdbcType=FLOAT}, #{intime,jdbcType=TIMESTAMP}
     )
   </insert>
 
@@ -584,6 +584,13 @@
     SELECT count(*) FROM yw_user
     WHERE intime between curdate()-INTERVAL 1 day  and CURDATE()
       AND (phone IS NULL OR phone NOT LIKE '%000000')
+  </select>
+
+  <!--查询前天注册的所有用户列表-->
+  <select id="queryQtRegisteUser" resultType="com.movision.mybatis.user.entity.User" >
+    SELECT id, intime, login_time FROM yw_user
+    WHERE date(intime)=curdate()-INTERVAL 2 day
+      AND (phone NOT LIKE '%000000' OR phone IS NULL)
   </select>
 
   <!--查询该用户前一天是否关注过圈子或标签或作者-->
