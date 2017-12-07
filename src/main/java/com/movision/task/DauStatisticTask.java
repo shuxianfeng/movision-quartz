@@ -63,13 +63,14 @@ public class DauStatisticTask {
         int ztloginnum = 0;
         for (int i = 0; i < activeUserList.size(); i++){
             for (int j = 0; j < qtRegisteUserList.size(); j++){
+                log.info("活跃用户id>>>>" + activeUserList.get(i).getId() + "登录用户id>>>>>>>>" + qtRegisteUserList.get(j).getId());
                 if (activeUserList.get(i).getId() == qtRegisteUserList.get(j).getId()){
                     ztloginnum = ztloginnum + 1;
                 }
             }
         }
         float keeprate = 0.00f;
-        System.out.println("测试ztloginnum>>>>>>" + ztloginnum);
+        log.info("测试ztloginnum>>>>>>" + ztloginnum);
         if (qtRegisteUserList.size() > 0){
             keeprate = ztloginnum/qtRegisteUserList.size();
         }
