@@ -74,7 +74,7 @@ public class DauStatisticTask {
         DecimalFormat df = new DecimalFormat("######0.00");
         log.info("测试ztloginnum>>>>>>" + ztloginnum +" 测试qtRegisteUserList.size()>>>>>>" + qtRegisteUserList.size());
         if (qtRegisteUserList.size() > 0){
-            keeprate = ztloginnum/qtRegisteUserList.size();
+            keeprate = (double)ztloginnum/qtRegisteUserList.size();
             log.info("测试keeprate>>>>>>>>>" + keeprate);
         }
 
