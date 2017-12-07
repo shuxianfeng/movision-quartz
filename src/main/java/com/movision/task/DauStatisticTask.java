@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 /**
@@ -69,7 +70,8 @@ public class DauStatisticTask {
                 }
             }
         }
-        double keeprate = 0;
+        double keeprate = 0.00;
+        DecimalFormat df = new DecimalFormat("######0.00");
         log.info("测试ztloginnum>>>>>>" + ztloginnum +" 测试qtRegisteUserList.size()>>>>>>" + qtRegisteUserList.size());
         if (qtRegisteUserList.size() > 0){
             keeprate = ztloginnum/qtRegisteUserList.size();
@@ -80,7 +82,7 @@ public class DauStatisticTask {
         parammap.put("usersum", activeUserList.size());
         parammap.put("validsum", validsum);
 //        parammap.put("channel", channel);//渠道需要APP端集成了不同平台的包时才能进行统计
-        parammap.put("keeprate", String.format("%.2f", keeprate*100));
+        parammap.put("keeprate", df.format(keeprate));
         parammap.put("intime", intime);
         userService.updateDauStatistic(parammap);
 
