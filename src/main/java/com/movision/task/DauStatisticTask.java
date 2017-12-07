@@ -66,10 +66,11 @@ public class DauStatisticTask {
                 log.info("活跃用户id>>>>" + activeUserList.get(i).getId() + "登录用户id>>>>>>>>" + qtRegisteUserList.get(j).getId());
                 if (activeUserList.get(i).getId() == qtRegisteUserList.get(j).getId()){
                     ztloginnum = ztloginnum + 1;
+                    log.info("ztloginnum+1一次！！");
                 }
             }
         }
-        float keeprate = 0.00f;
+        float keeprate = 0;
         log.info("测试ztloginnum>>>>>>" + ztloginnum);
         if (qtRegisteUserList.size() > 0){
             keeprate = ztloginnum/qtRegisteUserList.size();
