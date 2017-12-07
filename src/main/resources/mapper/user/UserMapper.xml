@@ -511,7 +511,7 @@
         date, registenum, usersum, validsum, keeprate, intime
     )
     VALUES (
-        #{date,jdbcType=TIMESTAMP}, #{registenum,jdbcType=INTEGER}, #{usersum,jdbcType=INTEGER}, #{validsum,jdbcType=INTEGER}, #{keeprate,jdbcType=FLOAT}, #{intime,jdbcType=TIMESTAMP}
+        #{date,jdbcType=TIMESTAMP}, #{registenum,jdbcType=INTEGER}, #{usersum,jdbcType=INTEGER}, #{validsum,jdbcType=INTEGER}, #{keeprate,jdbcType=VARCHAR}, #{intime,jdbcType=TIMESTAMP}
     )
   </insert>
 

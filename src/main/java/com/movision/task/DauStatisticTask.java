@@ -71,7 +71,7 @@ public class DauStatisticTask {
                 }
             }
         }
-        float keeprate = 0;
+        double keeprate = 0;
         log.info("测试ztloginnum>>>>>>" + ztloginnum);
         if (qtRegisteUserList.size() > 0){
             keeprate = ztloginnum/qtRegisteUserList.size();
@@ -82,7 +82,7 @@ public class DauStatisticTask {
         parammap.put("usersum", activeUserList.size());
         parammap.put("validsum", validsum);
 //        parammap.put("channel", channel);//渠道需要APP端集成了不同平台的包时才能进行统计
-        parammap.put("keeprate", keeprate);
+        parammap.put("keeprate", String.format("%.2f", keeprate*100));
         parammap.put("intime", intime);
         userService.updateDauStatistic(parammap);
 
