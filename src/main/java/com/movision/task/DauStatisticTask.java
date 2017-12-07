@@ -64,7 +64,8 @@ public class DauStatisticTask {
         for (int i = 0; i < activeUserList.size(); i++){
             for (int j = 0; j < qtRegisteUserList.size(); j++){
                 log.info("活跃用户id>>>>" + activeUserList.get(i).getId() + "登录用户id>>>>>>>>" + qtRegisteUserList.get(j).getId());
-                if (activeUserList.get(i).getId() != qtRegisteUserList.get(j).getId()){
+                //下方代码中Integer为整型对象，所以不能用==，而要用equals
+                if (activeUserList.get(i).getId().equals(qtRegisteUserList.get(j).getId())){
                     ztloginnum = ztloginnum + 1;
                     log.info("ztloginnum+1一次！！");
                 }
