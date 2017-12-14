@@ -30,7 +30,7 @@
                 <ref bean="everydayPostHeatvalueTrigger"/>
                 <ref bean="robotOperationTrigger"/>
                 <ref bean="InsertUserBehaviorTrigger"/>
-                <ref bean="quartzPostJobTrigger"/>
+                <!--<ref bean="quartzPostJobTrigger"/>-->
                 <ref bean="queryPostCountViewJobTrigger"/>
                 <ref bean="dauStatisticJobTrigger"/>
                 <ref bean="userParticipateJobTrigger"/>
@@ -59,7 +59,7 @@
                 <ref bean="everydayPostHeatvalueDetail"/>
                 <ref bean="robotOperationDetail"/>
                 <ref bean="InsertUserBehaviorJobDetail"/>
-                <ref bean="quartzPostJobDetail"/>
+                <!--<ref bean="quartzPostJobDetail"/>-->
                 <ref bean="queryPostCountViewJobDetail"/>
                 <ref bean="dauStatisticJobDetail"/>
                 <ref bean="userParticipateJobDetail"/>
@@ -101,74 +101,74 @@
     </bean>
 
     <!--<bean id="vipExpiredJobTrigger"-->
-          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
-        <!--<property name="jobDetail" ref="vipExpiredJobDetail"/>-->
-        <!--<property name="cronExpression" value="${vip_cronExpression}"/>-->
+    <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+    <!--<property name="jobDetail" ref="vipExpiredJobDetail"/>-->
+    <!--<property name="cronExpression" value="${vip_cronExpression}"/>-->
     <!--</bean>-->
     <!--<bean id="courseJobTrigger"-->
-          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
-        <!--<property name="jobDetail" ref="courseJobDetail"/>-->
-        <!--<property name="cronExpression" value="${course_cronExpression}"/>-->
+    <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+    <!--<property name="jobDetail" ref="courseJobDetail"/>-->
+    <!--<property name="cronExpression" value="${course_cronExpression}"/>-->
     <!--</bean>-->
 
     <!--<bean id="statJobTrigger"-->
-          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
-        <!--<property name="jobDetail" ref="statJobDetail"/>-->
-        <!--<property name="cronExpression" value="${stat_cronExpression}"/>-->
+    <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+    <!--<property name="jobDetail" ref="statJobDetail"/>-->
+    <!--<property name="cronExpression" value="${stat_cronExpression}"/>-->
     <!--</bean>-->
 
     <!--<bean id="courseProcessJobTrigger"-->
-          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
-        <!--<property name="jobDetail" ref="courseProcessJobDetail"/>-->
-        <!--<property name="cronExpression" value="${course_process_cronExpression}"/>-->
+    <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+    <!--<property name="jobDetail" ref="courseProcessJobDetail"/>-->
+    <!--<property name="cronExpression" value="${course_process_cronExpression}"/>-->
     <!--</bean>-->
 
     <!--<bean id="priceJobTrigger"-->
-          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
-        <!--<property name="jobDetail" ref="priceJobDetail"/>-->
-        <!--<property name="cronExpression" value="${price_cronExpression}"/>-->
+    <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+    <!--<property name="jobDetail" ref="priceJobDetail"/>-->
+    <!--<property name="cronExpression" value="${price_cronExpression}"/>-->
     <!--</bean>-->
 
     <!--<bean id="otherPriceJobTrigger"-->
-          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
-        <!--<property name="jobDetail" ref="otherPriceJobDetail"/>-->
-        <!--<property name="cronExpression" value="${other_price_cronExpression}"/>-->
+    <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+    <!--<property name="jobDetail" ref="otherPriceJobDetail"/>-->
+    <!--<property name="cronExpression" value="${other_price_cronExpression}"/>-->
     <!--</bean>-->
 
     <!--<bean id="imgCompressTrigger"-->
-          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
-        <!--<property name="jobDetail" ref="imgCompressDetail"/>-->
-        <!--<property name="cronExpression" value="${img_compress_cronExpression}"/>-->
+    <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+    <!--<property name="jobDetail" ref="imgCompressDetail"/>-->
+    <!--<property name="cronExpression" value="${img_compress_cronExpression}"/>-->
     <!--</bean>-->
 
     <!--<bean id="packageTrigger"-->
-          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
-        <!--<property name="jobDetail" ref="packageDetail"/>-->
-        <!--<property name="cronExpression" value="${package_cronExpression}"/>-->
+    <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+    <!--<property name="jobDetail" ref="packageDetail"/>-->
+    <!--<property name="cronExpression" value="${package_cronExpression}"/>-->
     <!--</bean>-->
 
     <!--<bean id="zhbExpiredTrigger"-->
-          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
-        <!--<property name="jobDetail" ref="zhbExpiredDetail"/>-->
-        <!--<property name="cronExpression" value="${zhbExpired_cronExpression}"/>-->
+    <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+    <!--<property name="jobDetail" ref="zhbExpiredDetail"/>-->
+    <!--<property name="cronExpression" value="${zhbExpired_cronExpression}"/>-->
     <!--</bean>-->
 
     <!--<bean id="zhbExpiredNoticeTrigger"-->
-          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
-        <!--<property name="jobDetail" ref="zhbExpiredNoticeDetail"/>-->
-        <!--<property name="cronExpression" value="${zhbExpiredNotice_cronExpression}"/>-->
+    <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+    <!--<property name="jobDetail" ref="zhbExpiredNoticeDetail"/>-->
+    <!--<property name="cronExpression" value="${zhbExpiredNotice_cronExpression}"/>-->
     <!--</bean>-->
 
     <!--<bean id="resumeDownloadRecordTrigger"-->
-          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
-        <!--<property name="jobDetail" ref="resumeDownloadRecordDetail"/>-->
-        <!--<property name="cronExpression" value="${resume_downloadRecord_cronExpression}"/>-->
+    <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+    <!--<property name="jobDetail" ref="resumeDownloadRecordDetail"/>-->
+    <!--<property name="cronExpression" value="${resume_downloadRecord_cronExpression}"/>-->
     <!--</bean>-->
 
     <!--<bean id="brandAnalysisRecordBatchAddTrigger"-->
-          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
-        <!--<property name="jobDetail" ref="brandAnalysisRecordBatchAddDetail"/>-->
-        <!--<property name="cronExpression" value="${brandAnalysisRecordBatchAdd_cronExpression}"/>-->
+    <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+    <!--<property name="jobDetail" ref="brandAnalysisRecordBatchAddDetail"/>-->
+    <!--<property name="cronExpression" value="${brandAnalysisRecordBatchAdd_cronExpression}"/>-->
     <!--</bean>-->
 
     <bean id="testRedisTrigger"
@@ -197,11 +197,11 @@
         <property name="cronExpression" value="${robotOperation_cronExpression}"/>
     </bean>
 
-    <bean id="quartzPostJobTrigger"
-          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="quartzPostJobDetail"/>
-        <property name="cronExpression" value="${quartzPostJob_cronExpression}"/>
-    </bean>
+    <!--<bean id="quartzPostJobTrigger"-->
+    <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+    <!--<property name="jobDetail" ref="quartzPostJobDetail"/>-->
+    <!--<property name="cronExpression" value="${quartzPostJob_cronExpression}"/>-->
+    <!--</bean>-->
     <bean id="queryPostCountViewJobTrigger"
           class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="queryPostCountViewJobDetail"/>
@@ -221,12 +221,12 @@
 
     <!-- **************************************job的配置******************************************************* -->
     <bean id="orderJobDetail"
-    class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="orderJob"/>
         <property name="targetMethod" value="execute"/>
     </bean>
     <bean id="cleanScanAllImgJobDetail"
-    class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="cleanScanAllImgJob"/>
         <property name="targetMethod" value="execute"/>
     </bean>
@@ -257,72 +257,72 @@
         <property name="targetMethod" value="execute"/>
     </bean>-->
     <!--<bean id="vipExpiredJobDetail"-->
-          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
-        <!--<property name="targetObject" ref="vipExpiredJob"/>-->
-        <!--<property name="targetMethod" value="execute"/>-->
+    <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="targetObject" ref="vipExpiredJob"/>-->
+    <!--<property name="targetMethod" value="execute"/>-->
     <!--</bean>-->
     <!--<bean id="courseJobDetail"-->
-          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
-        <!--<property name="targetObject" ref="courseJob"/>-->
-        <!--<property name="targetMethod" value="execute"/>-->
+    <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="targetObject" ref="courseJob"/>-->
+    <!--<property name="targetMethod" value="execute"/>-->
     <!--</bean>-->
 
     <!--<bean id="statJobDetail"-->
-          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
-        <!--<property name="targetObject" ref="statJob"/>-->
-        <!--<property name="targetMethod" value="execute"/>-->
+    <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="targetObject" ref="statJob"/>-->
+    <!--<property name="targetMethod" value="execute"/>-->
     <!--</bean>-->
 
     <!--<bean id="courseProcessJobDetail"-->
-          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
-        <!--<property name="targetObject" ref="courseProcessJob"/>-->
-        <!--<property name="targetMethod" value="execute"/>-->
+    <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="targetObject" ref="courseProcessJob"/>-->
+    <!--<property name="targetMethod" value="execute"/>-->
     <!--</bean>-->
 
     <!--<bean id="priceJobDetail"-->
-          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
-        <!--<property name="targetObject" ref="priceJob"/>-->
-        <!--<property name="targetMethod" value="execute"/>-->
+    <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="targetObject" ref="priceJob"/>-->
+    <!--<property name="targetMethod" value="execute"/>-->
     <!--</bean>-->
 
     <!--<bean id="otherPriceJobDetail"-->
-          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
-        <!--<property name="targetObject" ref="otherPriceJob"/>-->
-        <!--<property name="targetMethod" value="execute"/>-->
+    <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="targetObject" ref="otherPriceJob"/>-->
+    <!--<property name="targetMethod" value="execute"/>-->
     <!--</bean>-->
 
     <!--<bean id="imgCompressDetail"-->
-          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
-        <!--<property name="targetObject" ref="imgCompressJob"/>-->
-        <!--<property name="targetMethod" value="execute"/>-->
+    <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="targetObject" ref="imgCompressJob"/>-->
+    <!--<property name="targetMethod" value="execute"/>-->
     <!--</bean>-->
 
     <!--<bean id="packageDetail"-->
-          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
-        <!--<property name="targetObject" ref="packageJob"/>-->
-        <!--<property name="targetMethod" value="execute"/>-->
+    <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="targetObject" ref="packageJob"/>-->
+    <!--<property name="targetMethod" value="execute"/>-->
     <!--</bean>-->
     <!--<bean id="zhbExpiredDetail"-->
-          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
-        <!--<property name="targetObject" ref="zhbExpiredJob"/>-->
-        <!--<property name="targetMethod" value="execute"/>-->
+    <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="targetObject" ref="zhbExpiredJob"/>-->
+    <!--<property name="targetMethod" value="execute"/>-->
     <!--</bean>-->
 
     <!--<bean id="zhbExpiredNoticeDetail"-->
-          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
-        <!--<property name="targetObject" ref="zhbExpiredNoticeJob"/>-->
-        <!--<property name="targetMethod" value="execute"/>-->
+    <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="targetObject" ref="zhbExpiredNoticeJob"/>-->
+    <!--<property name="targetMethod" value="execute"/>-->
     <!--</bean>-->
 
     <!--<bean id="resumeDownloadRecordDetail"-->
-          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
-        <!--<property name="targetObject" ref="resumeDownloadRecordJob"/>-->
-        <!--<property name="targetMethod" value="execute"/>-->
+    <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="targetObject" ref="resumeDownloadRecordJob"/>-->
+    <!--<property name="targetMethod" value="execute"/>-->
     <!--</bean>-->
     <!--<bean id="brandAnalysisRecordBatchAddDetail"-->
-          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
-        <!--<property name="targetObject" ref="brandAnalysisRecordBatchAddJob"/>-->
-        <!--<property name="targetMethod" value="execute"/>-->
+    <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="targetObject" ref="brandAnalysisRecordBatchAddJob"/>-->
+    <!--<property name="targetMethod" value="execute"/>-->
     <!--</bean>-->
 
     <bean id="testRedisDetail"
@@ -347,11 +347,11 @@
         <property name="targetObject" ref="robotOperationJob"/>
         <property name="targetMethod" value="execute"/>
     </bean>
-    <bean id="quartzPostJobDetail"
-          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <property name="targetObject" ref="quartzPostJob"/>
-        <property name="targetMethod" value="execute"/>
-    </bean>
+    <!--<bean id="quartzPostJobDetail"-->
+    <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="targetObject" ref="quartzPostJob"/>-->
+    <!--<property name="targetMethod" value="execute"/>-->
+    <!--</bean>-->
     <bean id="queryPostCountViewJobDetail"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="queryPostCountViewJob"/>
@@ -394,7 +394,7 @@
     <bean id="everydayPostHeatvalueJob" class="com.movision.job.EverydayPostHeatvalueJob"/>
     <bean id="robotOperationJob" class="com.movision.job.RobotJob"/>
     <bean id="InsertUserBehaviorJob" class="com.movision.job.InsertUserBehaviorJob"/>
-    <bean id="quartzPostJob" class="com.movision.job.QuartzPostJob"/>
+    <!--<bean id="quartzPostJob" class="com.movision.job.QuartzPostJob"/>-->
     <bean id="queryPostCountViewJob" class="com.movision.job.QueryPostCountViewJob"/>
     <bean id="dauStatisticJob" class="com.movision.job.DauStatisticJob"/>
     <bean id="userParticipateJob" class="com.movision.job.UserParticipateJob"/>
