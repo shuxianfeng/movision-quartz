@@ -91,4 +91,8 @@ public interface PostMapper {
     int queryZan();
 
     int queryForward();
+
+    int queryActiveidByPostid(int postid);
+
+    void takeActive(Map<String, Object> parammap);
 }

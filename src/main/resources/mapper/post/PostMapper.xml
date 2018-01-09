@@ -56,6 +56,11 @@
     <select id="queryEncodeVideo" resultType="com.movision.mybatis.post.entity.Post" >
         SELECT t.id, t.postcontent FROM yw_post t WHERE t.isdel IN (2,4,5,6,8)
     </select>
+    
+    <!--根据投稿类帖子id查询帖子所属活动id-->
+    <select id="queryActiveidByPostid" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+        SELECT activeid FROM yw_post WHERE id = #{postid,jdbcType=INTEGER}
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from yw_post
@@ -251,6 +256,46 @@
 
         </trim>
     </insert>
+
+    <!--机器人刷票插入投票记录-->
+    <insert id="takeActive" parameterType="java.util.Map" >
+        insert into yw_active_take
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="postid != null" >
+                postid,
+            </if>
+            <if test="device != null" >
+                device,
+            </if>
+            <if test="intime != null" >
+                intime,
+            </if>
+            <if test="activeid != null" >
+                activeid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="postid != null" >
+                #{postid,jdbcType=INTEGER},
+            </if>
+            <if test="device != null" >
+                #{device,jdbcType=VARCHAR},
+            </if>
+            <if test="intime != null" >
+                #{intime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="activeid != null" >
+                #{activeid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.movision.mybatis.post.entity.Post">
         update yw_post
         <set>

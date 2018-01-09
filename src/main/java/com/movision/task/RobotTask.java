@@ -27,7 +27,7 @@ public class RobotTask {
     RobotOperationJobService robotOperationJobService;
 
     public void run() throws Exception {
-        //任务类型。1：点赞，2：收藏，3：评论，4：关注
+        //任务类型。1：点赞，2：收藏，3：评论，4：关注，5：帖子刷票
         List<RobotOperationJobBean> robotOperationJobBeanList = robotOperationJobService.queryNotHandleJob();
         if (ListUtil.isNotEmpty(robotOperationJobBeanList)) {
             int len = robotOperationJobBeanList.size();
@@ -49,6 +49,9 @@ public class RobotTask {
                 } else if (jobType == 4) {
                     //关注处理
                     robotService.followUserProcess(robotOperationJobBeanList.get(i));
+                } else if (jobType == 5){
+                    //帖子刷票处理
+                    robotService.votePostProcess(robotOperationJobBeanList.get(i));
                 } else {
                     log.error("任务类型不正确。任务id=" + id + ", 任务类型type=" + jobType);
                     continue;

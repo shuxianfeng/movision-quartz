@@ -5,6 +5,7 @@ import com.movision.facade.FacadeHeatValue;
 import com.movision.facade.PostFacade;
 import com.movision.mybatis.comment.entity.CommentVo;
 import com.movision.mybatis.comment.service.CommentService;
+import com.movision.mybatis.mapper.PostMapper;
 import com.movision.mybatis.post.service.PostService;
 import com.movision.mybatis.robotComment.entity.RobotComment;
 import com.movision.mybatis.robotComment.service.RobotCommentService;
@@ -66,6 +67,9 @@ public class RobotService {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    private PostMapper postMapper;
 
     /**
      * 定时机器人任务的赞流程
@@ -469,6 +473,41 @@ public class RobotService {
         for (int i = 0; i < robotArmy.size(); i++) {
             int robotid = robotArmy.get(i).getId();
             postFacade.concernedAuthorUser(robotid, userid);
+        }
+    }
+
+    /**
+     * 机器人执行帖子刷票任务流程
+     *
+     * @param jobBean
+     */
+    public void votePostProcess (RobotOperationJobBean jobBean){
+        //1.帖子刷票任务流程
+        int immediate = jobBean.getImmediate();//是否立即执行
+        if (immediate == 1) {
+            robotVotePostBusiProcess(jobBean, jobBean.getCount());
+        } else {
+            robotVotePostBusiProcess(jobBean, 1);
+        }
+        //2 通用流程
+        commonProcess(jobBean);
+    }
+
+    /**
+     * 机器人执行帖子刷票任务流程
+     */
+    public void robotVotePostBusiProcess(RobotOperationJobBean jobBean, int robotNum) {
+        int postid = jobBean.getPostid();
+        //根据帖子id查询所属活动id
+        int activeid = postMapper.queryActiveidByPostid(postid);
+
+        for (int i=0; i<robotNum; i++){
+            Map<String, Object> parammap = new HashMap<>();
+            parammap.put("device", UUID.randomUUID().toString().replaceAll("\\-", ""));
+            parammap.put("postid", postid);
+            parammap.put("intime", new Date());
+            parammap.put("activeid", activeid);
+            postMapper.takeActive(parammap);
         }
     }
 }
