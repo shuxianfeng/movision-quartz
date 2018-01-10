@@ -456,8 +456,6 @@
     <select id="queryAllTodayPost" resultType="com.movision.mybatis.post.entity.Post">
       SELECT * FROM yw_post WHERE DATE(intime) = date_sub(curdate(),interval 1 day)
       AND isheatoperate = 0
-      AND TIMESTAMP(intime,'24:00:00')>= NOW()
-      AND TIMESTAMP(NOW(),'01:00:00')> TIMESTAMP(intime,'24:00:00')
     </select>
 
     <select id="queryIsHeatOperate" resultType="java.lang.Integer">

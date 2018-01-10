@@ -130,7 +130,12 @@ public class PostHeatValueTask {
                 //热度
                 int heatvalue=today.get(i).getHeatvalue();
                 //发帖日期
-                String postDate=today.get(i).getIntime().toString();
+
+                Date date = new Date();
+                System.out.println(today.get(i).getIntime());
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                String postDate=df.format(date);
                 //从发帖后的一天开始算
                 String one=passDate(postDate,1);
                 String out=passDate(one,7);//7天后日期
