@@ -131,8 +131,7 @@ public class PostHeatValueTask {
                 int heatvalue=today.get(i).getHeatvalue();
                 //发帖日期
 
-                Date date = new Date();
-                System.out.println(today.get(i).getIntime());
+                Date date = today.get(i).getIntime();
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
                 String postDate=df.format(date);
