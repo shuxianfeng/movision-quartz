@@ -20,6 +20,8 @@ public interface SystemLayoutMapper {
 
     int updateByPrimaryKey(SystemLayout record);
 
+    String getValue(String key);
+
     Integer queryRobotSeparate(String separate);
 
     Double queryRobotpercentage(String percentage);
