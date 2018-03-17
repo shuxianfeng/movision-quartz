@@ -34,6 +34,8 @@ public interface PostMapper {
 
     Post selectByPrimaryKey(Integer id);
 
+    String queryUserNickname(int postid);
+
     List<PostVo> queryAllPost();
 
     List<Post> queryEncodeVideo();

@@ -62,6 +62,13 @@
         SELECT activeid FROM yw_post WHERE id = #{postid,jdbcType=INTEGER}
     </select>
 
+    <!--根据帖子id找到这个作者昵称-->
+    <select id="queryUserNickname" parameterType="java.lang.Integer" resultType="java.lang.String" >
+        SELECT nickname FROM yw_user WHERE id = (
+            SELECT userid FROM yw_post WHERE id = #{postid,jdbcType=INTEGER}
+        )
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from yw_post
     where id = #{id,jdbcType=INTEGER}

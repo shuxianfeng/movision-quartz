@@ -34,6 +34,7 @@
                 <ref bean="queryPostCountViewJobTrigger"/>
                 <ref bean="dauStatisticJobTrigger"/>
                 <ref bean="userParticipateJobTrigger"/>
+                <!--<ref bean="activeRefreshJobTrigger"/>-->
             </list>
         </property>
         <property name="jobDetails">
@@ -63,6 +64,7 @@
                 <ref bean="queryPostCountViewJobDetail"/>
                 <ref bean="dauStatisticJobDetail"/>
                 <ref bean="userParticipateJobDetail"/>
+                <!--<ref bean="activeRefreshJobDetail"/>-->
             </list>
         </property>
 
@@ -217,7 +219,11 @@
         <property name="jobDetail" ref="userParticipateJobDetail"/>
         <property name="cronExpression" value="${userParticipateJob_cronExpression}"/>
     </bean>
-
+    <!--<bean id="activeRefreshJobTrigger"-->
+          <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="activeRefreshJobDetail"/>-->
+        <!--<property name="cronExpression" value="${activeRefreshJob_cronExpression}"/>-->
+    <!--</bean>-->
 
     <!-- **************************************job的配置******************************************************* -->
     <bean id="orderJobDetail"
@@ -367,7 +373,11 @@
         <property name="targetObject" ref="userParticipateJob"/>
         <property name="targetMethod" value="execute"/>
     </bean>
-
+    <!--<bean id="activeRefreshJobDetail"-->
+          <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject" ref="activeRefreshJob"/>-->
+        <!--<property name="targetMethod" value="execute"/>-->
+    <!--</bean>-->
 
     <!-- ********************************************工作的bean**************************************************** -->
     <!-- 工作的bean -->
@@ -398,5 +408,6 @@
     <bean id="queryPostCountViewJob" class="com.movision.job.QueryPostCountViewJob"/>
     <bean id="dauStatisticJob" class="com.movision.job.DauStatisticJob"/>
     <bean id="userParticipateJob" class="com.movision.job.UserParticipateJob"/>
+    <!--<bean id="activeRefreshJob" class="com.movision.job.ActiveRefreshJob"/>-->
 
 </beans>

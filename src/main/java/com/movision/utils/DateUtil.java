@@ -1,5 +1,8 @@
 package com.movision.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,6 +13,8 @@ import java.util.Date;
  * 时间工具类
  */
 public class DateUtil {
+
+    private static Logger log = LoggerFactory.getLogger(DateUtil.class);
 
     public static String date2Str(Date target, SimpleDateFormat pattern) {
         if (null == target || null == pattern) {
@@ -209,6 +214,51 @@ public class DateUtil {
         Date date = new Date();
         returnStr = f.format(date);
         return returnStr;
+    }
+
+    /**
+     * 计算活动距离结束剩余的天数
+     *
+     * @param now   当前系统时间
+     * @param begin 活动开始时间
+     * @param end   活动结束时间
+     * @return
+     * @throws ParseException
+     */
+    public static int activeEndDays(Date now, Date begin, Date end) throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+
+        //第一步先给这个结束时间的日加1天----因为数据中存的时间默认为00:00:00结束，所以加1天，这样可以修正正常结束日期的晚上24点才结束
+        cal.setTime(sdf.parse(sdf.format(end)));
+        cal.add(Calendar.DAY_OF_MONTH, 1);
+        end = cal.getTime();
+
+        int enddays = 0;
+        if (now.before(begin)) {
+            log.info("活动还未开始");
+            enddays = -1;//活动还未开始返回-1
+        } else if (end.before(now)) {
+            log.info("活动已结束");
+            enddays = 0;//活动已结束返回0
+        } else if (begin.before(now) && now.before(end)) {
+            try {
+                log.info("计算活动剩余结束天数");
+                Date a = sdf.parse(sdf.format(now));
+                Date b = sdf.parse(sdf.format(end));
+                cal.setTime(a);
+                long time1 = cal.getTimeInMillis();
+                cal.setTime(b);
+                long time2 = cal.getTimeInMillis();
+                long between_days = (time2 - time1) / (1000 * 3600 * 24);
+                enddays = Integer.parseInt(String.valueOf(between_days));
+            } catch (Exception e) {
+                log.error("计算活动剩余结束天数失败");
+                e.printStackTrace();
+            }
+        }
+        return enddays;
     }
 
 
